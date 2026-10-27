@@ -28,6 +28,7 @@ import {
   RESEARCHER_PROFILES,
 } from '../data/siteContent';
 import {
+  ViteCyanCanvas,
   InteractiveSmileAndVideoBento,
   SonoramaVitalMediaHub,
   MinimalistAuthorityShowcase,
@@ -52,37 +53,39 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
   return (
     <div className="space-y-28 pb-24">
       {/* 1. FULL-BLEED CINEMATIC VIDEO HERO (UNBOXED REAL HERO STAGE) */}
-      <section className="relative overflow-hidden -mt-20 pt-24 pb-0 bg-[#1c2836] text-white shadow-[0_30px_90px_-15px_rgba(6,182,212,0.3)]">
-        {/* Subtle Architectural Wood + Cyan Glass Left Edge Trim */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-3 sm:w-5 bg-repeat-y bg-cover bg-left opacity-90 border-r border-cyan-400/50 shadow-[4px_0_24px_rgba(6,182,212,0.45)] z-20"
-          style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
-        />
+      {/* 1. ENDLESS WOOD + CYAN GLASS HERO WITH 9:16 FULL-FRAME HERO VIDEO */}
+      <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16">
+        {/* Interactive 60fps Cyan Energy Beam & Bio-Node Canvas */}
+        <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
 
-        {/* Ambient Cyan Glows Behind Hero */}
-        <div className="pointer-events-none absolute -top-32 left-1/4 h-[480px] w-[480px] rounded-full bg-cyan-500/12 blur-[140px]" />
-        <div className="pointer-events-none absolute bottom-10 right-1/3 h-[420px] w-[420px] rounded-full bg-sky-400/12 blur-[130px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center">
-            {/* Left Column: Unboxed Hero Typography Directly on the Hero Canvas (6 cols) */}
-            <div className="lg:col-span-6 py-8 lg:py-14 space-y-6 z-20">
-              <div className="animate-hero-up-1 inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-300 ring-1 ring-cyan-400/35">
-                <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>Dra. Pamela Pazmiño · Rehabilitación Oral, ATM & Bruxismo</span>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Column: Clean Hero Typography over Endless Wood & Cyan Canvas (7 cols) */}
+            <div className="lg:col-span-7 rounded-[2.5rem] bg-white/80 backdrop-blur-xl p-7 sm:p-10 lg:p-12 shadow-[0_24px_70px_-15px_rgba(6,182,212,0.2)] ring-1 ring-cyan-400/40 space-y-6 z-20">
+              {/* Top Brand Row with Official DentalCheck Logo + Live Pill */}
+              <div className="animate-hero-up-1 flex flex-wrap items-center justify-between gap-3">
+                <img
+                  src="/images/clinic/dentalcheck-logo.png"
+                  alt="DentalCheck · El mejor proyecto, tu sonrisa"
+                  className="h-12 sm:h-14 w-auto object-contain"
+                />
+                <div className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-4 py-1.5 text-xs font-extrabold text-cyan-800 ring-1 ring-cyan-500/30">
+                  <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 animate-ping" />
+                  <span>ATM Integral · Rehabilitación · Bruxismo</span>
+                </div>
               </div>
 
-              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.65rem] font-extrabold text-white leading-[1.05] tracking-tight">
+              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-slate-900 leading-[1.06] tracking-tight">
                 Ciencia y tecnología para{' '}
-                <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-400 bg-clip-text text-transparent animate-cyan-beam">
+                <span className="bg-gradient-to-r from-cyan-500 via-cyan-400 to-sky-600 bg-clip-text text-transparent animate-cyan-beam">
                   liberar tu ATM
                 </span>{' '}
                 y rehabilitar tu sonrisa.
               </h1>
 
-              <p className="animate-hero-up-3 text-base sm:text-lg text-slate-200/95 leading-relaxed max-w-xl">
-                Soy la <strong className="text-white font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
-                <strong className="text-white font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA), directora clínica de <strong className="text-cyan-300 font-bold">Dental Check UIO</strong> y conductora de <strong className="text-cyan-300 font-bold">Sonorama Vital</strong>.
+              <p className="animate-hero-up-3 text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl">
+                Soy la <strong className="text-slate-900 font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
+                <strong className="text-slate-900 font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA), directora clínica de <strong className="text-cyan-700 font-bold">Dental Check UIO</strong> y conductora de <strong className="text-cyan-700 font-bold">Sonorama Vital</strong>.
               </p>
 
               {/* Floating Minimalist Capability Pills */}
@@ -97,9 +100,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   return (
                     <span
                       key={i}
-                      className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-slate-100 ring-1 ring-cyan-400/25 hover:ring-cyan-400 hover:bg-white/15 transition-all"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-slate-700 shadow-2xs ring-1 ring-cyan-500/25 hover:ring-cyan-400 transition-all"
                     >
-                      <Icon className="h-3.5 w-3.5 text-cyan-400" />
+                      <Icon className="h-3.5 w-3.5 text-cyan-500" />
                       {pill.label}
                     </span>
                   );
@@ -111,7 +114,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                 <button
                   type="button"
                   onClick={() => onOpenBooking('atm-integral')}
-                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500 px-8 py-4 text-sm font-extrabold text-slate-950 shadow-[0_16px_40px_-8px_rgba(6,182,212,0.6)] hover:from-cyan-300 hover:to-cyan-400 hover:scale-[1.03] transition-all cursor-pointer"
+                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-8 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.03] transition-all cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Agendar Valoración en Quito</span>
@@ -119,7 +122,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
                 <a
                   href="#sonorama-vital-hub"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-7 py-4 text-sm font-bold text-white ring-1 ring-white/25 hover:bg-white/20 hover:scale-[1.02] transition-all"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 hover:scale-[1.02] transition-all"
                 >
                   <Radio className="h-4 w-4 text-cyan-400" />
                   <span>Videos Sonorama Vital</span>
@@ -127,42 +130,42 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               </div>
 
               {/* Quick Location & Social Links */}
-              <div className="animate-hero-up-4 pt-2 flex flex-wrap items-center gap-3.5 text-xs text-slate-300">
+              <div className="animate-hero-up-4 pt-2 flex flex-wrap items-center gap-3.5 text-xs text-slate-600">
                 <a
                   href={SITE_CONFIG.address.googleMapsShareUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-bold text-cyan-200 hover:text-white transition"
+                  className="inline-flex items-center gap-1.5 font-bold text-slate-800 hover:text-cyan-600 transition"
                 >
-                  <MapPin className="h-3.5 w-3.5 text-cyan-400" />
+                  <MapPin className="h-3.5 w-3.5 text-cyan-500" />
                   <span>{SITE_CONFIG.address.street}</span>
                 </a>
-                <span className="text-slate-500">•</span>
+                <span className="text-slate-300">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramPersonal.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-bold text-slate-200 hover:text-cyan-300 transition"
+                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-cyan-400" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
                   <span>{SITE_CONFIG.social.instagramPersonal.handle}</span>
                 </a>
-                <span className="text-slate-500">•</span>
+                <span className="text-slate-300">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramClinic.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-bold text-slate-200 hover:text-cyan-300 transition"
+                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-cyan-400" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
                   <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
                 </a>
               </div>
             </div>
 
-            {/* Right Column: FULL-HEIGHT UNBOXED HERO VIDEO OF DRA. PAMELA PAZMIÑO & DENTALCHECK HOLOGRAM (6 cols) */}
-            <div className="lg:col-span-6 relative flex items-end justify-center lg:justify-end order-first lg:order-last">
-              <div className="relative w-full max-w-[520px] lg:max-w-none h-[480px] sm:h-[600px] lg:h-[720px] flex items-end justify-center animate-hero-right">
+            {/* Right Column: PURE 9:16 HERO VIDEO (No Fake Navy Pseudo-Background, Exact Aspect Ratio) (5 cols) */}
+            <div className="lg:col-span-5 flex items-center justify-center order-first lg:order-last">
+              <div className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_32px_90px_-15px_rgba(6,182,212,0.45)] ring-2 ring-cyan-400/70 animate-hero-right">
                 <video
                   src="/videos/Fix_video_logo_framing_8c50867c_1080p.mp4"
                   poster="/images/clinic/hero-dra-pamela.jpg"
@@ -170,42 +173,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   loop
                   muted
                   playsInline
-                  className="h-full w-full object-contain object-bottom"
+                  className="h-full w-full object-cover"
                 />
-                {/* Seamless Edge Feathering into #1c2836 Studio Navy Hero Canvas */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#1c2836] to-transparent" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#1c2836] to-transparent" />
-                <div className="pointer-events-none absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-[#1c2836] to-transparent" />
-                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#1c2836] to-transparent" />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* High-Tech Animated Kinetic Marquee Bar at Bottom of Hero */}
-        <div className="relative z-20 border-t border-cyan-400/20 bg-slate-950/85 backdrop-blur-md py-3.5 overflow-hidden">
-          <div className="animate-marquee flex items-center gap-10 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-100/90">
-            {[
-              'ATM Integral & Eje Cráneo-Cervical',
-              'Bruxismo del Sueño y Vigilia',
-              'Rehabilitación Oral Biomimética',
-              'Diseño de Sonrisa Natural sin Desgaste',
-              'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
-              'Sonorama Vital · Radio Sonorama Ecuador',
-              'Investigación Científica UDLA · PubMed',
-              'ATM Integral & Eje Cráneo-Cervical',
-              'Bruxismo del Sueño y Vigilia',
-              'Rehabilitación Oral Biomimética',
-              'Diseño de Sonrisa Natural sin Desgaste',
-              'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
-              'Sonorama Vital · Radio Sonorama Ecuador',
-              'Investigación Científica UDLA · PubMed',
-            ].map((item, idx) => (
-              <span key={idx} className="inline-flex items-center gap-3 whitespace-nowrap">
-                <span className="h-2 w-2 rounded-full bg-cyan-400" />
-                <span>{item}</span>
-              </span>
-            ))}
+          {/* High-Tech Animated Kinetic Marquee Pill (Centered so Endless Background Never Breaks) */}
+          <div className="relative z-20 mt-12 rounded-full border border-cyan-500/25 bg-white/80 backdrop-blur-md py-3.5 px-4 shadow-sm overflow-hidden">
+            <div className="animate-marquee flex items-center gap-10 text-xs font-extrabold uppercase tracking-[0.18em] text-slate-700">
+              {[
+                'ATM Integral & Eje Cráneo-Cervical',
+                'Bruxismo del Sueño y Vigilia',
+                'Rehabilitación Oral Biomimética',
+                'Diseño de Sonrisa Natural sin Desgaste',
+                'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
+                'Sonorama Vital · Radio Sonorama Ecuador',
+                'Investigación Científica UDLA · PubMed',
+                'ATM Integral & Eje Cráneo-Cervical',
+                'Bruxismo del Sueño y Vigilia',
+                'Rehabilitación Oral Biomimética',
+                'Diseño de Sonrisa Natural sin Desgaste',
+                'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
+                'Sonorama Vital · Radio Sonorama Ecuador',
+                'Investigación Científica UDLA · PubMed',
+              ].map((item, idx) => (
+                <span key={idx} className="inline-flex items-center gap-3 whitespace-nowrap">
+                  <span className="h-2 w-2 rounded-full bg-cyan-500" />
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
