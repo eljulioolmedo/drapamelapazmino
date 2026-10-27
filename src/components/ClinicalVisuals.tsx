@@ -43,7 +43,10 @@ export const MEDIA_ASSETS = {
   googleMapsUrl:
     'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
 
-  // Real downloaded photos from DentalCheck Google Maps listing (excluding old location 09 and 03)
+  // Real downloaded photos & video from DentalCheck
+  heroAnimationLoopMp4: '/videos/hero-dental-check-loop.mp4',
+  dentalCheckLogo: '/images/clinic/dentalcheck-logo.png',
+  dentalCheckIcon: '/images/clinic/dentalcheck-icon.png',
   heroDraPamela: '/images/clinic/hero-dra-pamela.jpg',
   draPameDiplomas: '/images/clinic/dentalcheck-08.jpg',
   draPameClinicalUnit: '/images/clinic/dentalcheck-02.jpg',
@@ -220,7 +223,7 @@ const HERO_DOCTOR_PHOTOS = [
  * BIG CINEMATIC HERO STAGE OF DRA. PAMELA PAZMIÑO (Photo + Live Video Mode + Floating Animated 3D Badges)
  */
 export const InteractiveAtmHarmonyShowcase: React.FC = () => {
-  const [mode, setMode] = useState<'photo' | 'youtube' | 'reel'>('photo');
+  const [mode, setMode] = useState<'loop' | 'photo' | 'youtube' | 'reel'>('loop');
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [heroVideoId, setHeroVideoId] = useState<string>(SONORAMA_YOUTUBE_VIDEOS[0].id);
 
@@ -229,7 +232,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
     SONORAMA_YOUTUBE_VIDEOS.find((v) => v.id === heroVideoId) || SONORAMA_YOUTUBE_VIDEOS[0];
 
   return (
-    <div className="relative w-full animate-hero-right">
+    <div className="relative w-full max-w-[540px] mx-auto animate-hero-right">
       {/* Animated Rotating Cyan Orbital Ring Behind Hero */}
       <div className="pointer-events-none absolute -inset-6 flex items-center justify-center">
         <div className="h-[104%] w-[104%] rounded-[3.2rem] border border-dashed border-cyan-400/35 animate-spin-slow" />
@@ -239,28 +242,31 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
       <div className="pointer-events-none absolute -top-12 -right-12 h-96 w-96 rounded-full bg-cyan-400/35 blur-[100px] animate-pulse-glow" />
       <div className="pointer-events-none absolute -bottom-12 -left-12 h-80 w-80 rounded-full bg-sky-400/30 blur-[90px] animate-pulse-glow" />
 
-      {/* FLOATING 3D BADGE 1 (Top-Left): 5.0 ★ Google Maps */}
+      {/* FLOATING 3D BADGE 1 (Top-Left): Official DentalCheck Logo + 5.0 ★ Google Maps */}
       <a
         href={MEDIA_ASSETS.googleMapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="hidden sm:flex items-center gap-3 absolute -top-5 -left-6 z-30 rounded-2xl bg-white/95 backdrop-blur-xl px-4 py-3 shadow-[0_20px_50px_rgba(6,182,212,0.28)] ring-1 ring-cyan-500/30 animate-float-a hover:scale-105 transition-transform"
+        className="hidden sm:flex items-center gap-3.5 absolute -top-5 -left-6 z-30 rounded-2xl bg-white/95 backdrop-blur-xl px-4 py-2.5 shadow-[0_20px_50px_rgba(6,182,212,0.3)] ring-1 ring-cyan-500/35 animate-float-a hover:scale-105 transition-transform"
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white shadow-md">
-          <Star className="h-5 w-5 fill-white" />
-        </div>
-        <div>
+        <img
+          src={MEDIA_ASSETS.dentalCheckLogo}
+          alt="Dental Check · El mejor proyecto, tu sonrisa"
+          className="h-11 w-auto object-contain shrink-0"
+        />
+        <div className="border-l border-slate-200 pl-3">
           <div className="flex items-center gap-1 text-xs font-extrabold text-slate-900">
+            <Star className="h-3.5 w-3.5 fill-cyan-500 text-cyan-500" />
             <span>5.0 ★ Google Maps</span>
           </div>
-          <span className="block text-[11px] font-semibold text-cyan-700">
-            36+ Reseñas Verificadas · Quito
+          <span className="block text-[10px] font-semibold text-cyan-700">
+            36+ Reseñas · Fortune Plaza
           </span>
         </div>
       </a>
 
       {/* FLOATING 3D BADGE 2 (Bottom-Right): Live Video Trigger / Specialist Badge */}
-      {mode === 'photo' && (
+      {(mode === 'loop' || mode === 'photo') && (
         <button
           type="button"
           onClick={() => setMode('youtube')}
@@ -281,7 +287,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
           <div>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-cyan-400">
               <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>Ver Video en Vivo</span>
+              <span>Ver Programa en Vivo</span>
             </span>
             <p className="text-xs font-extrabold text-white mt-0.5">
               Dra. Pamela en Sonorama Vital TV →
@@ -303,49 +309,93 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
           <div className="inline-flex flex-wrap rounded-full bg-slate-900 p-1 ring-1 ring-white/15 gap-1">
             <button
               type="button"
+              onClick={() => setMode('loop')}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
+                mode === 'loop'
+                  ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
+                  : 'text-slate-200 hover:text-white'
+              }`}
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Dra. Pamela (Video)</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setMode('photo')}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-extrabold transition cursor-pointer ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 mode === 'photo'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
                   : 'text-slate-200 hover:text-white'
               }`}
             >
               <Camera className="h-3.5 w-3.5" />
-              <span>Fotos Dra. Pame ({HERO_DOCTOR_PHOTOS.length})</span>
+              <span>Fotos ({HERO_DOCTOR_PHOTOS.length})</span>
             </button>
 
             <button
               type="button"
               onClick={() => setMode('youtube')}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-extrabold transition cursor-pointer ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 mode === 'youtube'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
                   : 'text-slate-200 hover:text-white'
               }`}
             >
               <Tv className="h-3.5 w-3.5" />
-              <span>Video TV · Sonorama Vital</span>
+              <span>Sonorama Vital TV</span>
             </button>
 
             <button
               type="button"
               onClick={() => setMode('reel')}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-extrabold transition cursor-pointer ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 mode === 'reel'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
                   : 'text-slate-200 hover:text-white'
               }`}
             >
               <Radio className="h-3.5 w-3.5" />
-              <span>Video Reel Esmalte</span>
+              <span>Reel</span>
             </button>
           </div>
-
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 px-3 py-1 text-[10px] font-extrabold text-cyan-300 ring-1 ring-cyan-400/30">
-            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-            <span>DENTAL CHECK UIO</span>
-          </span>
         </div>
+
+        {/* MODE 0 (DEFAULT): SEAMLESS 1080P HERO ANIMATION LOOP OF DRA. PAMELA PAZMIÑO */}
+        {mode === 'loop' && (
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-[#16263b] ring-1 ring-cyan-400/40">
+            <video
+              src={MEDIA_ASSETS.heroAnimationLoopMp4}
+              poster={MEDIA_ASSETS.heroDraPamela}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-full w-full object-cover object-[center_25%]"
+            />
+
+            {/* Subtle Bottom Vignette so Caption is Crisp without Blocking the Video */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent" />
+
+            {/* Top-Right Specialist Pill */}
+            <div className="absolute top-3.5 right-3.5 inline-flex items-center gap-1.5 rounded-full bg-slate-950/75 backdrop-blur-md px-3 py-1 text-[11px] font-extrabold text-cyan-300 ring-1 ring-cyan-400/40">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              <span>Directora Clínica · Dental Check UIO</span>
+            </div>
+
+            {/* Bottom Caption Overlay */}
+            <div className="absolute bottom-4 inset-x-5 flex items-end justify-between gap-3">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-md">
+                  Dra. Pamela Pazmiño
+                </h2>
+                <p className="text-xs sm:text-sm text-cyan-200 font-semibold drop-shadow">
+                  Especialista en Rehabilitación Oral, ATM Integral y Bruxismo
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* MODE 1: BIG ANIMATED PORTRAIT SHOWCASE OF DRA. PAMELA PAZMIÑO */}
         {mode === 'photo' && (

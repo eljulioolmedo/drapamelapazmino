@@ -69,23 +69,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* BIG HERO PHOTO & VIDEO STAGE OF DRA. PAMELA PAZMIÑO FIRST (7 cols) */}
-            <div className="lg:col-span-7">
+            {/* BIG HERO VIDEO & PHOTO STAGE OF DRA. PAMELA PAZMIÑO FIRST (6 cols) */}
+            <div className="lg:col-span-6">
               <InteractiveAtmHarmonyShowcase />
             </div>
 
-            {/* Right Column: Staggered Animated Typography Framed in Double-Line Glowing Cyan Border (5 cols) */}
-            <div className="lg:col-span-5 relative rounded-[2.25rem] bg-white/88 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_-15px_rgba(6,182,212,0.22)] ring-2 ring-cyan-400/60 space-y-6">
+            {/* Right Column: Staggered Animated Typography Framed in Double-Line Glowing Cyan Border (6 cols) */}
+            <div className="lg:col-span-6 relative rounded-[2.25rem] bg-white/90 backdrop-blur-xl p-6 sm:p-9 shadow-[0_24px_70px_-15px_rgba(6,182,212,0.22)] ring-2 ring-cyan-400/60 space-y-6">
               {/* Inner Offset Glowing Cyan Frame (matching uploaded Wood+Cyan artwork) */}
               <div className="pointer-events-none absolute inset-2 rounded-[1.85rem] border border-cyan-400/35" />
               {/* Left Wood+Cyan Glass Accent Strip inside the Typography Card */}
               <div
-                className="pointer-events-none absolute inset-y-6 left-0 w-2 rounded-r-full bg-cover bg-left shadow-[2px_0_12px_rgba(6,182,212,0.45)]"
+                className="pointer-events-none absolute inset-y-6 left-0 w-2.5 rounded-r-full bg-cover bg-left shadow-[2px_0_12px_rgba(6,182,212,0.45)]"
                 style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
               />
-              <div className="animate-hero-up-1 inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/95 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-700 shadow-sm ring-1 ring-cyan-500/30">
-                <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 animate-ping" />
-                <span>Dra. Pamela Pazmiño · Dental Check UIO · Sonorama Vital</span>
+              {/* Top Brand Row with Official DentalCheck Logo + Live Pill */}
+              <div className="animate-hero-up-1 flex flex-wrap items-center justify-between gap-3">
+                <img
+                  src="/images/clinic/dentalcheck-logo.png"
+                  alt="DentalCheck · El mejor proyecto, tu sonrisa"
+                  className="h-12 sm:h-14 w-auto object-contain"
+                />
+                <div className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3.5 py-1.5 text-xs font-extrabold text-cyan-700 ring-1 ring-cyan-500/25">
+                  <span className="h-2 w-2 rounded-full bg-cyan-500 animate-ping" />
+                  <span>Dra. Pamela Pazmiño · Sonorama Vital</span>
+                </div>
               </div>
 
               <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 leading-[1.06] tracking-tight">

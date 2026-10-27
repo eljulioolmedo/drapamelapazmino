@@ -20,9 +20,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenGuide }) =>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
           {/* Brand Column (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-extrabold text-sm">
-                PP
+            <div className="flex flex-wrap items-center gap-3.5">
+              <div className="rounded-2xl bg-white px-3.5 py-2 shadow-lg ring-1 ring-cyan-400/30">
+                <img
+                  src="/images/clinic/dentalcheck-logo.png"
+                  alt="DentalCheck · El mejor proyecto, tu sonrisa"
+                  className="h-11 w-auto object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-extrabold text-white tracking-tight">

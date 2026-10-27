@@ -25,17 +25,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
       <div className="mx-auto max-w-7xl">
         {/* Floating Minimalist Glass Pill Header */}
         <div className="rounded-full bg-white/85 backdrop-blur-2xl px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-4 shadow-[0_8px_32px_-8px_rgba(6,182,212,0.14)] ring-1 ring-cyan-500/15">
-          {/* Minimalist Cyan Brand Identity */}
+          {/* Official DentalCheck Icon + Dra. Pamela Pazmiño Brand Identity */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-extrabold text-sm tracking-tight shadow-md shadow-cyan-500/25 group-hover:scale-105 transition-transform">
-              PP
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white p-1.5 shadow-md shadow-cyan-500/15 ring-1 ring-cyan-500/25 group-hover:scale-105 transition-transform">
+              <img
+                src="/images/clinic/dentalcheck-icon.png"
+                alt="DentalCheck Logo"
+                className="h-full w-full object-contain"
+              />
             </div>
             <div>
               <span className="block text-base sm:text-lg font-extrabold text-slate-900 leading-none tracking-tight">
                 Dra. Pamela Pazmiño
               </span>
               <span className="block text-[10px] uppercase tracking-[0.14em] text-cyan-600 font-bold mt-1">
-                ATM Integral · Rehabilitación · Dental Check
+                ATM Integral · Rehabilitación · DentalCheck
               </span>
             </div>
           </Link>
