@@ -23,15 +23,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (initialSpecialtyId) {
-      setSelectedSpecialty(initialSpecialtyId);
-    }
+    if (initialSpecialtyId) setSelectedSpecialty(initialSpecialtyId);
   }, [initialSpecialtyId]);
 
   useEffect(() => {
-    if (initialNote) {
-      setSymptomsNote(initialNote);
-    }
+    if (initialNote) setSymptomsNote(initialNote);
   }, [initialNote]);
 
   if (!isOpen) return null;
@@ -45,11 +41,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       ``,
       `• *Nombre:* ${patientName.trim() || 'Paciente'}`,
       patientPhone.trim() ? `• *Teléfono:* ${patientPhone.trim()}` : null,
-      `• *Motivo / Especialidad:* ${specialtyObj.title}`,
-      `• *Horario de preferencia:* ${preferredSchedule}`,
-      symptomsNote.trim() ? `• *Síntomas o consulta:* ${symptomsNote.trim()}` : null,
+      `• *Especialidad:* ${specialtyObj.title}`,
+      `• *Horario preferido:* ${preferredSchedule}`,
+      symptomsNote.trim() ? `• *Consulta:* ${symptomsNote.trim()}` : null,
       ``,
-      `Quedo atento/a a la disponibilidad en el consultorio (Av. La Coruña y Francisco de Orellana). ¡Muchas gracias!`,
+      `Quedo atento/a a la disponibilidad en Av. La Coruña y Francisco de Orellana. ¡Muchas gracias!`,
     ].filter(Boolean);
 
     return lines.join('\n');
@@ -69,45 +65,44 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A292A]/75 p-4 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="booking-modal-title"
     >
-      <div className="relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#FAF8F5] shadow-2xl border border-[#0F3D3E]/15">
-        {/* Top Modal Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#0F3D3E]/10 bg-[#0F3D3E] px-6 py-5 text-white">
+      <div className="relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-[2rem] bg-white shadow-[0_32px_80px_-16px_rgba(6,182,212,0.3)] ring-1 ring-cyan-500/20">
+        {/* Header */}
+        <div className="sticky top-0 z-10 flex items-center justify-between bg-white/95 backdrop-blur-xl px-6 sm:px-8 py-5 border-b border-slate-100">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#C5A059] font-semibold">
+            <div className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-cyan-600 font-bold">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Agendamiento Directo · Quito</span>
             </div>
-            <h2 id="booking-modal-title" className="font-editorial text-2xl font-semibold mt-0.5">
-              Agendar Valoración con la Dra. Pamela Pazmiño
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+              Reservar Valoración
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="rounded-full bg-white/10 p-2 text-white/80 hover:bg-white/20 hover:text-white transition"
-            aria-label="Cerrar ventana"
+            className="rounded-full bg-slate-100 p-2 text-slate-500 hover:bg-cyan-50 hover:text-cyan-700 transition cursor-pointer"
+            aria-label="Cerrar"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Form Body */}
-        <form onSubmit={handleSendWhatsApp} className="p-6 sm:p-7 space-y-5">
-          <div className="rounded-2xl bg-[#EBF2F0] p-4 border border-[#0F3D3E]/10 flex items-start gap-3">
-            <CheckCircle2 className="h-5 w-5 text-[#0F3D3E] shrink-0 mt-0.5" />
-            <p className="text-xs text-[#182625] leading-relaxed">
-              Completa tus datos para preparar tu ficha de pre-valoración. Al hacer clic en <strong>Confirmar por WhatsApp</strong>, se abrirá un chat directo con nuestro consultorio en <strong>Dental Check UIO</strong> ({SITE_CONFIG.whatsappDisplay}).
+        {/* Form */}
+        <form onSubmit={handleSendWhatsApp} className="p-6 sm:p-8 space-y-5">
+          <div className="rounded-2xl bg-cyan-50/70 p-4 flex items-start gap-3">
+            <CheckCircle2 className="h-5 w-5 text-cyan-600 shrink-0 mt-0.5" />
+            <p className="text-xs text-slate-700 leading-relaxed">
+              Prepara tu ficha de pre-valoración. Al confirmar se abrirá tu chat directo con <strong>Dental Check UIO</strong> ({SITE_CONFIG.whatsappDisplay}).
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0F3D3E] mb-1.5">
-                Tu Nombre y Apellido *
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                Nombre y Apellido *
               </label>
               <input
                 type="text"
@@ -115,46 +110,46 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
                 placeholder="Ej. Carolina Andrade"
-                className="w-full rounded-xl border border-[#0F3D3E]/20 bg-white px-4 py-2.5 text-sm text-[#182625] focus:border-[#0F3D3E] focus:outline-none focus:ring-2 focus:ring-[#0F3D3E]/15"
+                className="w-full rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-900 ring-1 ring-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#0F3D3E] mb-1.5">
-                Teléfono / Celular (Opcional)
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                Celular (Opcional)
               </label>
               <input
                 type="tel"
                 value={patientPhone}
                 onChange={(e) => setPatientPhone(e.target.value)}
                 placeholder="Ej. 099 123 4567"
-                className="w-full rounded-xl border border-[#0F3D3E]/20 bg-white px-4 py-2.5 text-sm text-[#182625] focus:border-[#0F3D3E] focus:outline-none focus:ring-2 focus:ring-[#0F3D3E]/15"
+                className="w-full rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-900 ring-1 ring-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#0F3D3E] mb-1.5">
-              Especialidad o Motivo de Consulta
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">
+              Especialidad o Motivo
             </label>
             <select
               value={selectedSpecialty}
               onChange={(e) => setSelectedSpecialty(e.target.value)}
-              className="w-full rounded-xl border border-[#0F3D3E]/20 bg-white px-4 py-2.5 text-sm text-[#182625] focus:border-[#0F3D3E] focus:outline-none focus:ring-2 focus:ring-[#0F3D3E]/15"
+              className="w-full rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-900 ring-1 ring-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               {SPECIALTIES.map((spec) => (
                 <option key={spec.id} value={spec.id}>
-                  {spec.title} ({spec.brandTag})
+                  {spec.title}
                 </option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#0F3D3E] mb-1.5">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">
               Horario de Preferencia
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {[
                 'Mañana (09h00 - 13h00)',
                 'Tarde (14h00 - 19h00)',
@@ -164,10 +159,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   type="button"
                   key={slot}
                   onClick={() => setPreferredSchedule(slot)}
-                  className={`flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-medium transition ${
+                  className={`flex items-center justify-center gap-1.5 rounded-2xl px-3 py-2.5 text-xs font-semibold transition cursor-pointer ${
                     preferredSchedule === slot
-                      ? 'border-[#0F3D3E] bg-[#0F3D3E] text-white shadow-sm'
-                      : 'border-[#0F3D3E]/20 bg-white text-[#182625] hover:bg-[#EBF2F0]'
+                      ? 'bg-cyan-500 text-white shadow-md shadow-cyan-500/25'
+                      : 'bg-slate-50 text-slate-700 ring-1 ring-slate-200 hover:bg-cyan-50'
                   }`}
                 >
                   <Calendar className="h-3.5 w-3.5 shrink-0" />
@@ -178,45 +173,43 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#0F3D3E] mb-1.5">
-              Cuéntanos brevemente tus síntomas o consulta (Opcional)
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">
+              Síntomas o consulta (Opcional)
             </label>
             <textarea
               rows={3}
               value={symptomsNote}
               onChange={(e) => setSymptomsNote(e.target.value)}
-              placeholder="Ej. Siento chasquidos al abrir la boca y dolor de cuello al despertar, o deseo una valoración de Rehabilitación Oral / Dental Check..."
-              className="w-full rounded-xl border border-[#0F3D3E]/20 bg-white px-4 py-2.5 text-sm text-[#182625] focus:border-[#0F3D3E] focus:outline-none focus:ring-2 focus:ring-[#0F3D3E]/15"
+              placeholder="Ej. Siento chasquidos al abrir la boca, tensión cervical al despertar o deseo una valoración estética..."
+              className="w-full rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-900 ring-1 ring-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
 
-          {/* Primary Actions */}
           <div className="pt-2 flex flex-col sm:flex-row gap-3">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F3D3E] px-5 py-3.5 text-sm font-semibold text-white shadow-lg hover:bg-[#134E4A] transition cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/25 hover:from-cyan-400 hover:to-cyan-500 transition cursor-pointer"
             >
-              <MessageCircle className="h-4 w-4 text-[#C5A059]" />
-              <span>Enviar Solicitud por WhatsApp ({SITE_CONFIG.whatsappDisplay})</span>
+              <MessageCircle className="h-4 w-4" />
+              <span>Confirmar por WhatsApp ({SITE_CONFIG.whatsappDisplay})</span>
             </button>
 
             <button
               type="button"
               onClick={handleCopySummary}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#0F3D3E]/25 bg-white px-4 py-3.5 text-xs font-semibold text-[#0F3D3E] hover:bg-[#EBF2F0] transition cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-xs font-bold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition cursor-pointer"
             >
-              {copied ? <Check className="h-4 w-4 text-emerald-700" /> : <Copy className="h-4 w-4" />}
-              <span>{copied ? 'Copiado' : 'Copiar Resumen'}</span>
+              {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
+              <span>{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
           </div>
 
-          {/* Direct Landline & Address Footer */}
-          <div className="border-t border-[#0F3D3E]/10 pt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[#4A5D5B]">
-            <div className="flex items-center gap-2">
-              <Phone className="h-3.5 w-3.5 text-[#0F3D3E]" />
+          <div className="border-t border-slate-100 pt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+            <div className="flex items-center gap-1.5">
+              <Phone className="h-3.5 w-3.5 text-cyan-600" />
               <span>
-                Fijo Clínica:{' '}
-                <a href={`tel:${SITE_CONFIG.landlineClean}`} className="font-semibold text-[#0F3D3E] hover:underline">
+                Fijo:{' '}
+                <a href={`tel:${SITE_CONFIG.landlineClean}`} className="font-bold text-slate-800 hover:text-cyan-600">
                   {SITE_CONFIG.landlineDisplay}
                 </a>
               </span>
@@ -225,10 +218,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               href={SITE_CONFIG.address.googleMapsShareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-semibold text-[#0F3D3E] hover:underline"
+              className="inline-flex items-center gap-1 font-bold text-cyan-600 hover:underline"
             >
-              <MapPin className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Av. La Coruña y Fco. de Orellana, Quito (Ver Mapa)</span>
+              <MapPin className="h-3.5 w-3.5" />
+              <span>Av. La Coruña y Fco. de Orellana, Quito</span>
             </a>
           </div>
         </form>

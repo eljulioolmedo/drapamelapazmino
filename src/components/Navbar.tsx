@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Phone, MapPin, Calendar, Activity } from 'lucide-react';
-import { InstagramIcon as Instagram } from './ClinicalVisuals';
+import { Menu, X, Calendar, Activity } from 'lucide-react';
 import { SITE_CONFIG } from '../data/siteContent';
+import { InstagramIcon as Instagram } from './ClinicalVisuals';
 
 interface NavbarProps {
   onOpenBooking: (specialtyId?: string) => void;
@@ -14,91 +14,44 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
 
   const navItems = [
     { label: 'Inicio', to: '/' },
-    { label: 'Sobre Mí', to: '/sobre-mi' },
-    { label: 'Especialidades y ATM', to: '/especialidades' },
-    { label: 'Blog y Recursos', to: '/blog' },
+    { label: 'Enfoque & Ciencia', to: '/sobre-mi' },
+    { label: 'Especialidades & ATM', to: '/especialidades' },
+    { label: 'Artículos & Guía', to: '/blog' },
     { label: 'Contacto', to: '/contacto' },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full">
-      {/* Top Clinical Information Bar */}
-      <div className="bg-[#0A292A] text-[#E6F0EE] text-xs py-2 px-4 border-b border-white/10">
-        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-4 flex-wrap">
-            <a
-              href={SITE_CONFIG.address.googleMapsShareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-[#C5A059] transition"
-            >
-              <MapPin className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Quito: {SITE_CONFIG.address.street} · Dental Check UIO</span>
-            </a>
-            <span className="hidden md:inline text-white/25">|</span>
-            <a
-              href={`tel:${SITE_CONFIG.landlineClean}`}
-              className="hidden sm:inline-flex items-center gap-1.5 hover:text-[#C5A059] transition"
-            >
-              <Phone className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>{SITE_CONFIG.whatsappDisplay} / {SITE_CONFIG.landlineDisplay}</span>
-            </a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={SITE_CONFIG.social.instagramPersonal.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 hover:text-[#C5A059] transition font-medium"
-            >
-              <Instagram className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>{SITE_CONFIG.social.instagramPersonal.handle}</span>
-            </a>
-            <a
-              href={SITE_CONFIG.social.instagramClinic.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 hover:text-[#C5A059] transition font-medium"
-            >
-              <Instagram className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar */}
-      <div className="bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#0F3D3E]/10 shadow-xs">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Brand Logo */}
+    <header className="sticky top-0 z-40 w-full pt-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        {/* Floating Minimalist Glass Pill Header */}
+        <div className="rounded-full bg-white/85 backdrop-blur-2xl px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-4 shadow-[0_8px_32px_-8px_rgba(6,182,212,0.14)] ring-1 ring-cyan-500/15">
+          {/* Minimalist Cyan Brand Identity */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0F3D3E] text-[#FAF8F5] font-editorial text-xl font-bold tracking-wider border border-[#C5A059]/40 shadow-sm group-hover:bg-[#134E4A] transition">
-              <span>P</span>
-              <span className="text-[#C5A059]">P</span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-extrabold text-sm tracking-tight shadow-md shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+              PP
             </div>
             <div>
-              <span className="block font-editorial text-xl sm:text-2xl font-bold text-[#0F3D3E] leading-none tracking-tight">
+              <span className="block text-base sm:text-lg font-extrabold text-slate-900 leading-none tracking-tight">
                 Dra. Pamela Pazmiño
               </span>
-              <span className="block text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-[#4A5D5B] font-semibold mt-1">
-                Rehabilitación Oral · ATM Integral · Dental Check
+              <span className="block text-[10px] uppercase tracking-[0.14em] text-cyan-600 font-bold mt-1">
+                ATM Integral · Rehabilitación · Dental Check
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Navigation Pills */}
+          <nav className="hidden lg:flex items-center gap-1 rounded-full bg-slate-100/80 p-1">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `px-3.5 py-2 rounded-xl text-sm font-medium transition ${
+                  `px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     isActive
-                      ? 'bg-[#EBF2F0] text-[#0F3D3E] font-semibold'
-                      : 'text-[#182625]/80 hover:text-[#0F3D3E] hover:bg-[#EBF2F0]/50'
+                      ? 'bg-white text-cyan-700 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`
                 }
               >
@@ -107,41 +60,51 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
             ))}
           </nav>
 
-          {/* Desktop Action CTAs */}
-          <div className="hidden md:flex items-center gap-2.5">
+          {/* Desktop Action Pills */}
+          <div className="hidden md:flex items-center gap-2">
+            <a
+              href={SITE_CONFIG.social.instagramPersonal.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:text-cyan-600 hover:bg-cyan-50 transition"
+              title={SITE_CONFIG.social.instagramPersonal.handle}
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
+
             <button
               type="button"
               onClick={onOpenQuiz}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#0F3D3E]/20 bg-white px-3.5 py-2.5 text-xs font-semibold text-[#0F3D3E] hover:bg-[#EBF2F0] transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-cyan-50 px-4 py-2 text-xs font-bold text-cyan-700 hover:bg-cyan-100 transition cursor-pointer"
             >
-              <Activity className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Test ATM / Bruxismo</span>
+              <Activity className="h-3.5 w-3.5 text-cyan-500" />
+              <span>Test ATM</span>
             </button>
 
             <button
               type="button"
               onClick={() => onOpenBooking('atm-integral')}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#0F3D3E] px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-[#134E4A] transition cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-cyan-500/25 hover:from-cyan-400 hover:to-cyan-500 transition cursor-pointer"
             >
-              <Calendar className="h-4 w-4 text-[#C5A059]" />
+              <Calendar className="h-3.5 w-3.5" />
               <span>Agendar Cita</span>
             </button>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Menu Toggle */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden rounded-xl border border-[#0F3D3E]/15 p-2.5 text-[#0F3D3E] hover:bg-[#EBF2F0] transition"
-            aria-label="Abrir menú de navegación"
+            className="lg:hidden rounded-full bg-cyan-50 p-2.5 text-cyan-700 hover:bg-cyan-100 transition"
+            aria-label="Abrir menú"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
-        {/* Mobile Drawer */}
+        {/* Mobile Floating Dropdown */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#0F3D3E]/10 bg-[#FAF8F5] px-4 pt-3 pb-6 space-y-3 shadow-xl">
+          <div className="lg:hidden mt-2 rounded-3xl bg-white/95 backdrop-blur-2xl p-5 shadow-2xl ring-1 ring-cyan-500/15 space-y-4">
             <div className="flex flex-col space-y-1">
               {navItems.map((item) => (
                 <NavLink
@@ -150,10 +113,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
                   end={item.to === '/'}
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
-                    `px-4 py-3 rounded-xl text-sm font-medium transition ${
+                    `px-4 py-3 rounded-2xl text-sm font-semibold transition ${
                       isActive
-                        ? 'bg-[#0F3D3E] text-white font-semibold'
-                        : 'text-[#182625] hover:bg-[#EBF2F0]'
+                        ? 'bg-cyan-50 text-cyan-700'
+                        : 'text-slate-700 hover:bg-slate-50'
                     }`
                   }
                 >
@@ -162,17 +125,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
               ))}
             </div>
 
-            <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenQuiz();
                 }}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-[#0F3D3E]/25 bg-white px-4 py-3 text-xs font-semibold text-[#0F3D3E]"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-50 px-4 py-3 text-xs font-bold text-cyan-700"
               >
-                <Activity className="h-4 w-4 text-[#C5A059]" />
-                <span>Realizar Test de ATM y Bruxismo</span>
+                <Activity className="h-4 w-4 text-cyan-500" />
+                <span>Test Interactivo ATM</span>
               </button>
 
               <button
@@ -181,10 +144,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
                   setMobileMenuOpen(false);
                   onOpenBooking('atm-integral');
                 }}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#0F3D3E] px-4 py-3 text-xs font-semibold text-white"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-3 text-xs font-bold text-white shadow-md shadow-cyan-500/20"
               >
-                <Calendar className="h-4 w-4 text-[#C5A059]" />
-                <span>Agendar Valoración</span>
+                <Calendar className="h-4 w-4" />
+                <span>Agendar Cita</span>
               </button>
             </div>
           </div>

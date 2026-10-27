@@ -48,6 +48,145 @@ export interface QuizQuestion {
   }[];
 }
 
+export interface SonoramaVideoItem {
+  id: string;
+  title: string;
+  dateLabel: string;
+  category: string;
+  youtubeUrl: string;
+  embedUrl: string;
+  thumbnailUrl: string;
+}
+
+export const SONORAMA_YOUTUBE_VIDEOS: SonoramaVideoItem[] = [
+  {
+    id: 'YEiBtw4KfyM',
+    title: 'Sonorama Vital con Pamela Pazmiño · 08 Octubre 2026',
+    dateLabel: '08 Octubre 2026',
+    category: 'Programa Completo · Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=YEiBtw4KfyM',
+    embedUrl: 'https://www.youtube.com/embed/YEiBtw4KfyM?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/YEiBtw4KfyM/hqdefault.jpg',
+  },
+  {
+    id: 'tsvZlHxC_Ik',
+    title: 'Detección Temprana de Cáncer de Mama | Sonorama Vital con Pamela Pazmiño',
+    dateLabel: 'Octubre 2026',
+    category: 'Prevención y Salud Integral',
+    youtubeUrl: 'https://www.youtube.com/watch?v=tsvZlHxC_Ik',
+    embedUrl: 'https://www.youtube.com/embed/tsvZlHxC_Ik?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/tsvZlHxC_Ik/hqdefault.jpg',
+  },
+  {
+    id: '8MJjhTdVmw8',
+    title: 'Sonorama Vital con Pamela Pazmiño · 27 Agosto 2026',
+    dateLabel: '27 Agosto 2026',
+    category: 'Salud y Bienestar · Radio Sonorama',
+    youtubeUrl: 'https://www.youtube.com/watch?v=8MJjhTdVmw8',
+    embedUrl: 'https://www.youtube.com/embed/8MJjhTdVmw8?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/8MJjhTdVmw8/hqdefault.jpg',
+  },
+  {
+    id: 'T4QtHbxK0R4',
+    title: 'Sonorama Vital con Pamela Pazmiño · 20 Agosto 2026',
+    dateLabel: '20 Agosto 2026',
+    category: 'Salud y Bienestar · Radio Sonorama',
+    youtubeUrl: 'https://www.youtube.com/watch?v=T4QtHbxK0R4',
+    embedUrl: 'https://www.youtube.com/embed/T4QtHbxK0R4?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/T4QtHbxK0R4/hqdefault.jpg',
+  },
+  {
+    id: '1NLe74AVgkM',
+    title: 'Sonorama Vital con Pamela Pazmiño · 23 Julio 2026',
+    dateLabel: '23 Julio 2026',
+    category: 'Entrevista Médica · Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=1NLe74AVgkM',
+    embedUrl: 'https://www.youtube.com/embed/1NLe74AVgkM?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/1NLe74AVgkM/hqdefault.jpg',
+  },
+  {
+    id: 'ie1ikAahXbg',
+    title: 'Sonorama Vital · 02 Julio 2026',
+    dateLabel: '02 Julio 2026',
+    category: 'Salud Integral · Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=ie1ikAahXbg',
+    embedUrl: 'https://www.youtube.com/embed/ie1ikAahXbg?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/ie1ikAahXbg/hqdefault.jpg',
+  },
+  {
+    id: '3ZRuDV421-g',
+    title: 'Sonorama Vital con Pamela Pazmiño · 11 Junio 2026',
+    dateLabel: '11 Junio 2026',
+    category: 'Programa Completo · Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=3ZRuDV421-g',
+    embedUrl: 'https://www.youtube.com/embed/3ZRuDV421-g?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/3ZRuDV421-g/hqdefault.jpg',
+  },
+  {
+    id: '4ZdV3ZT42So',
+    title: 'Sonorama Vital con Pamela Pazmiño · 23 Abril 2026',
+    dateLabel: '23 Abril 2026',
+    category: 'Salud y Prevención · Radio Sonorama',
+    youtubeUrl: 'https://www.youtube.com/watch?v=4ZdV3ZT42So',
+    embedUrl: 'https://www.youtube.com/embed/4ZdV3ZT42So?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/4ZdV3ZT42So/hqdefault.jpg',
+  },
+  {
+    id: 'Qai_yc69Mbw',
+    title: 'Sonorama Vital con Pamela Pazmiño · 16 Abril 2026',
+    dateLabel: '16 Abril 2026',
+    category: 'Salud y Bienestar · Radio Sonorama',
+    youtubeUrl: 'https://www.youtube.com/watch?v=Qai_yc69Mbw',
+    embedUrl: 'https://www.youtube.com/embed/Qai_yc69Mbw?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/Qai_yc69Mbw/hqdefault.jpg',
+  },
+  {
+    id: 'UkKJ_xV6p8M',
+    title: 'Sonorama Vital · 26 Marzo 2026',
+    dateLabel: '26 Marzo 2026',
+    category: 'Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=UkKJ_xV6p8M',
+    embedUrl: 'https://www.youtube.com/embed/UkKJ_xV6p8M?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/UkKJ_xV6p8M/hqdefault.jpg',
+  },
+  {
+    id: 'zrJu2DADeQ8',
+    title: 'Sonorama Vital | Síndrome de Ovario Poliquístico y Fertilidad',
+    dateLabel: 'Especial Clínico',
+    category: 'Salud Integral',
+    youtubeUrl: 'https://www.youtube.com/watch?v=zrJu2DADeQ8',
+    embedUrl: 'https://www.youtube.com/embed/zrJu2DADeQ8?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/zrJu2DADeQ8/hqdefault.jpg',
+  },
+  {
+    id: 'YnW22r-_Zxs',
+    title: 'Sonorama Vital | El arte de pensar diferente, un mundo Neurodivergente',
+    dateLabel: 'Especial Bienestar',
+    category: 'Salud y Mente',
+    youtubeUrl: 'https://www.youtube.com/watch?v=YnW22r-_Zxs',
+    embedUrl: 'https://www.youtube.com/embed/YnW22r-_Zxs?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/YnW22r-_Zxs/hqdefault.jpg',
+  },
+  {
+    id: 'T0RbE62CSrI',
+    title: 'Sonorama Vital · 11 Diciembre 2025',
+    dateLabel: '11 Diciembre 2025',
+    category: 'Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=T0RbE62CSrI',
+    embedUrl: 'https://www.youtube.com/embed/T0RbE62CSrI?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/T0RbE62CSrI/hqdefault.jpg',
+  },
+  {
+    id: 'PuFDxxAzzKY',
+    title: 'Sonorama Vital · 16 Octubre 2025',
+    dateLabel: '16 Octubre 2025',
+    category: 'Sonorama Digital',
+    youtubeUrl: 'https://www.youtube.com/watch?v=PuFDxxAzzKY',
+    embedUrl: 'https://www.youtube.com/embed/PuFDxxAzzKY?rel=0',
+    thumbnailUrl: 'https://i.ytimg.com/vi/PuFDxxAzzKY/hqdefault.jpg',
+  },
+];
+
 export const SITE_CONFIG = {
   doctorName: 'Dra. Pamela Pazmiño',
   doctorFullName: 'Dra. Eliana Pamela Pazmiño Troncoso',

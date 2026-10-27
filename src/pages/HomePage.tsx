@@ -13,8 +13,8 @@ import {
   MapPin,
   Star,
   ExternalLink,
-  Award,
   Phone,
+  Radio,
 } from 'lucide-react';
 import {
   SITE_CONFIG,
@@ -25,7 +25,14 @@ import {
   INSTAGRAM_SHOWCASE,
   TESTIMONIALS,
 } from '../data/siteContent';
-import { DoctorEditorialPortrait, InstagramIcon as Instagram } from '../components/ClinicalVisuals';
+import {
+  ViteCyanCanvas,
+  InteractiveAtmHarmonyShowcase,
+  SonoramaVitalMediaHub,
+  InteractiveSmileAndVideoBento,
+  MinimalistAuthorityShowcase,
+  InstagramIcon as Instagram,
+} from '../components/ClinicalVisuals';
 import { AtmQuizContent } from '../components/AtmQuizModal';
 
 interface HomePageProps {
@@ -43,163 +50,207 @@ const iconMap = {
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }) => {
   return (
-    <div className="space-y-24 pb-20">
-      {/* 1. HERO SECTION (Editorial Clinical Luxury like davidjaramillo.org) */}
-      <section className="relative overflow-hidden pt-8 pb-16 sm:pt-14 sm:pb-24 bg-gradient-to-b from-[#EBF2F0]/70 via-[#FAF8F5] to-[#FAF8F5] border-b border-[#0F3D3E]/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="space-y-28 pb-24">
+      {/* 1. VITE-INSPIRED ANIMATED HIGH-TECH MINIMALIST CYAN HERO */}
+      <section className="relative overflow-hidden pt-10 pb-20 sm:pt-16 sm:pb-24 bg-vite-grid">
+        {/* Interactive 60fps Cyan Energy Beam & Bio-Node Canvas */}
+        <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
+
+        {/* Ambient Cyan Mesh Glows */}
+        <div className="pointer-events-none absolute -top-40 left-1/4 h-[520px] w-[520px] rounded-full bg-cyan-300/30 blur-[140px]" />
+        <div className="pointer-events-none absolute top-20 right-0 h-[440px] w-[440px] rounded-full bg-sky-300/25 blur-[130px]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-            {/* Left Column: Core Value Proposition (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-[#0F3D3E] shadow-xs border border-[#0F3D3E]/15">
-                <span className="h-2 w-2 rounded-full bg-[#C5A059]" />
-                <span>Rehabilitación Oral · ATM Integral · Bruxismo · Dental Check Quito</span>
+            {/* Left Column: High-Tech Minimalist Typography (7 cols) */}
+            <div className="lg:col-span-7 space-y-7">
+              <div className="inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/90 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-700 shadow-sm ring-1 ring-cyan-500/25">
+                <span className="h-2 w-2 rounded-full bg-cyan-500 animate-ping" />
+                <span>Dra. Pamela Pazmiño · Dental Check UIO · Sonorama Vital</span>
               </div>
 
-              <h1 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#0F3D3E] leading-[1.08] tracking-tight">
-                Ciencia, precisión y calidez para devolver la{' '}
-                <span className="italic text-[#134E4A] underline decoration-[#C5A059]/60 decoration-2 underline-offset-8">
-                  calma a tu mandíbula
+              <h1 className="text-4xl sm:text-6xl lg:text-[4.15rem] font-extrabold text-slate-900 leading-[1.04] tracking-tight">
+                Ciencia y tecnología para{' '}
+                <span className="bg-gradient-to-r from-cyan-500 via-cyan-400 to-sky-600 bg-clip-text text-transparent animate-cyan-beam">
+                  liberar tu ATM
                 </span>{' '}
-                y la armonía a tu sonrisa.
+                y rehabilitar tu sonrisa.
               </h1>
 
-              <p className="text-base sm:text-lg text-[#334745] leading-relaxed max-w-2xl">
-                Soy la <strong>{SITE_CONFIG.doctorFullName}</strong>, odontóloga especialista en{' '}
-                <strong>Rehabilitación Oral</strong>, manejo clínico de <strong>ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria. En nuestro centro{' '}
-                <strong>{SITE_CONFIG.clinicName}</strong> en Quito te brindamos un diagnóstico honesto, conservador y basado en evidencia científica.
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+                Soy la <strong className="text-slate-900 font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
+                <strong className="text-slate-900 font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA) y conductora de <strong className="text-cyan-700 font-bold">Sonorama Vital</strong>.
               </p>
 
-              {/* Key Trust Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                <div className="flex items-center gap-2.5 rounded-2xl bg-white p-3.5 shadow-xs border border-[#0F3D3E]/10">
-                  <Activity className="h-5 w-5 text-[#C5A059] shrink-0" />
-                  <div className="text-xs">
-                    <p className="font-bold text-[#0F3D3E]">ATM Integral y Bruxismo</p>
-                    <p className="text-[#4A5D5B]">Alivio articular y cráneo-cervical</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2.5 rounded-2xl bg-white p-3.5 shadow-xs border border-[#0F3D3E]/10">
-                  <Crown className="h-5 w-5 text-[#C5A059] shrink-0" />
-                  <div className="text-xs">
-                    <p className="font-bold text-[#0F3D3E]">Rehabilitación Biomimética</p>
-                    <p className="text-[#4A5D5B]">Estética y función sin desgaste</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2.5 rounded-2xl bg-white p-3.5 shadow-xs border border-[#0F3D3E]/10">
-                  <Stethoscope className="h-5 w-5 text-[#C5A059] shrink-0" />
-                  <div className="text-xs">
-                    <p className="font-bold text-[#0F3D3E]">Dental Check UIO</p>
-                    <p className="text-[#4A5D5B]">Av. La Coruña y Fco. de Orellana</p>
-                  </div>
-                </div>
+              {/* Floating Minimalist Capability Pills */}
+              <div className="flex flex-wrap gap-2.5 pt-1">
+                {[
+                  { label: 'ATM Integral & Dolor Orofacial', icon: Activity },
+                  { label: 'Bruxismo (Sueño y Vigilia)', icon: ShieldCheck },
+                  { label: 'Rehabilitación Biomimética', icon: Crown },
+                  { label: 'Sonorama Vital · Divulgación', icon: Radio },
+                ].map((pill, i) => {
+                  const Icon = pill.icon;
+                  return (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-md px-4 py-2 text-xs font-bold text-slate-700 shadow-2xs ring-1 ring-cyan-500/15"
+                    >
+                      <Icon className="h-3.5 w-3.5 text-cyan-500" />
+                      {pill.label}
+                    </span>
+                  );
+                })}
               </div>
 
-              {/* Primary CTAs */}
+              {/* Primary Pill CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('atm-integral')}
-                  className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#0F3D3E] px-7 py-4 text-sm font-semibold text-white shadow-lg hover:bg-[#134E4A] transition cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-8 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.02] transition-all cursor-pointer"
                 >
-                  <Calendar className="h-4 w-4 text-[#C5A059]" />
-                  <span>Agendar Cita de Valoración</span>
+                  <Calendar className="h-4 w-4" />
+                  <span>Agendar Valoración en Quito</span>
                 </button>
 
                 <a
-                  href="#test-atm-interactivo"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#0F3D3E]/25 bg-white px-6 py-4 text-sm font-semibold text-[#0F3D3E] hover:bg-[#EBF2F0] transition"
+                  href="#sonorama-vital-hub"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 transition"
                 >
-                  <Activity className="h-4 w-4 text-[#C5A059]" />
-                  <span>Realizar Test de ATM y Bruxismo</span>
+                  <Radio className="h-4 w-4 text-cyan-400" />
+                  <span>Ver Videos Sonorama Vital</span>
                 </a>
               </div>
 
-              {/* Quick Social & Location Proof */}
-              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-[#4A5D5B]">
+              {/* Quick Location & Social Links */}
+              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-500">
                 <a
                   href={SITE_CONFIG.address.googleMapsShareUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-medium text-[#0F3D3E] hover:underline"
+                  className="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
-                  <MapPin className="h-3.5 w-3.5 text-[#C5A059]" />
-                  <span>Quito · Sector Iñaquito ({SITE_CONFIG.address.street})</span>
+                  <MapPin className="h-3.5 w-3.5 text-cyan-500" />
+                  <span>{SITE_CONFIG.address.street} · Dental Check UIO</span>
                 </a>
-                <span>•</span>
+                <span className="text-slate-300">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramPersonal.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-medium text-[#0F3D3E] hover:underline"
+                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-[#C5A059]" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
                   <span>{SITE_CONFIG.social.instagramPersonal.handle}</span>
                 </a>
-                <span>•</span>
+                <span className="text-slate-300">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramClinic.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-medium text-[#0F3D3E] hover:underline"
+                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-[#C5A059]" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
                   <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
                 </a>
               </div>
             </div>
 
-            {/* Right Column: Editorial Specialist Portrait (5 cols) */}
+            {/* Right Column: Live YouTube + Facebook Reel + 3D ATM Scanner HUD (5 cols) */}
             <div className="lg:col-span-5">
-              <DoctorEditorialPortrait variant="hero" />
+              <InteractiveAtmHarmonyShowcase />
             </div>
+          </div>
+        </div>
+
+        {/* High-Tech Animated Kinetic Marquee Bar */}
+        <div className="relative z-10 mt-16 border-y border-cyan-500/15 bg-white/80 backdrop-blur-md py-3.5 overflow-hidden">
+          <div className="animate-marquee flex items-center gap-10 text-xs font-extrabold uppercase tracking-[0.18em] text-slate-600">
+            {[
+              'ATM Integral & Eje Cráneo-Cervical',
+              'Bruxismo del Sueño y Vigilia',
+              'Rehabilitación Oral Biomimética',
+              'Diseño de Sonrisa Natural sin Desgaste',
+              'Dental Check UIO · Av. La Coruña',
+              'Sonorama Vital · Radio Sonorama Ecuador',
+              'Investigación Científica UDLA · PubMed',
+              'ATM Integral & Eje Cráneo-Cervical',
+              'Bruxismo del Sueño y Vigilia',
+              'Rehabilitación Oral Biomimética',
+              'Diseño de Sonrisa Natural sin Desgaste',
+              'Dental Check UIO · Av. La Coruña',
+              'Sonorama Vital · Radio Sonorama Ecuador',
+              'Investigación Científica UDLA · PubMed',
+            ].map((item, idx) => (
+              <span key={idx} className="inline-flex items-center gap-3 whitespace-nowrap">
+                <span className="h-2 w-2 rounded-full bg-cyan-400" />
+                <span>{item}</span>
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 2. EMPATHY SYMPTOM IDENTIFICATION ("¿Te identificas con alguno de estos signos?" like davidjaramillo.org) */}
+      {/* 2. SONORAMA VITAL MEDIA THEATER (All 14 YouTube Videos + Facebook Reel) */}
+      <section id="sonorama-vital-hub" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <SonoramaVitalMediaHub />
+      </section>
+
+      {/* 3. INTERACTIVE SMILE SLIDER & LOOPING CLINICAL VIDEO BENTO */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-[#0F3D3E]">
-            Escucha Clínica Activa
-          </span>
-          <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#0F3D3E]">
-            ¿Te identificas con alguna de estas situaciones?
-          </h2>
-          <p className="text-sm sm:text-base text-[#4A5D5B] leading-relaxed">
-            El dolor mandibular, el desgaste dental y la inseguridad al sonreír no deberían normalizarse. Identificar la causa real es el primer paso hacia un tratamiento conservador y duradero.
+        <InteractiveSmileAndVideoBento onOpenBooking={(specId) => onOpenBooking(specId)} />
+      </section>
+
+      {/* 4. MINIMALIST SYMPTOM IDENTIFICATION ("¿Te identificas con alguno de estos signos?") */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="max-w-2xl space-y-3">
+            <span className="inline-block text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+              Diagnóstico con Sentido Clínico
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+              ¿Reconoces alguno de estos síntomas en tu día a día?
+            </h2>
+          </div>
+          <p className="text-sm text-slate-500 max-w-md leading-relaxed">
+            El dolor articular, las cefaleas matutinas y el desgaste dental silencioso tienen tratamiento conservador cuando se evalúa el origen biomecánico real.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {EMPATHY_SYMPTOMS.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {EMPATHY_SYMPTOMS.map((item, idx) => (
             <div
               key={item.id}
-              className="group rounded-3xl bg-white p-6 sm:p-7 shadow-sm hover:shadow-xl border border-[#0F3D3E]/10 hover:border-[#0F3D3E]/30 transition flex flex-col justify-between"
+              className="group relative overflow-hidden rounded-[2rem] bg-white hover:bg-gradient-to-br hover:from-cyan-50/90 hover:to-white p-7 transition-all duration-300 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] flex flex-col justify-between"
             >
-              <div className="space-y-3">
-                <span className="inline-block rounded-full bg-[#EBF2F0] px-3 py-1 text-[11px] font-semibold text-[#0F3D3E]">
-                  {item.badge}
-                </span>
-                <h3 className="font-editorial text-2xl font-semibold text-[#182625] group-hover:text-[#0F3D3E] transition">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-cyan-500/10 px-3.5 py-1 text-[11px] font-bold text-cyan-700">
+                    {item.badge}
+                  </span>
+                  <span className="text-xs font-extrabold text-cyan-500/40">0{idx + 1}</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-cyan-700 transition leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-sm text-[#4A5D5B] leading-relaxed">{item.description}</p>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
               </div>
 
-              <div className="pt-5 mt-5 border-t border-[#0F3D3E]/10 flex items-center justify-between">
+              <div className="pt-6 mt-6 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => onOpenBooking(item.recommendedSpecialty, `Consulta sobre: ${item.title}`)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F3D3E] group-hover:text-[#134E4A] cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 group-hover:text-cyan-700 cursor-pointer"
                 >
-                  <span>Consultar este caso</span>
-                  <ArrowRight className="h-3.5 w-3.5 text-[#C5A059] group-hover:translate-x-1 transition-transform" />
+                  <span>Agendar valoración</span>
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <Link
                   to={`/especialidades#${item.recommendedSpecialty}`}
-                  className="text-xs text-[#4A5D5B] hover:text-[#0F3D3E] underline"
+                  className="text-xs font-medium text-slate-400 hover:text-cyan-600 transition"
                 >
-                  Ver protocolo
+                  Protocolo →
                 </Link>
               </div>
             </div>
@@ -207,70 +258,69 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
         </div>
       </section>
 
-      {/* 3. CORE SPECIALTIES & ATM INTEGRAL SHOWCASE */}
-      <section className="bg-[#0F3D3E] text-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+      {/* 5. BENTO GRID OF 5 CLINICAL SPECIALTIES */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[2.75rem] bg-gradient-to-b from-cyan-950 via-slate-900 to-slate-950 p-7 sm:p-12 lg:p-16 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.28)] relative overflow-hidden bg-vite-grid-dark">
+          <div className="pointer-events-none absolute -top-24 right-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Áreas de Intervención Clínica
+              <span className="inline-block text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-400">
+                Especialidades Clínicas
               </span>
-              <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
-                Especialidades diseñadas para cuidar tu función y tu estética
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                Precisión biomecánica y estética biológica.
               </h2>
-              <p className="text-sm sm:text-base text-[#D5E5E2]/90 leading-relaxed">
-                Integramos la alta especialidad en Rehabilitación Oral y ATM Integral de la Dra. Pamela Pazmiño con la atención odontológica preventiva y multidisciplinaria de Dental Check UIO.
-              </p>
             </div>
 
             <Link
               to="/especialidades"
-              className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-5 py-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#C5A059] hover:text-[#0A292A] transition self-start"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-xs font-bold text-white hover:bg-cyan-400 hover:text-slate-950 transition self-start"
             >
-              <span>Explorar todas las especialidades</span>
+              <span>Ver protocolos detallados</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {SPECIALTIES.map((spec, idx) => {
               const IconComponent = iconMap[spec.iconName] || Activity;
               const isFeatured = idx === 0;
               return (
                 <div
                   key={spec.id}
-                  className={`rounded-3xl p-7 flex flex-col justify-between transition border ${
+                  className={`rounded-[2rem] p-7 flex flex-col justify-between transition-all ${
                     isFeatured
-                      ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-[#134E4A] to-[#0A292A] border-[#C5A059]/50 shadow-2xl'
-                      : 'bg-white/6 border-white/12 hover:border-[#C5A059]/40'
+                      ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-cyan-500/20 via-cyan-900/30 to-white/5 ring-1 ring-cyan-400/40'
+                      : 'bg-white/6 hover:bg-white/10 ring-1 ring-white/10 hover:ring-cyan-400/30'
                   }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full bg-[#C5A059]/20 px-3 py-1 text-[11px] font-semibold text-[#C5A059] border border-[#C5A059]/30">
+                      <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-[11px] font-bold text-cyan-300">
                         {spec.badge}
                       </span>
-                      <span className="text-[11px] text-[#D5E5E2]/75 font-medium">{spec.brandTag}</span>
+                      <span className="text-[11px] text-cyan-100/60 font-medium">{spec.brandTag}</span>
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#C5A059] text-[#0A292A]">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20">
                         <IconComponent className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="font-editorial text-2xl sm:text-3xl font-semibold text-white">
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                           {spec.title}
                         </h3>
-                        <p className="text-xs text-[#C5A059] font-medium mt-0.5">{spec.subtitle}</p>
+                        <p className="text-xs text-cyan-300 font-medium mt-0.5">{spec.subtitle}</p>
                       </div>
                     </div>
 
-                    <p className="text-sm text-[#E6F0EE]/90 leading-relaxed">{spec.shortDescription}</p>
+                    <p className="text-sm text-slate-300 leading-relaxed">{spec.shortDescription}</p>
 
                     <div className="pt-2 space-y-1.5">
                       {spec.procedures.slice(0, isFeatured ? 3 : 2).map((proc, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-[#D5E5E2]">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-[#C5A059] shrink-0" />
+                        <div key={i} className="flex items-center gap-2 text-xs text-cyan-100/90">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                           <span>{proc.name}</span>
                         </div>
                       ))}
@@ -281,17 +331,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                     <button
                       type="button"
                       onClick={() => onOpenBooking(spec.id)}
-                      className="inline-flex items-center gap-2 rounded-xl bg-[#C5A059] px-4 py-2.5 text-xs font-bold text-[#0A292A] hover:bg-[#d4b26c] transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition cursor-pointer"
                     >
                       <Calendar className="h-3.5 w-3.5" />
-                      <span>Agendar en esta área</span>
+                      <span>Agendar cita</span>
                     </button>
 
                     <Link
                       to={`/especialidades#${spec.id}`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-[#C5A059] transition"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-cyan-300 hover:text-white transition"
                     >
-                      <span>Detalles clínicos</span>
+                      <span>Explorar</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
@@ -302,186 +352,128 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
         </div>
       </section>
 
-      {/* 4. ABOUT THE SPECIALIST PREVIEW ("Conóceme" section inspired by davidjaramillo.org) */}
+      {/* 6. SCIENTIFIC & CLINICAL AUTHORITY */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.25rem] bg-white p-8 sm:p-12 shadow-xl border border-[#0F3D3E]/10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#EBF2F0] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0F3D3E]">
-              <Award className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Conóceme · Rigor Científico y Trato Humano</span>
-            </div>
-
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#0F3D3E] leading-tight">
-              Dra. Eliana Pamela Pazmiño Troncoso
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-6 space-y-5">
+            <span className="inline-block text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+              Ciencia, Docencia y Práctica Clínica
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              {SITE_CONFIG.doctorFullName}
             </h2>
-
-            <p className="text-sm sm:text-base text-[#334745] leading-relaxed">
-              Mi vocación nace de comprender que detrás de cada diente desgastado o de cada dolor mandibular crónico hay una persona que desea volver a comer, hablar, descansar y sonreír con tranquilidad.
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              Cada diagnóstico en <strong className="text-slate-900">Dental Check UIO</strong> integra la experiencia clínica en <strong className="text-slate-900">Rehabilitación Oral y ATM Integral</strong> con la investigación científica activa en la Carrera de Odontología de la <strong className="text-slate-900">Universidad de Las Américas (UDLA)</strong> y la comunicación en salud en <strong className="text-cyan-700">Sonorama Vital</strong>.
+            </p>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              Nuestro objetivo es claro: aliviar el dolor orofacial, detener el desgaste por bruxismo y diseñar sonrisas armónicas con la mínima intervención biológica posible.
             </p>
 
-            <p className="text-sm sm:text-base text-[#334745] leading-relaxed">
-              Combino mi práctica clínica privada como <strong>Especialista en Rehabilitación Oral y ATM Integral</strong> en <strong>Dental Check UIO</strong> con la <strong>docencia e investigación científica universitaria en la UDLA</strong>, donde investigamos activamente los mecanismos del bruxismo, los trastornos temporomandibulares y el dolor orofacial.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="rounded-2xl bg-[#FAF8F5] p-4 border border-[#0F3D3E]/10">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#0F3D3E]">
-                  Investigación Publicada (PubMed / NIH)
-                </p>
-                <p className="text-xs text-[#4A5D5B] mt-1 leading-relaxed">
-                  Estudios científicos sobre Trastornos Temporomandibulares (TTM), bruxismo y biomarcadores de estrés oxidativo aplicados a protocolos clínicos reales.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-[#FAF8F5] p-4 border border-[#0F3D3E]/10">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#0F3D3E]">
-                  Dirección en Dental Check UIO
-                </p>
-                <p className="text-xs text-[#4A5D5B] mt-1 leading-relaxed">
-                  Un centro odontológico en Quito diseñado para que te sientas escuchado, seguro y acompañado por especialistas éticos.
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-3 flex flex-wrap items-center gap-4">
+            <div className="pt-2 flex flex-wrap gap-3">
               <Link
                 to="/sobre-mi"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#0F3D3E] px-6 py-3.5 text-xs sm:text-sm font-semibold text-white hover:bg-[#134E4A] transition shadow"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-xs font-bold text-white hover:bg-cyan-600 transition"
               >
-                <span>Conocer mi trayectoria completa</span>
-                <ArrowRight className="h-4 w-4 text-[#C5A059]" />
+                <span>Conocer enfoque e investigación</span>
+                <ArrowRight className="h-4 w-4 text-cyan-400" />
               </Link>
-
               <button
                 type="button"
                 onClick={() => onOpenBooking('atm-integral')}
-                className="inline-flex items-center gap-2 rounded-xl border border-[#0F3D3E]/25 bg-[#FAF8F5] px-5 py-3.5 text-xs sm:text-sm font-semibold text-[#0F3D3E] hover:bg-[#EBF2F0] transition cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-6 py-3.5 text-xs font-bold text-cyan-700 hover:bg-cyan-100 transition cursor-pointer"
               >
-                <Calendar className="h-4 w-4 text-[#C5A059]" />
-                <span>Agendar Consulta</span>
+                <Calendar className="h-4 w-4 text-cyan-500" />
+                <span>Reservar Valoración</span>
               </button>
             </div>
           </div>
 
-          {/* Right Highlight Box: Clinical Philosophy */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#0F3D3E] to-[#0A292A] p-7 sm:p-8 text-white space-y-5 border border-[#C5A059]/30">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#C5A059]">
-              Nuestra Promesa Clínica
-            </span>
-            <h3 className="font-editorial text-2xl sm:text-3xl font-semibold">
-              ¿Por qué nuestros pacientes confían en nuestro enfoque?
-            </h3>
-
-            <ul className="space-y-4 text-xs sm:text-sm text-[#E6F0EE]/90">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-[#C5A059] shrink-0 mt-0.5" />
-                <span>
-                  <strong>Cero sobretratamiento:</strong> Priorizamos siempre la preservación biológica de tu esmalte y terapias reversibles antes de cualquier intervención invasiva.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-[#C5A059] shrink-0 mt-0.5" />
-                <span>
-                  <strong>Visión de ATM Integral:</strong> No miramos solo un diente aislado; evaluamos tu mordida, tus articulaciones temporomandibulares y tu postura cervical.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-[#C5A059] shrink-0 mt-0.5" />
-                <span>
-                  <strong>Tiempo de calidad en consulta:</strong> Explicamos tu diagnóstico con fotografías e indicadores claros para que tomes decisiones informadas.
-                </span>
-              </li>
-            </ul>
+          <div className="lg:col-span-6">
+            <MinimalistAuthorityShowcase />
           </div>
         </div>
       </section>
 
-      {/* 5. INTERACTIVE SELF-ASSESSMENT & FREE E-BOOK (Inspired by davidjaramillo.org's Free Resource & Workshop) */}
+      {/* 7. INTERACTIVE SELF-ASSESSMENT & FREE E-BOOK */}
       <section id="test-atm-interactivo" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Interactive ATM & Bruxism Quiz (7 cols) */}
           <div className="lg:col-span-7">
             <AtmQuizContent
               onOpenBookingWithNote={(specId, note) => onOpenBooking(specId, note)}
             />
           </div>
 
-          {/* Right: Free Downloadable Patient E-Book Card (5 cols) */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-br from-[#0F3D3E] via-[#134E4A] to-[#0A292A] p-7 sm:p-9 text-white shadow-xl border border-[#C5A059]/35 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-[#C5A059] border border-[#C5A059]/30">
+          <div className="lg:col-span-5 rounded-[2.25rem] bg-gradient-to-br from-cyan-500 via-cyan-600 to-sky-700 p-7 sm:p-9 text-white shadow-[0_24px_60px_-15px_rgba(6,182,212,0.4)] space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-bold text-white backdrop-blur-md">
               <BookOpen className="h-3.5 w-3.5" />
               <span>E-Book Gratuito para Pacientes</span>
             </div>
 
             <div className="space-y-2">
-              <h3 className="font-editorial text-3xl sm:text-4xl font-semibold text-white leading-tight">
+              <h3 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
                 {FREE_GUIDE_CONTENT.title}
               </h3>
-              <p className="text-xs sm:text-sm text-[#D5E5E2] leading-relaxed">
+              <p className="text-xs sm:text-sm text-cyan-50 leading-relaxed">
                 {FREE_GUIDE_CONTENT.subtitle}
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white/8 p-4 border border-white/12 space-y-2.5 text-xs text-[#E6F0EE]">
-              <p className="font-bold text-[#C5A059] uppercase tracking-wider">
-                Lo que aprenderás en esta guía clínica:
+            <div className="rounded-3xl bg-white/12 backdrop-blur-md p-5 space-y-2.5 text-xs text-white">
+              <p className="font-extrabold uppercase tracking-wider text-cyan-100">
+                Capítulos incluidos:
               </p>
               {FREE_GUIDE_CONTENT.chapters.map((ch) => (
                 <div key={ch.number} className="flex items-start gap-2.5">
-                  <span className="font-bold text-[#C5A059]">{ch.number}.</span>
+                  <span className="font-extrabold text-cyan-200">{ch.number}.</span>
                   <span>{ch.title}</span>
                 </div>
               ))}
             </div>
 
-            <div className="pt-2 space-y-3">
-              <button
-                type="button"
-                onClick={onOpenGuide}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#C5A059] px-6 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A292A] hover:bg-[#d4b26c] transition shadow-lg cursor-pointer"
-              >
-                <BookOpen className="h-4 w-4" />
-                <span>Leer y Descargar Guía Gratuita (PDF)</span>
-              </button>
-              <p className="text-[11px] text-center text-[#D5E5E2]/80">
-                Acceso inmediato sin registro obligatorio · Escrito por la Dra. Pamela Pazmiño
-              </p>
-            </div>
+            <button
+              type="button"
+              onClick={onOpenGuide}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-cyan-700 hover:bg-cyan-50 transition shadow-lg cursor-pointer"
+            >
+              <BookOpen className="h-4 w-4" />
+              <span>Abrir y Descargar Guía (PDF)</span>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* 6. INSTAGRAM DUAL SHOWCASE (@drapamelapazmino & @dentalcheck.uio) */}
+      {/* 8. INSTAGRAM DUAL SHOWCASE (@drapamelapazmino & @dentalcheck.uio) */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="space-y-2">
-            <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-[#0F3D3E]">
-              Comunidad Digital y Divulgación
+            <span className="inline-block text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+              Comunidad Digital
             </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl font-semibold text-[#0F3D3E]">
-              Síguenos en Instagram: Educación y Casos Reales
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Síguenos en Instagram
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5">
             <a
               href={SITE_CONFIG.social.instagramPersonal.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#0F3D3E] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#134E4A] transition"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-500 px-5 py-2.5 text-xs font-bold text-white hover:bg-cyan-600 transition shadow-sm shadow-cyan-500/20"
             >
-              <Instagram className="h-4 w-4 text-[#C5A059]" />
+              <Instagram className="h-4 w-4" />
               <span>{SITE_CONFIG.social.instagramPersonal.handle}</span>
-              <ExternalLink className="h-3 w-3 opacity-75" />
+              <ExternalLink className="h-3 w-3 opacity-80" />
             </a>
             <a
               href={SITE_CONFIG.social.instagramClinic.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-[#0F3D3E]/25 bg-white px-4 py-2.5 text-xs font-semibold text-[#0F3D3E] hover:bg-[#EBF2F0] transition"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-5 py-2.5 text-xs font-bold text-cyan-700 hover:bg-cyan-100 transition"
             >
-              <Instagram className="h-4 w-4 text-[#C5A059]" />
+              <Instagram className="h-4 w-4 text-cyan-500" />
               <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
-              <ExternalLink className="h-3 w-3 opacity-75" />
+              <ExternalLink className="h-3 w-3 opacity-80" />
             </a>
           </div>
         </div>
@@ -493,49 +485,49 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               href={post.accountUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-3xl bg-white p-6 shadow-sm hover:shadow-xl border border-[#0F3D3E]/10 hover:border-[#0F3D3E]/30 transition flex flex-col justify-between"
+              className="group rounded-[2rem] bg-white p-6 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.18)] transition-all flex flex-col justify-between"
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-[#0F3D3E] inline-flex items-center gap-1">
-                    <Instagram className="h-3.5 w-3.5 text-[#C5A059]" />
+                  <span className="font-bold text-slate-900 inline-flex items-center gap-1.5">
+                    <Instagram className="h-3.5 w-3.5 text-cyan-500" />
                     {post.account}
                   </span>
-                  <span className="rounded-full bg-[#EBF2F0] px-2.5 py-0.5 text-[10px] font-semibold text-[#0F3D3E]">
+                  <span className="rounded-full bg-cyan-50 px-2.5 py-0.5 text-[10px] font-bold text-cyan-700">
                     {post.format}
                   </span>
                 </div>
 
-                <div className="rounded-2xl bg-gradient-to-br from-[#0F3D3E] to-[#134E4A] p-4 text-white">
-                  <span className="text-[10px] uppercase tracking-wider text-[#C5A059] font-semibold block">
+                <div className="rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-600 p-4 text-white">
+                  <span className="text-[10px] uppercase tracking-wider text-cyan-100 font-bold block">
                     {post.badge}
                   </span>
-                  <h3 className="font-editorial text-lg font-semibold mt-1 leading-snug">
+                  <h3 className="text-base font-bold mt-1 leading-snug">
                     {post.title}
                   </h3>
                 </div>
 
-                <p className="text-xs text-[#4A5D5B] leading-relaxed">{post.caption}</p>
+                <p className="text-xs text-slate-600 leading-relaxed">{post.caption}</p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-[#0F3D3E]/10 flex items-center justify-between text-xs font-semibold text-[#0F3D3E]">
-                <span>Ver en Instagram</span>
-                <ExternalLink className="h-3.5 w-3.5 text-[#C5A059] group-hover:translate-x-0.5 transition-transform" />
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-cyan-600">
+                <span>Abrir en Instagram</span>
+                <ExternalLink className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </a>
           ))}
         </div>
       </section>
 
-      {/* 7. PATIENT TESTIMONIALS */}
-      <section className="bg-[#EBF2F0]/60 py-16 border-y border-[#0F3D3E]/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* 9. PATIENT TESTIMONIALS & BLOG PREVIEW */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-20">
+        <div>
           <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0F3D3E]">
-              Experiencias Reales en Quito
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+              Experiencias Reales
             </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl font-semibold text-[#0F3D3E]">
-              Lo que dicen nuestros pacientes
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Historias de alivio articular y armonía dental
             </h2>
           </div>
 
@@ -543,117 +535,110 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
             {TESTIMONIALS.map((t) => (
               <div
                 key={t.id}
-                className="rounded-3xl bg-white p-7 shadow-sm border border-[#0F3D3E]/10 flex flex-col justify-between space-y-4"
+                className="rounded-[2rem] bg-white p-7 shadow-xs ring-1 ring-cyan-500/15 flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-3">
-                  <div className="flex items-center gap-1 text-[#C5A059]">
+                  <div className="flex items-center gap-1 text-cyan-500">
                     {Array.from({ length: t.rating }).map((_, idx) => (
-                      <Star key={idx} className="h-4 w-4 fill-[#C5A059]" />
+                      <Star key={idx} className="h-4 w-4 fill-cyan-400" />
                     ))}
                   </div>
-                  <p className="text-sm text-[#182625] italic leading-relaxed">"{t.quote}"</p>
+                  <p className="text-sm text-slate-700 leading-relaxed">"{t.quote}"</p>
                 </div>
 
-                <div className="pt-4 border-t border-[#0F3D3E]/10">
-                  <p className="text-sm font-bold text-[#0F3D3E]">{t.name}</p>
-                  <p className="text-xs text-[#4A5D5B]">{t.role}</p>
+                <div className="pt-4 border-t border-cyan-500/10">
+                  <p className="text-sm font-extrabold text-slate-900">{t.name}</p>
+                  <p className="text-xs font-medium text-cyan-700">{t.role}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* 8. BLOG PREVIEW SECTION (matching davidjaramillo.org's educational articles) */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0F3D3E]">
-              Blog de Divulgación Científica
-            </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl font-semibold text-[#0F3D3E] mt-1">
-              Artículos sobre ATM Integral, Bruxismo y Salud Oral
-            </h2>
-          </div>
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0F3D3E] hover:underline"
-          >
-            <span>Ver todos los artículos ({BLOG_POSTS.length})</span>
-            <ArrowRight className="h-4 w-4 text-[#C5A059]" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {BLOG_POSTS.slice(0, 3).map((post) => (
+        {/* Blog Preview */}
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+                Lecturas Clínicas
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1">
+                Artículos sobre ATM Integral y Bruxismo
+              </h2>
+            </div>
             <Link
-              key={post.id}
-              to={`/blog/${post.slug}`}
-              className="group rounded-3xl bg-white p-6 sm:p-7 shadow-sm hover:shadow-xl border border-[#0F3D3E]/10 transition flex flex-col justify-between"
+              to="/blog"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-cyan-600 hover:text-cyan-700"
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-[#4A5D5B]">
-                  <span className="rounded-full bg-[#EBF2F0] px-3 py-1 font-semibold text-[#0F3D3E]">
-                    {post.category}
-                  </span>
-                  <span>{post.readTime}</span>
-                </div>
-                <h3 className="font-editorial text-2xl font-semibold text-[#182625] group-hover:text-[#0F3D3E] transition leading-snug">
-                  {post.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#4A5D5B] leading-relaxed">{post.excerpt}</p>
-              </div>
-
-              <div className="pt-5 mt-5 border-t border-[#0F3D3E]/10 flex items-center justify-between text-xs font-bold text-[#0F3D3E]">
-                <span>Leer artículo completo</span>
-                <ArrowRight className="h-4 w-4 text-[#C5A059] group-hover:translate-x-1 transition-transform" />
-              </div>
+              <span>Ver todos ({BLOG_POSTS.length})</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {BLOG_POSTS.slice(0, 3).map((post) => (
+              <Link
+                key={post.id}
+                to={`/blog/${post.slug}`}
+                className="group rounded-[2rem] bg-white p-7 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.16)] transition-all flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs text-slate-500">
+                    <span className="rounded-full bg-cyan-50 px-3 py-1 font-bold text-cyan-700">
+                      {post.category}
+                    </span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-cyan-600 transition leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{post.excerpt}</p>
+                </div>
+
+                <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-cyan-600">
+                  <span>Leer artículo</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 9. FINAL LOCATION & APPOINTMENT BANNER */}
+      {/* 10. MINIMALIST CYAN CALL TO ACTION BANNER */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.25rem] bg-gradient-to-r from-[#0F3D3E] via-[#134E4A] to-[#0A292A] p-8 sm:p-12 text-white shadow-2xl border border-[#C5A059]/30 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-8 space-y-4">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-[#C5A059]">
+        <div className="rounded-[2.5rem] bg-gradient-to-r from-cyan-500 via-cyan-600 to-sky-600 p-8 sm:p-12 text-white shadow-[0_28px_70px_-15px_rgba(6,182,212,0.45)] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-3">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-bold text-white">
               <MapPin className="h-3.5 w-3.5" />
-              <span>Consultorio en Quito · Dental Check UIO</span>
+              <span>Quito · {SITE_CONFIG.clinicName} ({SITE_CONFIG.address.street})</span>
             </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
               Agenda tu valoración con la Dra. Pamela Pazmiño
             </h2>
-            <p className="text-sm sm:text-base text-[#D5E5E2] leading-relaxed max-w-2xl">
-              Te esperamos en <strong>{SITE_CONFIG.clinicName}</strong> ({SITE_CONFIG.address.street}, {SITE_CONFIG.address.sector}). Da el primer paso hacia una mordida estable, sin dolor articular y una sonrisa natural.
+            <p className="text-sm sm:text-base text-cyan-50 leading-relaxed max-w-2xl">
+              Atención personalizada en el sector Iñaquito / La Coruña. WhatsApp directo{' '}
+              <strong>{SITE_CONFIG.whatsappDisplay}</strong> o teléfono fijo <strong>{SITE_CONFIG.landlineDisplay}</strong>.
             </p>
-            <div className="flex flex-wrap gap-4 pt-1 text-xs text-[#E6F0EE]">
-              <span className="inline-flex items-center gap-1.5">
-                <Phone className="h-4 w-4 text-[#C5A059]" />
-                WhatsApp: <strong>{SITE_CONFIG.whatsappDisplay}</strong> | Fijo: <strong>{SITE_CONFIG.landlineDisplay}</strong>
-              </span>
-              <span>•</span>
-              <span>{SITE_CONFIG.hours.weekdays}</span>
-            </div>
           </div>
 
           <div className="lg:col-span-4 flex flex-col gap-3">
             <button
               type="button"
               onClick={() => onOpenBooking('atm-integral')}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#C5A059] px-6 py-4 text-sm font-bold text-[#0A292A] hover:bg-[#d4b26c] transition shadow-lg cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-extrabold text-cyan-700 hover:bg-cyan-50 transition shadow-lg cursor-pointer"
             >
               <Calendar className="h-4 w-4" />
-              <span>Agendar Cita por WhatsApp</span>
+              <span>Reservar por WhatsApp</span>
             </button>
             <a
               href={SITE_CONFIG.address.googleMapsShareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3.5 text-xs font-semibold text-white hover:bg-white/20 transition"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-6 py-3.5 text-xs font-bold text-white hover:bg-white/25 transition"
             >
-              <MapPin className="h-4 w-4 text-[#C5A059]" />
-              <span>Abrir Ubicación en Google Maps</span>
+              <Phone className="h-3.5 w-3.5" />
+              <span>Ver Ubicación en Google Maps</span>
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </div>

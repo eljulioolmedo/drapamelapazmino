@@ -45,7 +45,7 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTopAndHash />
-      <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#182625]">
+      <div className="min-h-screen flex flex-col bg-slate-50/50 text-slate-900">
         <Navbar
           onOpenBooking={(specId) => handleOpenBooking(specId)}
           onOpenQuiz={() => setQuizModalOpen(true)}
@@ -113,7 +113,6 @@ export const App: React.FC = () => {
           onOpenGuide={() => setGuideModalOpen(true)}
         />
 
-        {/* Interactive Modals */}
         <BookingModal
           isOpen={bookingModalOpen}
           onClose={() => setBookingModalOpen(false)}
