@@ -51,8 +51,15 @@ const iconMap = {
 export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }) => {
   return (
     <div className="space-y-28 pb-24">
-      {/* 1. VITE-INSPIRED ANIMATED HIGH-TECH MINIMALIST CYAN HERO */}
-      <section className="relative overflow-hidden pt-10 pb-20 sm:pt-16 sm:pb-24 bg-vite-grid">
+      {/* 1. ARCHITECTURAL WOOD SLATS + DIAGONAL CYAN GLASS + HIGH-TECH MINIMALIST HERO */}
+      <section className="relative overflow-hidden pt-10 pb-20 sm:pt-14 sm:pb-24 bg-vite-grid">
+        {/* Real Architectural Wood Slats + Diagonal Cyan Glass Artwork Backdrop */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[58%] bg-cover bg-left opacity-35 lg:opacity-55"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-white/95" />
+
         {/* Interactive 60fps Cyan Energy Beam & Bio-Node Canvas */}
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
 
@@ -61,15 +68,27 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
         <div className="pointer-events-none absolute top-20 right-0 h-[440px] w-[440px] rounded-full bg-sky-300/25 blur-[130px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-            {/* Left Column: High-Tech Minimalist Typography (7 cols) */}
-            <div className="lg:col-span-7 space-y-7">
-              <div className="inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/90 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-700 shadow-sm ring-1 ring-cyan-500/25">
-                <span className="h-2 w-2 rounded-full bg-cyan-500 animate-ping" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* BIG HERO PHOTO & VIDEO STAGE OF DRA. PAMELA PAZMIÑO FIRST (7 cols) */}
+            <div className="lg:col-span-7">
+              <InteractiveAtmHarmonyShowcase />
+            </div>
+
+            {/* Right Column: Staggered Animated Typography Framed in Double-Line Glowing Cyan Border (5 cols) */}
+            <div className="lg:col-span-5 relative rounded-[2.25rem] bg-white/88 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_-15px_rgba(6,182,212,0.22)] ring-2 ring-cyan-400/60 space-y-6">
+              {/* Inner Offset Glowing Cyan Frame (matching uploaded Wood+Cyan artwork) */}
+              <div className="pointer-events-none absolute inset-2 rounded-[1.85rem] border border-cyan-400/35" />
+              {/* Left Wood+Cyan Glass Accent Strip inside the Typography Card */}
+              <div
+                className="pointer-events-none absolute inset-y-6 left-0 w-2 rounded-r-full bg-cover bg-left shadow-[2px_0_12px_rgba(6,182,212,0.45)]"
+                style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
+              />
+              <div className="animate-hero-up-1 inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/95 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-700 shadow-sm ring-1 ring-cyan-500/30">
+                <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 animate-ping" />
                 <span>Dra. Pamela Pazmiño · Dental Check UIO · Sonorama Vital</span>
               </div>
 
-              <h1 className="text-4xl sm:text-6xl lg:text-[4.15rem] font-extrabold text-slate-900 leading-[1.04] tracking-tight">
+              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 leading-[1.06] tracking-tight">
                 Ciencia y tecnología para{' '}
                 <span className="bg-gradient-to-r from-cyan-500 via-cyan-400 to-sky-600 bg-clip-text text-transparent animate-cyan-beam">
                   liberar tu ATM
@@ -77,13 +96,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                 y rehabilitar tu sonrisa.
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+              <p className="animate-hero-up-3 text-base sm:text-lg text-slate-600 leading-relaxed">
                 Soy la <strong className="text-slate-900 font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
                 <strong className="text-slate-900 font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA) y conductora de <strong className="text-cyan-700 font-bold">Sonorama Vital</strong>.
               </p>
 
               {/* Floating Minimalist Capability Pills */}
-              <div className="flex flex-wrap gap-2.5 pt-1">
+              <div className="animate-hero-up-3 flex flex-wrap gap-2 pt-1">
                 {[
                   { label: 'ATM Integral & Dolor Orofacial', icon: Activity },
                   { label: 'Bruxismo (Sueño y Vigilia)', icon: ShieldCheck },
@@ -94,7 +113,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   return (
                     <span
                       key={i}
-                      className="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-md px-4 py-2 text-xs font-bold text-slate-700 shadow-2xs ring-1 ring-cyan-500/15"
+                      className="inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-slate-700 shadow-2xs ring-1 ring-cyan-500/20 hover:ring-cyan-400 hover:-translate-y-0.5 transition-all"
                     >
                       <Icon className="h-3.5 w-3.5 text-cyan-500" />
                       {pill.label}
@@ -103,12 +122,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                 })}
               </div>
 
-              {/* Primary Pill CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+              {/* Primary Pill CTAs with Shimmer Sweep */}
+              <div className="animate-hero-up-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('atm-integral')}
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-8 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.02] transition-all cursor-pointer"
+                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-7 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.03] transition-all cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Agendar Valoración en Quito</span>
@@ -116,15 +135,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
                 <a
                   href="#sonorama-vital-hub"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 transition"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 hover:scale-[1.02] transition-all"
                 >
                   <Radio className="h-4 w-4 text-cyan-400" />
-                  <span>Ver Videos Sonorama Vital</span>
+                  <span>Videos Sonorama Vital</span>
                 </a>
               </div>
 
               {/* Quick Location & Social Links */}
-              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-500">
+              <div className="animate-hero-up-4 pt-1 flex flex-wrap items-center gap-3.5 text-xs text-slate-500">
                 <a
                   href={SITE_CONFIG.address.googleMapsShareUrl}
                   target="_blank"
@@ -132,7 +151,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   className="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-cyan-600 transition"
                 >
                   <MapPin className="h-3.5 w-3.5 text-cyan-500" />
-                  <span>{SITE_CONFIG.address.street} · Dental Check UIO</span>
+                  <span>{SITE_CONFIG.address.street} · Edificio Fortune Plaza</span>
                 </a>
                 <span className="text-slate-300">•</span>
                 <a
@@ -155,11 +174,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
                 </a>
               </div>
-            </div>
-
-            {/* Right Column: Live YouTube + Facebook Reel + 3D ATM Scanner HUD (5 cols) */}
-            <div className="lg:col-span-5">
-              <InteractiveAtmHarmonyShowcase />
             </div>
           </div>
         </div>
@@ -222,10 +236,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
           {EMPATHY_SYMPTOMS.map((item, idx) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden rounded-[2rem] bg-white hover:bg-gradient-to-br hover:from-cyan-50/90 hover:to-white p-7 pl-9 transition-all duration-300 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] flex flex-col justify-between"
+              className="group relative overflow-hidden rounded-[2rem] bg-white hover:bg-gradient-to-br hover:from-cyan-50/90 hover:to-white p-7 pl-10 transition-all duration-300 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] flex flex-col justify-between"
             >
-              {/* Subtle Architectural Wood-Slat Vertical Accent */}
-              <div className="absolute inset-y-0 left-0 w-2.5 bg-wood-slats opacity-80 group-hover:opacity-100 transition-opacity" />
+              {/* Real Architectural Wood Slats + Cyan Glass Left Strip */}
+              <div
+                className="pointer-events-none absolute inset-y-0 left-0 w-4 bg-cover bg-left border-r border-cyan-400/50 shadow-[2px_0_12px_rgba(6,182,212,0.25)]"
+                style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
+              />
+              {/* Subtle Diagonal Cyan Glass Shard on Card Bottom-Left */}
+              <div className="pointer-events-none absolute -left-8 bottom-6 h-8 w-28 -rotate-35 bg-gradient-to-r from-cyan-400/25 via-white/30 to-transparent border-y border-cyan-300/40" />
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-cyan-500/10 px-3.5 py-1 text-[11px] font-bold text-cyan-700">
@@ -262,9 +281,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
       {/* 5. BENTO GRID OF 5 CLINICAL SPECIALTIES */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.75rem] bg-slate-950 bg-vite-grid-dark p-7 sm:p-12 lg:p-16 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.35)] ring-1 ring-cyan-400/30 relative overflow-hidden">
-          {/* Signature Architectural Wooden Slats Top Trim */}
-          <div className="absolute top-0 inset-x-0 h-2.5 bg-wood-slats opacity-95" />
+        <div className="rounded-[2.75rem] bg-slate-950 bg-vite-grid-dark p-7 sm:p-12 lg:p-16 pl-10 sm:pl-16 lg:pl-20 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.35)] ring-1 ring-cyan-400/40 relative overflow-hidden">
+          {/* Real Architectural Wood Slats + Cyan Glass Left Column */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-4 sm:w-7 bg-cover bg-left border-r border-cyan-400/60 shadow-[4px_0_24px_rgba(6,182,212,0.4)]"
+            style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
+          />
           <div className="pointer-events-none absolute -top-24 right-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-24 left-10 h-96 w-96 rounded-full bg-sky-500/15 blur-3xl" />
 

@@ -37,23 +37,28 @@ export const ContactPage: React.FC = () => {
 
   return (
     <div className="space-y-20 pb-24">
-      {/* 1. HEADER */}
+      {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HEADER */}
       <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[45%] bg-cover bg-left opacity-30 lg:opacity-45"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
+          <div className="animate-hero-up-1 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
             <MapPin className="h-3.5 w-3.5 text-cyan-500" />
             <span>Ubicación y Agendamiento · Quito</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Contacto y Reserva de{' '}
             <span className="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">
               Valoración Clínica
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="animate-hero-up-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             Atendemos en nuestro centro odontológico <strong>{SITE_CONFIG.clinicName}</strong> ({SITE_CONFIG.address.street}, {SITE_CONFIG.address.sector}).
           </p>
         </div>

@@ -34,30 +34,35 @@ export const SpecialtiesPage: React.FC<SpecialtiesPageProps> = ({ onOpenBooking,
 
   return (
     <div className="space-y-20 pb-24">
-      {/* 1. HIGH-TECH CYAN HEADER */}
+      {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HEADER */}
       <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[45%] bg-cover bg-left opacity-30 lg:opacity-45"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-cyan-300/25 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center space-y-5">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
+          <div className="animate-hero-up-1 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
             <Activity className="h-3.5 w-3.5 text-cyan-500" />
             <span>Especialidades Clínicas · Quito</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             ATM Integral, Bruxismo y{' '}
             <span className="bg-gradient-to-r from-cyan-500 to-sky-600 bg-clip-text text-transparent">
               Rehabilitación Biomimética
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="animate-hero-up-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             Protocolos clínicos basados en evidencia científica para aliviar el dolor articular, detener el desgaste dental y diseñar sonrisas naturales en <strong>Dental Check UIO</strong>.
           </p>
 
           {/* Pill Filters */}
-          <div className="pt-3 flex flex-wrap items-center justify-center gap-2">
+          <div className="animate-hero-up-4 pt-3 flex flex-wrap items-center justify-center gap-2">
             <button
               type="button"
               onClick={() => setActiveFilter('all')}

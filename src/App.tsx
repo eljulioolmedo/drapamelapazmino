@@ -25,31 +25,47 @@ const ScrollToTopAndHash: React.FC = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Attach smooth scroll-reveal animations to sections & articles on route change
-    const targets = Array.from(document.querySelectorAll('main section, main article'));
-    targets.forEach((el, index) => {
-      if (index === 0) {
-        el.classList.remove('scroll-reveal');
-        el.classList.add('is-visible');
-      } else {
-        el.classList.add('scroll-reveal');
-      }
-    });
+    // Attach staggered scroll-reveal animations to headings, cards, and blocks below the hero
+    const timer = setTimeout(() => {
+      const sections = Array.from(document.querySelectorAll('main > div > section'));
+      const revealTargets: HTMLElement[] = [];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+      sections.forEach((sec, secIdx) => {
+        // Skip Hero section (secIdx === 0) because it has its own immediate keyframe animations
+        if (secIdx === 0) return;
+
+        const headings = Array.from(sec.querySelectorAll('h2')) as HTMLElement[];
+        headings.forEach((h) => {
+          h.classList.add('reveal-on-scroll');
+          revealTargets.push(h);
         });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    );
 
-    targets.forEach((el) => observer.observe(el));
+        const grids = Array.from(sec.querySelectorAll('.grid'));
+        grids.forEach((grid) => {
+          const children = Array.from(grid.children) as HTMLElement[];
+          children.forEach((child, idx) => {
+            child.classList.add('reveal-on-scroll');
+            child.style.transitionDelay = `${(idx % 4) * 110}ms`;
+            revealTargets.push(child);
+          });
+        });
+      });
 
-    return () => observer.disconnect();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        },
+        { threshold: 0.14, rootMargin: '0px 0px -60px 0px' }
+      );
+
+      revealTargets.forEach((el) => observer.observe(el));
+    }, 60);
+
+    return () => clearTimeout(timer);
   }, [pathname, hash]);
 
   return null;

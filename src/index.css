@@ -19,24 +19,92 @@
   }
 }
 
-/* Vite-inspired High-Tech & Subtle Modern Animations */
+/* ==========================================================================
+   MODERN HIGH-TECH & EDITORIAL ANIMATIONS
+   ========================================================================== */
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(44px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes heroSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(56px) scale(0.96);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.065) translate3d(-1%, -1%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes floatCardA {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-0.5deg);
+  }
+}
+
+@keyframes floatCardB {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(11px) rotate(0.5deg);
+  }
+}
+
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.45;
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
     opacity: 0.85;
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
 }
 
-@keyframes floatSmooth {
-  0%, 100% {
-    transform: translateY(0px);
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
   }
-  50% {
-    transform: translateY(-8px);
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  55%, 100% {
+    transform: translateX(220%) skewX(-18deg);
   }
 }
 
@@ -61,27 +129,72 @@
   }
 }
 
-@keyframes progressFill {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
+.animate-hero-up-1 {
+  animation: heroSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-hero-up-2 {
+  animation: heroSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.animate-hero-up-3 {
+  animation: heroSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.animate-hero-up-4 {
+  animation: heroSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+.animate-hero-right {
+  animation: heroSlideRight 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.animate-ken-burns {
+  animation: kenBurnsZoom 16s ease-in-out infinite;
+}
+
+.animate-float-a {
+  animation: floatCardA 4.8s ease-in-out infinite;
+}
+
+.animate-float-b {
+  animation: floatCardB 5.6s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
   animation: pulseGlow 5s ease-in-out infinite;
 }
 
-.animate-float-smooth {
-  animation: floatSmooth 5.5s ease-in-out infinite;
+.animate-spin-slow {
+  animation: spinSlow 28s linear infinite;
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerSweep 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 32s linear infinite;
+  animation: marqueeScroll 28s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -93,21 +206,20 @@
   animation: cyanBeam 6s ease infinite;
 }
 
-.animate-progress-bar {
-  animation: progressFill 4.8s linear infinite;
-}
+/* ==========================================================================
+   STAGGERED SCROLL-REVEAL ANIMATIONS (Triggered as elements enter viewport)
+   ========================================================================== */
 
-/* Scroll-Reveal Animation Classes (smooth modern entrance on scroll) */
-.scroll-reveal {
+.reveal-on-scroll {
   opacity: 0;
-  transform: translateY(28px) scale(0.988);
+  transform: translateY(48px) scale(0.96);
   transition:
-    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.scroll-reveal.is-visible {
+.reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -128,38 +240,6 @@
     linear-gradient(to right, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
     linear-gradient(180deg, #083344 0%, #0f172a 45%, #020617 100%);
-}
-
-/*
- * Signature Dental Check UIO Architectural Vertical Wooden Slats (Listones de Madera)
- * Inspired by the warm vertical wood-slat walls in Dra. Pamela Pazmiño's clinic.
- */
-.bg-wood-slats {
-  background-color: #b8743b;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      #d4955a 0px,
-      #c68246 4px,
-      #b26d33 9px,
-      #784318 10px,
-      #593010 12px,
-      #c9874d 13px
-    ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.18) 100%);
-  box-shadow: inset 0 0 12px rgba(45, 22, 6, 0.35);
-}
-
-.bg-wood-slats-soft {
-  background-color: #f5ebe1;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(198, 130, 70, 0.18) 0px,
-    rgba(198, 130, 70, 0.26) 6px,
-    rgba(120, 67, 24, 0.34) 8px,
-    rgba(255, 255, 255, 0.6) 9px,
-    rgba(212, 149, 90, 0.14) 14px
-  );
 }
 
 /* Minimalist custom scrollbar */

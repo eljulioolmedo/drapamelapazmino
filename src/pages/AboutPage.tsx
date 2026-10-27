@@ -29,28 +29,33 @@ interface AboutPageProps {
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="space-y-24 pb-24">
-      {/* 1. HIGH-TECH MINIMALIST CYAN HERO */}
+      {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HERO */}
       <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[48%] bg-cover bg-left opacity-30 lg:opacity-45"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-cyan-300/25 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
+              <div className="animate-hero-up-1 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
                 <Sparkles className="h-3.5 w-3.5 text-cyan-500" />
                 <span>Enfoque Clínico, Ciencia y Medios</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
                 {SITE_CONFIG.doctorFullName}
               </h1>
 
-              <p className="text-base sm:text-lg font-bold text-cyan-600">
+              <p className="animate-hero-up-2 text-base sm:text-lg font-bold text-cyan-600">
                 Especialista en Rehabilitación Oral · ATM Integral, Bruxismo y Dolor Orofacial · Docente e Investigadora UDLA · Sonorama Vital
               </p>
 
-              <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+              <div className="animate-hero-up-3 space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
                 <p>
                   Nuestra práctica nace de una convicción sencilla: la odontología moderna debe ser <strong>minimalista, indolora y sustentada en evidencia científica real</strong>.
                 </p>
@@ -62,11 +67,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
                 </p>
               </div>
 
-              <div className="pt-2 flex flex-wrap gap-3">
+              <div className="animate-hero-up-4 pt-2 flex flex-wrap gap-3">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('atm-integral')}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/25 hover:from-cyan-400 hover:to-cyan-500 transition cursor-pointer"
+                  className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/25 hover:from-cyan-400 hover:to-cyan-500 transition cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Agendar Valoración</span>
@@ -84,7 +89,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            <div className="lg:col-span-6">
+            <div className="lg:col-span-6 animate-hero-right">
               <MinimalistAuthorityShowcase />
             </div>
           </div>
