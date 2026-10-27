@@ -43,8 +43,8 @@ export const MEDIA_ASSETS = {
   googleMapsUrl:
     'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
 
-  // Real downloaded photos from DentalCheck Google Maps listing (excluding old location 09)
-  draPameCyanScrubs: '/images/clinic/dentalcheck-03.jpg',
+  // Real downloaded photos from DentalCheck Google Maps listing (excluding old location 09 and 03)
+  heroDraPamela: '/images/clinic/hero-dra-pamela.jpg',
   draPameDiplomas: '/images/clinic/dentalcheck-08.jpg',
   draPameClinicalUnit: '/images/clinic/dentalcheck-02.jpg',
   draPameHappyPatient: '/images/clinic/dentalcheck-10.jpg',
@@ -183,12 +183,12 @@ export const ViteCyanCanvas: React.FC<{ className?: string }> = ({ className = '
 
 const HERO_DOCTOR_PHOTOS = [
   {
-    id: 'pame-cyan',
-    src: MEDIA_ASSETS.draPameCyanScrubs,
+    id: 'pame-hero-portrait',
+    src: MEDIA_ASSETS.heroDraPamela,
     badge: 'Directora Clínica · Dental Check UIO',
     title: 'Dra. Pamela Pazmiño',
-    subtitle: 'Especialista en Rehabilitación Oral, ATM Integral y Bruxismo',
-    objectPos: 'object-center',
+    subtitle: 'Especialista en Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial',
+    objectPos: 'object-top',
   },
   {
     id: 'pame-diplomas',
@@ -199,19 +199,19 @@ const HERO_DOCTOR_PHOTOS = [
     objectPos: 'object-top',
   },
   {
-    id: 'pame-patient',
-    src: MEDIA_ASSETS.draPameHappyPatient,
-    badge: '5.0 ★ en Google Maps (36+ reseñas)',
-    title: '"Nuestro mejor proyecto, Tu sonrisa"',
-    subtitle: 'Atención empática, minuciosa y libre de dolor en Quito',
-    objectPos: 'object-top',
-  },
-  {
     id: 'pame-chair',
     src: MEDIA_ASSETS.draPameClinicalUnit,
     badge: 'Tecnología & Precisión',
     title: 'Consultorio Dental Check UIO',
     subtitle: 'Edificio Fortune Plaza · Torre Alemania (Av. Eloy Alfaro y Alemania)',
+    objectPos: 'object-top',
+  },
+  {
+    id: 'pame-patient',
+    src: MEDIA_ASSETS.draPameHappyPatient,
+    badge: '5.0 ★ en Google Maps (36+ reseñas)',
+    title: '"Nuestro mejor proyecto, Tu sonrisa"',
+    subtitle: 'Atención empática, minuciosa y libre de dolor en Quito',
     objectPos: 'object-top',
   },
 ];
@@ -222,28 +222,14 @@ const HERO_DOCTOR_PHOTOS = [
 export const InteractiveAtmHarmonyShowcase: React.FC = () => {
   const [mode, setMode] = useState<'photo' | 'youtube' | 'reel'>('photo');
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [heroVideoId, setHeroVideoId] = useState<string>(SONORAMA_YOUTUBE_VIDEOS[0].id);
-
-  // Auto-cycle through her 4 real clinic photos when in photo mode
-  useEffect(() => {
-    if (mode !== 'photo' || isPaused) return;
-    const timer = setInterval(() => {
-      setActivePhotoIdx((prev) => (prev + 1) % HERO_DOCTOR_PHOTOS.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [mode, isPaused]);
 
   const currentPhoto = HERO_DOCTOR_PHOTOS[activePhotoIdx] || HERO_DOCTOR_PHOTOS[0];
   const currentHeroVideo =
     SONORAMA_YOUTUBE_VIDEOS.find((v) => v.id === heroVideoId) || SONORAMA_YOUTUBE_VIDEOS[0];
 
   return (
-    <div
-      className="relative w-full animate-hero-right"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <div className="relative w-full animate-hero-right">
       {/* Animated Rotating Cyan Orbital Ring Behind Hero */}
       <div className="pointer-events-none absolute -inset-6 flex items-center justify-center">
         <div className="h-[104%] w-[104%] rounded-[3.2rem] border border-dashed border-cyan-400/35 animate-spin-slow" />
@@ -311,10 +297,6 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
           className="pointer-events-none absolute inset-y-0 left-0 w-5 sm:w-7 bg-cover bg-left opacity-95 border-r border-cyan-300/60 shadow-[4px_0_24px_rgba(6,182,212,0.45)]"
           style={{ backgroundImage: `url(${MEDIA_ASSETS.woodCyanStrip})` }}
         />
-
-        {/* Diagonal Translucent Cyan Glass Shards (matching reference image) */}
-        <div className="pointer-events-none absolute -left-10 bottom-16 h-24 w-64 -rotate-35 bg-gradient-to-r from-cyan-400/35 via-white/25 to-transparent backdrop-blur-[2px] border-y border-cyan-300/50 z-10" />
-        <div className="pointer-events-none absolute -left-8 bottom-6 h-12 w-52 -rotate-35 bg-gradient-to-r from-white/30 via-cyan-300/25 to-transparent backdrop-blur-[2px] border-y border-white/40 z-10" />
 
         {/* Top Mode Switcher Bar */}
         <div className="relative z-20 flex flex-wrap items-center justify-between gap-2 px-1 pb-3">
@@ -926,8 +908,8 @@ export const InteractiveSmileAndVideoBento: React.FC<{
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           {
-            src: MEDIA_ASSETS.draPameCyanScrubs,
-            tag: 'Recepción Dental Check',
+            src: MEDIA_ASSETS.heroDraPamela,
+            tag: 'Directora Clínica · Dental Check UIO',
             label: 'Dra. Pamela Pazmiño',
           },
           {
@@ -1038,17 +1020,25 @@ export const SpecialtyVisualIllustration: React.FC<{
     bruxism: MEDIA_ASSETS.draPameClinicalUnit,
     rehab: MEDIA_ASSETS.realBiomimeticVeneers,
     esthetic: MEDIA_ASSETS.realBeforeAfterSmile,
-    dentalcheck: MEDIA_ASSETS.draPameCyanScrubs,
+    dentalcheck: MEDIA_ASSETS.heroDraPamela,
+  };
+
+  const posByType = {
+    atm: 'object-center',
+    bruxism: 'object-top',
+    rehab: 'object-center',
+    esthetic: 'object-center',
+    dentalcheck: 'object-top',
   };
 
   return (
     <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-50 via-sky-50/70 to-white p-5 sm:p-6 ring-1 ring-cyan-500/20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        <div className="lg:col-span-4 relative h-48 sm:h-52 overflow-hidden rounded-2xl ring-1 ring-cyan-500/20 bg-slate-950">
+        <div className="lg:col-span-4 relative h-52 sm:h-56 overflow-hidden rounded-2xl ring-1 ring-cyan-500/20 bg-slate-950">
           <img
             src={imageByType[type]}
             alt={type}
-            className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
+            className={`h-full w-full object-cover ${posByType[type]} transition-transform duration-500 hover:scale-105`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent" />
           <span className="absolute bottom-3 left-3 rounded-full bg-cyan-400 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-950">

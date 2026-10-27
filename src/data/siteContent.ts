@@ -189,25 +189,18 @@ export const SONORAMA_YOUTUBE_VIDEOS: SonoramaVideoItem[] = [
 
 export const CLINIC_REAL_PHOTOS = [
   {
-    id: 'dra-pame-cyan',
-    src: '/images/clinic/dentalcheck-03.jpg',
-    badge: 'Directora Clínica · Dental Check',
-    title: 'Dra. Pamela Pazmiño en Dental Check UIO',
+    id: 'dra-pame-hero',
+    src: '/images/clinic/hero-dra-pamela.jpg',
+    badge: 'Directora Clínica · Dental Check UIO',
+    title: 'Dra. Pamela Pazmiño',
     caption: 'Especialista en Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial.',
   },
   {
     id: 'dra-pame-diplomas',
     src: '/images/clinic/dentalcheck-08.jpg',
     badge: 'Excelencia Académica · UDLA',
-    title: 'Formación de Posgrado, Docencia e Investigación',
+    title: 'Dra. Pamela Pazmiño · Especialista y Docente UDLA',
     caption: 'Trayectoria académica respaldada por publicaciones científicas internacionales y docencia universitaria.',
-  },
-  {
-    id: 'dra-pame-patient',
-    src: '/images/clinic/dentalcheck-10.jpg',
-    badge: 'Nuestro mejor proyecto, Tu sonrisa',
-    title: 'Atención Empática y Sin Dolor',
-    caption: 'Acompañamiento personalizado y resultados que devuelven la confianza al sonreír.',
   },
   {
     id: 'dra-pame-chair',
@@ -215,6 +208,13 @@ export const CLINIC_REAL_PHOTOS = [
     badge: 'Tecnología & Bioseguridad',
     title: 'Consultorio Clínico Dental Check',
     caption: 'Equipamiento moderno para diagnóstico de ATM, rehabilitación oral y estética dental.',
+  },
+  {
+    id: 'dra-pame-patient',
+    src: '/images/clinic/dentalcheck-10.jpg',
+    badge: 'Nuestro mejor proyecto, Tu sonrisa',
+    title: 'Atención Empática y Sin Dolor',
+    caption: 'Acompañamiento personalizado y resultados que devuelven la confianza al sonreír.',
   },
   {
     id: 'cadcam-splint-3d',
@@ -295,7 +295,7 @@ export const SITE_CONFIG = {
     },
   },
   images: {
-    doctorPortraitLocal: '/images/clinic/dentalcheck-03.jpg',
+    doctorPortraitLocal: '/images/clinic/hero-dra-pamela.jpg',
     clinicPhotoLocal: '/images/clinic/dentalcheck-02.jpg',
   },
 };
@@ -934,7 +934,7 @@ export const INSTAGRAM_SHOWCASE = [
     id: 'ig-3',
     account: '@dentalcheck.uio',
     accountUrl: 'https://www.instagram.com/dentalcheck.uio/',
-    imageUrl: '/images/clinic/dentalcheck-03.jpg',
+    imageUrl: '/images/clinic/dentalcheck-02.jpg',
     badge: 'Dental Check UIO · Quito',
     title: 'Dra. Pamela Pazmiño · "Nuestro mejor proyecto, Tu sonrisa"',
     caption:
