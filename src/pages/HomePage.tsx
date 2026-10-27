@@ -24,12 +24,12 @@ import {
   BLOG_POSTS,
   INSTAGRAM_SHOWCASE,
   TESTIMONIALS,
+  SCIENTIFIC_PUBLICATIONS,
+  RESEARCHER_PROFILES,
 } from '../data/siteContent';
 import {
-  ViteCyanCanvas,
-  InteractiveAtmHarmonyShowcase,
-  SonoramaVitalMediaHub,
   InteractiveSmileAndVideoBento,
+  SonoramaVitalMediaHub,
   MinimalistAuthorityShowcase,
   InstagramIcon as Instagram,
 } from '../components/ClinicalVisuals';
@@ -51,62 +51,38 @@ const iconMap = {
 export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }) => {
   return (
     <div className="space-y-28 pb-24">
-      {/* 1. ARCHITECTURAL WOOD SLATS + DIAGONAL CYAN GLASS + HIGH-TECH MINIMALIST HERO */}
-      <section className="relative overflow-hidden pt-10 pb-20 sm:pt-14 sm:pb-24 bg-vite-grid">
-        {/* Real Architectural Wood Slats + Diagonal Cyan Glass Artwork Backdrop */}
+      {/* 1. FULL-BLEED CINEMATIC VIDEO HERO (UNBOXED REAL HERO STAGE) */}
+      <section className="relative overflow-hidden -mt-20 pt-24 pb-0 bg-[#1c2836] text-white shadow-[0_30px_90px_-15px_rgba(6,182,212,0.3)]">
+        {/* Subtle Architectural Wood + Cyan Glass Left Edge Trim */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[58%] bg-cover bg-left opacity-35 lg:opacity-55"
-          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
+          className="pointer-events-none absolute inset-y-0 left-0 w-3 sm:w-5 bg-repeat-y bg-cover bg-left opacity-90 border-r border-cyan-400/50 shadow-[4px_0_24px_rgba(6,182,212,0.45)] z-20"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-white/95" />
 
-        {/* Interactive 60fps Cyan Energy Beam & Bio-Node Canvas */}
-        <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
+        {/* Ambient Cyan Glows Behind Hero */}
+        <div className="pointer-events-none absolute -top-32 left-1/4 h-[480px] w-[480px] rounded-full bg-cyan-500/12 blur-[140px]" />
+        <div className="pointer-events-none absolute bottom-10 right-1/3 h-[420px] w-[420px] rounded-full bg-sky-400/12 blur-[130px]" />
 
-        {/* Ambient Cyan Mesh Glows */}
-        <div className="pointer-events-none absolute -top-40 left-1/4 h-[520px] w-[520px] rounded-full bg-cyan-300/30 blur-[140px]" />
-        <div className="pointer-events-none absolute top-20 right-0 h-[440px] w-[440px] rounded-full bg-sky-300/25 blur-[130px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* BIG HERO VIDEO & PHOTO STAGE OF DRA. PAMELA PAZMIÑO FIRST (6 cols) */}
-            <div className="lg:col-span-6">
-              <InteractiveAtmHarmonyShowcase />
-            </div>
-
-            {/* Right Column: Staggered Animated Typography Framed in Double-Line Glowing Cyan Border (6 cols) */}
-            <div className="lg:col-span-6 relative rounded-[2.25rem] bg-white/90 backdrop-blur-xl p-6 sm:p-9 shadow-[0_24px_70px_-15px_rgba(6,182,212,0.22)] ring-2 ring-cyan-400/60 space-y-6">
-              {/* Inner Offset Glowing Cyan Frame (matching uploaded Wood+Cyan artwork) */}
-              <div className="pointer-events-none absolute inset-2 rounded-[1.85rem] border border-cyan-400/35" />
-              {/* Left Wood+Cyan Glass Accent Strip inside the Typography Card */}
-              <div
-                className="pointer-events-none absolute inset-y-6 left-0 w-2.5 rounded-r-full bg-cover bg-left shadow-[2px_0_12px_rgba(6,182,212,0.45)]"
-                style={{ backgroundImage: "url('/images/clinic/wood-cyan-strip.jpg')" }}
-              />
-              {/* Top Brand Row with Official DentalCheck Logo + Live Pill */}
-              <div className="animate-hero-up-1 flex flex-wrap items-center justify-between gap-3">
-                <img
-                  src="/images/clinic/dentalcheck-logo.png"
-                  alt="DentalCheck · El mejor proyecto, tu sonrisa"
-                  className="h-12 sm:h-14 w-auto object-contain"
-                />
-                <div className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3.5 py-1.5 text-xs font-extrabold text-cyan-700 ring-1 ring-cyan-500/25">
-                  <span className="h-2 w-2 rounded-full bg-cyan-500 animate-ping" />
-                  <span>Dra. Pamela Pazmiño · Sonorama Vital</span>
-                </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center">
+            {/* Left Column: Unboxed Hero Typography Directly on the Hero Canvas (6 cols) */}
+            <div className="lg:col-span-6 py-8 lg:py-14 space-y-6 z-20">
+              <div className="animate-hero-up-1 inline-flex flex-wrap items-center gap-2.5 rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-xs font-extrabold text-cyan-300 ring-1 ring-cyan-400/35">
+                <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 animate-ping" />
+                <span>Dra. Pamela Pazmiño · Rehabilitación Oral, ATM & Bruxismo</span>
               </div>
 
-              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 leading-[1.06] tracking-tight">
+              <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.65rem] font-extrabold text-white leading-[1.05] tracking-tight">
                 Ciencia y tecnología para{' '}
-                <span className="bg-gradient-to-r from-cyan-500 via-cyan-400 to-sky-600 bg-clip-text text-transparent animate-cyan-beam">
+                <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-sky-400 bg-clip-text text-transparent animate-cyan-beam">
                   liberar tu ATM
                 </span>{' '}
                 y rehabilitar tu sonrisa.
               </h1>
 
-              <p className="animate-hero-up-3 text-base sm:text-lg text-slate-600 leading-relaxed">
-                Soy la <strong className="text-slate-900 font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
-                <strong className="text-slate-900 font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA) y conductora de <strong className="text-cyan-700 font-bold">Sonorama Vital</strong>.
+              <p className="animate-hero-up-3 text-base sm:text-lg text-slate-200/95 leading-relaxed max-w-xl">
+                Soy la <strong className="text-white font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
+                <strong className="text-white font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA), directora clínica de <strong className="text-cyan-300 font-bold">Dental Check UIO</strong> y conductora de <strong className="text-cyan-300 font-bold">Sonorama Vital</strong>.
               </p>
 
               {/* Floating Minimalist Capability Pills */}
@@ -121,9 +97,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   return (
                     <span
                       key={i}
-                      className="inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-slate-700 shadow-2xs ring-1 ring-cyan-500/20 hover:ring-cyan-400 hover:-translate-y-0.5 transition-all"
+                      className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-slate-100 ring-1 ring-cyan-400/25 hover:ring-cyan-400 hover:bg-white/15 transition-all"
                     >
-                      <Icon className="h-3.5 w-3.5 text-cyan-500" />
+                      <Icon className="h-3.5 w-3.5 text-cyan-400" />
                       {pill.label}
                     </span>
                   );
@@ -131,11 +107,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               </div>
 
               {/* Primary Pill CTAs with Shimmer Sweep */}
-              <div className="animate-hero-up-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              <div className="animate-hero-up-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('atm-integral')}
-                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-7 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.03] transition-all cursor-pointer"
+                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500 px-8 py-4 text-sm font-extrabold text-slate-950 shadow-[0_16px_40px_-8px_rgba(6,182,212,0.6)] hover:from-cyan-300 hover:to-cyan-400 hover:scale-[1.03] transition-all cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Agendar Valoración en Quito</span>
@@ -143,7 +119,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
                 <a
                   href="#sonorama-vital-hub"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 hover:scale-[1.02] transition-all"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-7 py-4 text-sm font-bold text-white ring-1 ring-white/25 hover:bg-white/20 hover:scale-[1.02] transition-all"
                 >
                   <Radio className="h-4 w-4 text-cyan-400" />
                   <span>Videos Sonorama Vital</span>
@@ -151,44 +127,64 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               </div>
 
               {/* Quick Location & Social Links */}
-              <div className="animate-hero-up-4 pt-1 flex flex-wrap items-center gap-3.5 text-xs text-slate-500">
+              <div className="animate-hero-up-4 pt-2 flex flex-wrap items-center gap-3.5 text-xs text-slate-300">
                 <a
                   href={SITE_CONFIG.address.googleMapsShareUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-bold text-slate-700 hover:text-cyan-600 transition"
+                  className="inline-flex items-center gap-1.5 font-bold text-cyan-200 hover:text-white transition"
                 >
-                  <MapPin className="h-3.5 w-3.5 text-cyan-500" />
-                  <span>{SITE_CONFIG.address.street} · Edificio Fortune Plaza</span>
+                  <MapPin className="h-3.5 w-3.5 text-cyan-400" />
+                  <span>{SITE_CONFIG.address.street}</span>
                 </a>
-                <span className="text-slate-300">•</span>
+                <span className="text-slate-500">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramPersonal.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
+                  className="inline-flex items-center gap-1 font-bold text-slate-200 hover:text-cyan-300 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-400" />
                   <span>{SITE_CONFIG.social.instagramPersonal.handle}</span>
                 </a>
-                <span className="text-slate-300">•</span>
+                <span className="text-slate-500">•</span>
                 <a
                   href={SITE_CONFIG.social.instagramClinic.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-bold text-slate-700 hover:text-cyan-600 transition"
+                  className="inline-flex items-center gap-1 font-bold text-slate-200 hover:text-cyan-300 transition"
                 >
-                  <Instagram className="h-3.5 w-3.5 text-cyan-500" />
+                  <Instagram className="h-3.5 w-3.5 text-cyan-400" />
                   <span>{SITE_CONFIG.social.instagramClinic.handle}</span>
                 </a>
+              </div>
+            </div>
+
+            {/* Right Column: FULL-HEIGHT UNBOXED HERO VIDEO OF DRA. PAMELA PAZMIÑO & DENTALCHECK HOLOGRAM (6 cols) */}
+            <div className="lg:col-span-6 relative flex items-end justify-center lg:justify-end order-first lg:order-last">
+              <div className="relative w-full max-w-[520px] lg:max-w-none h-[480px] sm:h-[600px] lg:h-[720px] flex items-end justify-center animate-hero-right">
+                <video
+                  src="/videos/hero-dental-check-loop.mp4"
+                  poster="/images/clinic/hero-dra-pamela.jpg"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="h-full w-full object-contain object-bottom"
+                />
+                {/* Seamless Edge Feathering into #1c2836 Studio Navy Hero Canvas */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#1c2836] to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#1c2836] to-transparent" />
+                <div className="pointer-events-none absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-[#1c2836] to-transparent" />
+                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#1c2836] to-transparent" />
               </div>
             </div>
           </div>
         </div>
 
-        {/* High-Tech Animated Kinetic Marquee Bar */}
-        <div className="relative z-10 mt-16 border-y border-cyan-500/15 bg-white/80 backdrop-blur-md py-3.5 overflow-hidden">
-          <div className="animate-marquee flex items-center gap-10 text-xs font-extrabold uppercase tracking-[0.18em] text-slate-600">
+        {/* High-Tech Animated Kinetic Marquee Bar at Bottom of Hero */}
+        <div className="relative z-20 border-t border-cyan-400/20 bg-slate-950/85 backdrop-blur-md py-3.5 overflow-hidden">
+          <div className="animate-marquee flex items-center gap-10 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-100/90">
             {[
               'ATM Integral & Eje Cráneo-Cervical',
               'Bruxismo del Sueño y Vigilia',
@@ -387,29 +383,57 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
         </div>
       </section>
 
-      {/* 6. SCIENTIFIC & CLINICAL AUTHORITY */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* 6. SCIENTIFIC & CLINICAL AUTHORITY + VERIFIED PUBLICATIONS */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6 space-y-5">
             <span className="inline-block text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
-              Ciencia, Docencia y Práctica Clínica
+              Ciencia, Docencia e Investigación (UDLA)
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               {SITE_CONFIG.doctorFullName}
             </h2>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Cada diagnóstico en <strong className="text-slate-900">Dental Check UIO</strong> integra la experiencia clínica en <strong className="text-slate-900">Rehabilitación Oral y ATM Integral</strong> con la investigación científica activa en la Carrera de Odontología de la <strong className="text-slate-900">Universidad de Las Américas (UDLA)</strong> y la comunicación en salud en <strong className="text-cyan-700">Sonorama Vital</strong>.
+              Cada diagnóstico en <strong className="text-slate-900">Dental Check UIO</strong> integra la práctica clínica en <strong className="text-slate-900">Rehabilitación Oral y ATM Integral</strong> con la investigación científica activa en la Facultad de Odontología de la <strong className="text-slate-900">Universidad de Las Américas (UDLA)</strong>, publicando en bases científicas internacionales bajo <strong className="text-slate-900">Pamela Pazmiño Troncoso</strong> y <strong className="text-slate-900">Eliana Pazmiño Troncoso</strong>.
             </p>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Nuestro objetivo es claro: aliviar el dolor orofacial, detener el desgaste por bruxismo y diseñar sonrisas armónicas con la mínima intervención biológica posible.
-            </p>
+
+            {/* Researcher Identifiers Row */}
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <a
+                href={RESEARCHER_PROFILES.orcidUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-cyan-50 px-3.5 py-1.5 text-xs font-extrabold text-cyan-800 ring-1 ring-cyan-500/25 hover:bg-cyan-100 transition"
+              >
+                <span>ORCID: {RESEARCHER_PROFILES.orcidId}</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.researchGateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:ring-cyan-400 hover:text-cyan-700 transition"
+              >
+                <span>ResearchGate</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.sciProfilesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:ring-cyan-400 hover:text-cyan-700 transition"
+              >
+                <span>MDPI SciProfiles</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
 
             <div className="pt-2 flex flex-wrap gap-3">
               <Link
                 to="/sobre-mi"
                 className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-xs font-bold text-white hover:bg-cyan-600 transition"
               >
-                <span>Conocer enfoque e investigación</span>
+                <span>Ver las 4 publicaciones y red científica</span>
                 <ArrowRight className="h-4 w-4 text-cyan-400" />
               </Link>
               <button
@@ -425,6 +449,66 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
           <div className="lg:col-span-6">
             <MinimalistAuthorityShowcase />
+          </div>
+        </div>
+
+        {/* 4 Verified Peer-Reviewed Publications Grid */}
+        <div className="rounded-[2.25rem] bg-white/90 backdrop-blur-md p-6 sm:p-9 shadow-[0_20px_60px_-15px_rgba(6,182,212,0.14)] ring-1 ring-cyan-500/20 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div>
+              <span className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-cyan-600 block">
+                Evidencia Científica Verificada · UDLA
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                Publicaciones Indexadas en Bruxismo, Dolor Orofacial y TTM
+              </h3>
+            </div>
+            <Link
+              to="/sobre-mi"
+              className="inline-flex items-center gap-1.5 text-xs font-extrabold text-cyan-700 hover:text-cyan-900"
+            >
+              <span>Ver coautores e identificadores</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {SCIENTIFIC_PUBLICATIONS.map((pub) => (
+              <div
+                key={pub.id}
+                className="rounded-3xl bg-slate-50/90 p-5 sm:p-6 ring-1 ring-slate-200/80 hover:ring-cyan-400 transition-all flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="rounded-full bg-cyan-500/10 px-3 py-0.5 text-[11px] font-extrabold text-cyan-800">
+                      {pub.journal} ({pub.year})
+                    </span>
+                    <span className="text-[11px] font-semibold text-slate-500">
+                      Autora: {pub.publishedAs}
+                    </span>
+                  </div>
+                  <h4 className="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">
+                    {pub.title}
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">{pub.focus}</p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-200/70 flex flex-wrap gap-2">
+                  {pub.links.map((lnk, i) => (
+                    <a
+                      key={i}
+                      href={lnk.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[11px] font-bold text-cyan-700 ring-1 ring-cyan-500/25 hover:bg-cyan-500 hover:text-white transition"
+                    >
+                      <span>{lnk.label}</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

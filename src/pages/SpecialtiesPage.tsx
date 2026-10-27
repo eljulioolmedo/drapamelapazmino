@@ -35,12 +35,7 @@ export const SpecialtiesPage: React.FC<SpecialtiesPageProps> = ({ onOpenBooking,
   return (
     <div className="space-y-20 pb-24">
       {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HEADER */}
-      <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[45%] bg-cover bg-left opacity-30 lg:opacity-45"
-          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
+      <section className="relative overflow-hidden pt-12 pb-16">
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-cyan-300/25 blur-[120px]" />
 

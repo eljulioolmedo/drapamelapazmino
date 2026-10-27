@@ -35,11 +35,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
               />
             </div>
             <div>
-              <span className="block text-base sm:text-lg font-extrabold text-slate-900 leading-none tracking-tight">
+              <span className="block text-base sm:text-lg font-extrabold text-slate-900 leading-none tracking-tight whitespace-nowrap">
                 Dra. Pamela Pazmiño
               </span>
-              <span className="block text-[10px] uppercase tracking-[0.14em] text-cyan-600 font-bold mt-1">
-                ATM Integral · Rehabilitación · DentalCheck
+              <span className="block text-[10px] uppercase tracking-[0.14em] text-cyan-600 font-bold mt-1 whitespace-nowrap">
+                ATM Integral · Rehabilitación · Bruxismo
               </span>
             </div>
           </Link>

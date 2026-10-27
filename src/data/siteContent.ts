@@ -588,20 +588,152 @@ export const CREDENTIALS_LIST = [
   },
 ];
 
-export const SCIENTIFIC_HIGHLIGHTS = [
+export const RESEARCHER_PROFILES = {
+  orcidId: '0009-0004-0294-1418',
+  orcidUrl: 'https://orcid.org/0009-0004-0294-1418',
+  researchGateUrl:
+    'https://www.researchgate.net/scientific-contributions/Eliana-Pazmino-Troncoso-2341281851',
+  sciProfilesUrl:
+    'https://sciprofiles.com/profile/author/T0JWK0dDb3ArSlFqKzNtOS9tMm44dUdoS0JDV0VFSE1JQVdFa2pQRUVkdzNDQ0hnWTRHQ3NZTnRPZ00vVUxORQ==',
+  affiliation:
+    'Facultad de Odontología · Universidad de Las Américas (UDLA), Quito, Ecuador — Grupo de Investigación en Prótesis, Dolor Orofacial y TTM',
+  publishedNames: ['Pamela Pazmiño Troncoso', 'Eliana Pazmiño Troncoso', 'Eliana Pamela Pazmiño Troncoso'],
+};
+
+export const SCIENTIFIC_PUBLICATIONS = [
   {
-    journal: 'Publicación Científica Indexada (PubMed / NIH)',
-    topic: 'Trastornos Temporomandibulares, Dolor Orofacial y Biomarcadores de Estrés Oxidativo',
-    summary:
-      'Investigación académica enfocada en comprender los mecanismos biológicos y clínicos detrás del dolor articular y muscular mandibular para ofrecer tratamientos verdaderamente efectivos y no invasivos.',
+    id: 'pub-2022-bruxism-app',
+    year: '2022',
+    title: 'Monitoring of awake bruxism by intelligent app',
+    publishedAs: 'Pamela Pazmiño Troncoso',
+    journal: 'F1000Research, 11:479',
+    doi: '10.12688/f1000research.110673.2',
+    pmid: '36606116',
+    pmcid: 'PMC9768384',
+    focus:
+      'Revisión sistemática que evalúa la efectividad de aplicaciones móviles de evaluación ecológica momentánea (EMA) para el monitoreo del bruxismo de vigilia y su riesgo interactivo con el bruxismo del sueño y los trastornos temporomandibulares (TTM).',
+    coAuthors:
+      'Byron Velásquez Ron, Verónica Mosquera Cisneros, María Rodríguez Tates, Eddy Alvares Lalvay, Luis Chauca Bajaña, Andrea Ordoñez Balladares.',
+    links: [
+      { label: 'PubMed (PMID: 36606116)', url: 'https://pubmed.ncbi.nlm.nih.gov/36606116/' },
+      { label: 'PMC Full Text (PMC9768384)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9768384/' },
+      { label: 'F1000Research (DOI)', url: 'https://f1000research.com/articles/11-479' },
+    ],
   },
   {
-    journal: 'Línea de Investigación UDLA · Rehabilitación y Oclusión',
-    topic: 'Diagnóstico Diferencial del Bruxismo y Rehabilitación Adhesiva Conservadora',
-    summary:
-      'Integración de los consensos internacionales actuales sobre bruxismo de sueño y vigilia en la práctica clínica diaria en Quito.',
+    id: 'pub-2023-bruxapp-universities',
+    year: '2023 / Rev. 2024',
+    title:
+      'Evaluation by app in smartphones of awake bruxism at the return of presential classes in two university centers',
+    publishedAs: 'Pamela Pazmiño Troncoso',
+    journal: 'F1000Research, 12:766',
+    doi: '10.12688/f1000research.133946.2',
+    focus:
+      'Estudio observacional que monitorea conductas de bruxismo de vigilia (músculos mandibulares relajados, contacto dental, rigidez mandibular, apretamiento y rechinamiento) mediante la aplicación BruxApp en 300 estudiantes de odontología.',
+    coAuthors:
+      'Byron Velásquez Ron, Verónica Mosquera Cisneros, María Rodríguez Tates, Eddy Alvares Lalvay, Luis Chauca Bajaña, Andrea Ordoñez Balladares.',
+    links: [
+      { label: 'F1000Research (DOI)', url: 'https://f1000research.com/articles/12-766' },
+      { label: 'Descargar PDF Directo', url: 'https://f1000research.com/articles/12-766/pdf' },
+      {
+        label: 'ResearchGate',
+        url: 'https://www.researchgate.net/publication/382899057_Evaluation_by_app_in_smartphones_of_awake_bruxism_at_the_return_of_presential_classes_in_two_university_centers',
+      },
+    ],
+  },
+  {
+    id: 'pub-2026-tmd-biomarkers',
+    year: 'Junio 2026',
+    title:
+      'Salivary Oxidative Stress Biomarkers in Temporomandibular Disorders: A Systematic Review and Meta-Analysis',
+    publishedAs: 'Eliana Pazmiño Troncoso',
+    journal: 'Journal of Personalized Medicine (MDPI), 16(7):357',
+    doi: '10.3390/jpm16070357',
+    pmid: '42506083',
+    focus:
+      'Revisión sistemática y metaanálisis sobre biomarcadores salivales de estrés oxidativo asociados con dolor crónico, inflamación y limitación funcional en trastornos temporomandibulares (TTM).',
+    coAuthors:
+      'Luis Chauca Bajaña, Tatiana Cruz Moreno, Diego Quiguango Farias, Sandra Vélez Cevallos, Alisson Juiña Jaime, Mauricio Rosales Pavón, Byron Velásquez Ron.',
+    links: [
+      { label: 'PubMed (PMID: 42506083)', url: 'https://pubmed.ncbi.nlm.nih.gov/42506083/' },
+      { label: 'MDPI Journal (DOI)', url: 'https://www.mdpi.com/2075-4426/16/7/357/notes' },
+    ],
+  },
+  {
+    id: 'pub-2026-orofacial-pain',
+    year: 'Agosto 2026',
+    title:
+      'Cannabis-Based Therapies for Chronic Orofacial Pain: A Systematic Review and Meta-Analysis',
+    publishedAs: 'Eliana Pazmiño Troncoso',
+    journal: 'Odovtos - International Journal of Dental Sciences, 28(3):139–153',
+    focus:
+      'Revisión sistemática y metaanálisis que evalúa la eficacia de terapias cannabinoides en el manejo del dolor orofacial crónico asociado con trastornos temporomandibulares (TTM), periodontitis y patología oral.',
+    coAuthors:
+      'Tatiana Cruz Moreno, María Romero Guerrero, Diego Quiguango Farias, Sandra Vélez Cevallos, Alisson Juiña Jaime, Luis Chauca Bajaña, Alejandro I. Lorenzo-Pouso, Héctor Zambrano Aguilar, Byron Velásquez Ron.',
+    links: [
+      {
+        label: 'Odovtos Journal Full Text (UCR)',
+        url: 'https://revistas.ucr.ac.cr/index.php/rOdontos/article/view/3386',
+      },
+      {
+        label: 'ResearchGate',
+        url: 'https://www.researchgate.net/publication/401237814_Cannabis-Based_Therapies_for_Chronic_Orofacial_Pain_A_Systematic_Review_and_Meta-Analysis',
+      },
+    ],
   },
 ];
+
+export const RESEARCH_COLLABORATORS = [
+  {
+    name: 'Dr. Byron Velásquez Ron',
+    role: 'Investigador Principal / Autor Corresponsal (4 artículos) · Investigación en Prótesis y TTM (UDLA)',
+    links: [
+      { label: 'ORCID', url: 'http://orcid.org/0000-0001-5660-3941' },
+      { label: 'SciProfiles', url: 'https://sciprofiles.com/profile/2212728' },
+      { label: 'ResearchGate', url: 'https://www.researchgate.net/profile/Byron-Velasquez' },
+    ],
+  },
+  {
+    name: 'Dr. Luis Alberto Chauca Bajaña',
+    role: 'Coautor en los 4 estudios · Universidad de Guayaquil',
+    links: [{ label: 'ORCID', url: 'https://orcid.org/0000-0002-8713-951X' }],
+  },
+  {
+    name: 'Dr. Eddy Alvares Lalvay',
+    role: 'Coautor en estudios de Bruxismo de Vigilia · UDLA',
+    links: [{ label: 'ORCID', url: 'https://orcid.org/0000-0002-7377-8003' }],
+  },
+  {
+    name: 'Dra. Alisson Juiña Jaime',
+    role: 'Coautora en estudios de Biomarcadores en TTM y Dolor Orofacial · UDLA',
+    links: [{ label: 'Scilit Profile', url: 'https://www.scilit.com/scholars/019f2a513c8f72c2b83d25900853b7d7' }],
+  },
+  {
+    name: 'Dr. Héctor Zambrano Aguilar',
+    role: 'Coautor en estudio de Dolor Orofacial Crónico · UDLA',
+    links: [{ label: 'ORCID', url: 'https://orcid.org/0000-0002-9993-1192' }],
+  },
+];
+
+export const ADDITIONAL_COAUTHORS = [
+  'Verónica Mosquera Cisneros (UDLA)',
+  'María Rodríguez Tates (UDLA)',
+  'Andrea Ordoñez Balladares (Universidad de Guayaquil)',
+  'Tatiana Cruz Moreno (UDLA)',
+  'Diego Quiguango Farias (UDLA)',
+  'Sandra Vélez Cevallos (UDLA)',
+  'Mauricio Rosales Pavón (UDLA)',
+  'María Romero Guerrero (UDLA)',
+  'Alejandro I. Lorenzo-Pouso (Universidade de Santiago de Compostela)',
+];
+
+export const SCIENTIFIC_HIGHLIGHTS = SCIENTIFIC_PUBLICATIONS.map((p) => ({
+  journal: `${p.journal} (${p.year}) · Publicado como ${p.publishedAs}`,
+  topic: p.title,
+  summary: p.focus,
+  links: p.links,
+  coAuthors: p.coAuthors,
+}));
 
 export const ATM_QUIZ_QUESTIONS: QuizQuestion[] = [
   {

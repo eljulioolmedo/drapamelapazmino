@@ -14,7 +14,14 @@ import {
   Sparkles,
   Stethoscope,
 } from 'lucide-react';
-import { SITE_CONFIG, CREDENTIALS_LIST, SCIENTIFIC_HIGHLIGHTS } from '../data/siteContent';
+import {
+  SITE_CONFIG,
+  CREDENTIALS_LIST,
+  SCIENTIFIC_PUBLICATIONS,
+  RESEARCHER_PROFILES,
+  RESEARCH_COLLABORATORS,
+  ADDITIONAL_COAUTHORS,
+} from '../data/siteContent';
 import {
   ViteCyanCanvas,
   MinimalistAuthorityShowcase,
@@ -30,12 +37,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="space-y-24 pb-24">
       {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HERO */}
-      <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[48%] bg-cover bg-left opacity-30 lg:opacity-45"
-          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
+      <section className="relative overflow-hidden pt-12 pb-16">
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-cyan-300/25 blur-[120px]" />
 
@@ -135,21 +137,146 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
           ))}
         </div>
 
-        <div className="rounded-[2.25rem] bg-gradient-to-r from-cyan-50 via-sky-50 to-white p-7 sm:p-10 ring-1 ring-cyan-500/20">
-          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-cyan-700 mb-5">
-            <Microscope className="h-4 w-4 text-cyan-500" />
-            <span>Publicaciones e Investigación Científica (PubMed / NIH · UDLA)</span>
+        {/* VERIFIED SCIENTIFIC PUBLICATIONS, AUTHOR PROFILES & COLLABORATORS */}
+        <div className="rounded-[2.25rem] bg-gradient-to-r from-cyan-50 via-sky-50 to-white p-7 sm:p-10 ring-1 ring-cyan-500/20 space-y-10">
+          {/* Header + Author Profiles */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-cyan-500/15 pb-6">
+            <div className="space-y-2 max-w-3xl">
+              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-cyan-700">
+                <Microscope className="h-4 w-4 text-cyan-500" />
+                <span>1. Publicaciones Científicas Verificadas · UDLA</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Investigación en Bruxismo, Dolor Orofacial y TTM
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                La <strong>Dra. {SITE_CONFIG.doctorFullName}</strong> publica en bases de datos científicas internacionales bajo los nombres <strong>Pamela Pazmiño Troncoso</strong> y <strong>Eliana Pazmiño Troncoso</strong> como docente e investigadora de la Facultad de Odontología de la <strong>Universidad de Las Américas (UDLA)</strong>.
+              </p>
+            </div>
+
+            {/* 2. Author Profiles & Identifiers */}
+            <div className="flex flex-wrap gap-2 shrink-0">
+              <a
+                href={RESEARCHER_PROFILES.orcidUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-cyan-600 px-4 py-2 text-xs font-extrabold text-white shadow-sm hover:bg-cyan-700 transition"
+              >
+                <span>ORCID: {RESEARCHER_PROFILES.orcidId}</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.researchGateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-cyan-800 ring-1 ring-cyan-500/30 hover:bg-cyan-50 transition"
+              >
+                <span>ResearchGate</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.sciProfilesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-cyan-800 ring-1 ring-cyan-500/30 hover:bg-cyan-50 transition"
+              >
+                <span>MDPI SciProfiles</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
+
+          {/* 4 Publications Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SCIENTIFIC_HIGHLIGHTS.map((pub, idx) => (
-              <div key={idx} className="rounded-3xl bg-white p-6 shadow-xs ring-1 ring-cyan-500/10 space-y-2">
-                <span className="inline-block rounded-full bg-cyan-50 px-3 py-0.5 text-[11px] font-bold text-cyan-700">
-                  {pub.journal}
-                </span>
-                <h4 className="text-lg font-extrabold text-slate-900">{pub.topic}</h4>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{pub.summary}</p>
+            {SCIENTIFIC_PUBLICATIONS.map((pub) => (
+              <div
+                key={pub.id}
+                className="rounded-3xl bg-white p-6 shadow-xs ring-1 ring-cyan-500/15 flex flex-col justify-between space-y-4"
+              >
+                <div className="space-y-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="inline-block rounded-full bg-cyan-50 px-3 py-0.5 text-[11px] font-extrabold text-cyan-700">
+                      {pub.journal} ({pub.year})
+                    </span>
+                    <span className="text-[11px] font-bold text-slate-500">
+                      Publicado como: {pub.publishedAs}
+                    </span>
+                  </div>
+                  <h4 className="text-lg font-extrabold text-slate-900 leading-snug">
+                    {pub.title}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {pub.focus}
+                  </p>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    <strong className="text-slate-700">Coautores:</strong> {pub.coAuthors}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 flex flex-wrap gap-2">
+                  {pub.links.map((lnk, i) => (
+                    <a
+                      key={i}
+                      href={lnk.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full bg-cyan-50 px-3 py-1.5 text-[11px] font-bold text-cyan-800 hover:bg-cyan-500 hover:text-white transition"
+                    >
+                      <span>{lnk.label}</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ))}
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* 3. Key Research Collaborators & Networks */}
+          <div className="rounded-3xl bg-white/90 p-6 sm:p-8 ring-1 ring-cyan-500/15 space-y-5">
+            <div className="space-y-1">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-cyan-700">
+                3. Red de Investigación y Colaboradores Científicos
+              </span>
+              <h4 className="text-xl font-extrabold text-slate-900">
+                Grupo de Investigación en Prótesis, Dolor Orofacial y TTM (UDLA)
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600">
+                Producción académica desarrollada en colaboración con investigadores nacionales e internacionales:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {RESEARCH_COLLABORATORS.map((col, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200/80 flex flex-col justify-between space-y-3"
+                >
+                  <div>
+                    <p className="text-sm font-extrabold text-slate-900">{col.name}</p>
+                    <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{col.role}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {col.links.map((l, j) => (
+                      <a
+                        key={j}
+                        href={l.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-cyan-700 ring-1 ring-cyan-500/20 hover:bg-cyan-500 hover:text-white transition"
+                      >
+                        <span>{l.label}</span>
+                        <ExternalLink className="h-2.5 w-2.5" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2 border-t border-slate-100 text-xs text-slate-600">
+              <strong className="text-slate-800">Coautores recurrentes adicionales:</strong>{' '}
+              {ADDITIONAL_COAUTHORS.join(' · ')}.
+            </div>
           </div>
         </div>
       </section>

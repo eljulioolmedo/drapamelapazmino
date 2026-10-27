@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenGuide }) =>
                   {SITE_CONFIG.doctorName}
                 </h3>
                 <p className="text-[11px] uppercase tracking-widest text-cyan-400 font-bold">
-                  ATM Integral · Rehabilitación · Quito
+                  ATM Integral · Rehabilitación · Bruxismo
                 </p>
               </div>
             </div>

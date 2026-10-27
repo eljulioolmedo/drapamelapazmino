@@ -13,7 +13,12 @@ import {
   MapPin,
   Star,
 } from 'lucide-react';
-import { SITE_CONFIG, SONORAMA_YOUTUBE_VIDEOS } from '../data/siteContent';
+import {
+  SITE_CONFIG,
+  SONORAMA_YOUTUBE_VIDEOS,
+  RESEARCHER_PROFILES,
+  SCIENTIFIC_PUBLICATIONS,
+} from '../data/siteContent';
 
 export const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'h-4 w-4' }) => (
   <svg
@@ -654,18 +659,42 @@ export const SonoramaVitalMediaHub: React.FC = () => {
 
       {/* Main Cinema Row: Active YouTube Episode (8 cols) + Featured Facebook Reel (4 cols) */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
-        {/* Main YouTube Theater (8 cols) */}
+        {/* Main YouTube Theater (8 cols) — Direct YouTube Launch to Avoid UMPG Embed Block */}
         <div className="lg:col-span-8 rounded-[2rem] bg-slate-900/95 p-4 sm:p-6 ring-1 ring-cyan-400/30 flex flex-col justify-between space-y-4">
-          <div className="relative w-full overflow-hidden rounded-2xl bg-black aspect-video shadow-2xl ring-1 ring-white/10">
-            <iframe
+          <a
+            href={selectedVideo.youtubeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block w-full overflow-hidden rounded-2xl bg-black aspect-video shadow-2xl ring-1 ring-cyan-400/30"
+          >
+            <img
               key={selectedVideo.id}
-              src={selectedVideo.embedUrl}
-              title={selectedVideo.title}
-              className="h-full w-full border-0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
+              src={`https://i.ytimg.com/vi/${selectedVideo.id}/maxresdefault.jpg`}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = selectedVideo.thumbnailUrl;
+              }}
+              alt={selectedVideo.title}
+              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-slate-950/20 group-hover:via-slate-950/20 transition-colors" />
+
+            {/* Top-Left Live Broadcast Pill */}
+            <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-slate-950/85 backdrop-blur-md px-3.5 py-1.5 text-[11px] font-extrabold text-cyan-300 ring-1 ring-cyan-400/40">
+              <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
+              <span>Sonorama Vital · Ver en YouTube</span>
+            </div>
+
+            {/* Center Glowing Play Button */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 text-slate-950 shadow-[0_0_50px_rgba(6,182,212,0.85)] group-hover:scale-110 transition-transform">
+                <Play className="h-9 w-9 fill-current ml-1" />
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-950/85 backdrop-blur-md px-4 py-1.5 text-xs font-extrabold text-white ring-1 ring-white/20 shadow-lg">
+                <span>Haz clic para reproducir directamente en YouTube</span>
+                <ExternalLink className="h-3.5 w-3.5 text-cyan-400" />
+              </span>
+            </div>
+          </a>
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
             <div>
@@ -683,9 +712,10 @@ export const SonoramaVitalMediaHub: React.FC = () => {
               href={selectedVideo.youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-cyan-400/15 px-4 py-2 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/30 hover:bg-cyan-400 hover:text-slate-950 transition self-start"
+              className="btn-shimmer inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition self-start shadow-md shadow-cyan-500/20"
             >
-              <span>Abrir en YouTube</span>
+              <Play className="h-3.5 w-3.5 fill-current" />
+              <span>Ver en YouTube</span>
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -743,9 +773,11 @@ export const SonoramaVitalMediaHub: React.FC = () => {
           {visibleEpisodes.map((vid) => {
             const isSelected = vid.id === selectedVideo.id;
             return (
-              <button
+              <a
                 key={vid.id}
-                type="button"
+                href={vid.youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setSelectedVideo(vid)}
                 className={`group text-left rounded-2xl p-3 transition-all flex items-center gap-3.5 cursor-pointer hover:-translate-y-1 ${
                   isSelected
@@ -771,14 +803,15 @@ export const SonoramaVitalMediaHub: React.FC = () => {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block truncate">
-                    {vid.dateLabel}
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 flex items-center justify-between gap-1">
+                    <span className="truncate">{vid.dateLabel}</span>
+                    <ExternalLink className="h-3 w-3 shrink-0 opacity-70 group-hover:opacity-100" />
                   </span>
                   <p className="text-xs font-bold text-white line-clamp-2 leading-snug mt-0.5">
                     {vid.title}
                   </p>
                 </div>
-              </button>
+              </a>
             );
           })}
         </div>
@@ -1042,19 +1075,50 @@ export const MinimalistAuthorityShowcase: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-[2rem] bg-gradient-to-br from-cyan-500 to-sky-600 p-5 text-white shadow-lg shadow-cyan-500/20 space-y-2">
+          <div className="rounded-[2rem] bg-gradient-to-br from-cyan-500 to-sky-600 p-5 text-white shadow-lg shadow-cyan-500/20 space-y-3">
             <div className="flex items-center justify-between">
               <GraduationCap className="h-6 w-6 text-cyan-100" />
               <span className="text-[10px] font-extrabold uppercase tracking-widest bg-white/20 px-2.5 py-0.5 rounded-full">
-                UDLA · PubMed
+                UDLA · PubMed · ORCID
               </span>
             </div>
-            <p className="text-base font-extrabold leading-snug">
-              Docente Universitaria e Investigadora
-            </p>
-            <p className="text-xs text-cyan-50 leading-relaxed">
-              Publicaciones científicas sobre Bruxismo, Dolor Orofacial y Trastornos Temporomandibulares.
-            </p>
+            <div>
+              <p className="text-base font-extrabold leading-snug">
+                Docente Universitaria e Investigadora
+              </p>
+              <p className="text-xs text-cyan-50 leading-relaxed mt-1">
+                {SCIENTIFIC_PUBLICATIONS.length} publicaciones indexadas (PubMed, PMC, F1000Research, MDPI, Odovtos) como <strong>Pamela Pazmiño Troncoso</strong> y <strong>Eliana Pazmiño Troncoso</strong>.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              <a
+                href={RESEARCHER_PROFILES.orcidUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-white text-cyan-800 px-2.5 py-1 text-[10px] font-extrabold hover:bg-cyan-50 transition"
+              >
+                <span>ORCID {RESEARCHER_PROFILES.orcidId}</span>
+                <ExternalLink className="h-2.5 w-2.5" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.researchGateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-white/20 text-white px-2.5 py-1 text-[10px] font-bold hover:bg-white/30 transition"
+              >
+                <span>ResearchGate</span>
+                <ExternalLink className="h-2.5 w-2.5" />
+              </a>
+              <a
+                href={RESEARCHER_PROFILES.sciProfilesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-full bg-white/20 text-white px-2.5 py-1 text-[10px] font-bold hover:bg-white/30 transition"
+              >
+                <span>SciProfiles</span>
+                <ExternalLink className="h-2.5 w-2.5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

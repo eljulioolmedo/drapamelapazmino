@@ -87,13 +87,20 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTopAndHash />
-      <div className="min-h-screen flex flex-col bg-slate-50/50 text-slate-900">
+      <div className="relative min-h-screen flex flex-col bg-slate-50 text-slate-900">
+        {/* Endless Seamless Architectural Wood Slats + Cyan Glass Background Across All Pages */}
+        <div
+          className="pointer-events-none fixed inset-y-0 left-0 w-full lg:w-[58%] bg-repeat-y bg-[length:100%_auto] bg-left opacity-35 lg:opacity-50 z-0"
+          style={{ backgroundImage: "url('/images/clinic/wood-cyan-endless.jpg')" }}
+        />
+        <div className="pointer-events-none fixed inset-0 bg-gradient-to-r from-transparent via-white/80 to-white/95 z-0" />
+
         <Navbar
           onOpenBooking={(specId) => handleOpenBooking(specId)}
           onOpenQuiz={() => setQuizModalOpen(true)}
         />
 
-        <main className="flex-1">
+        <main className="relative z-10 flex-1">
           <Routes>
             <Route
               path="/"

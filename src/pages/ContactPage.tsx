@@ -38,12 +38,7 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="space-y-20 pb-24">
       {/* 1. ARCHITECTURAL WOOD + CYAN GLASS HEADER */}
-      <section className="relative overflow-hidden pt-12 pb-16 bg-vite-grid">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[45%] bg-cover bg-left opacity-30 lg:opacity-45"
-          style={{ backgroundImage: "url('/images/clinic/wood-cyan-bg.jpg')" }}
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/75 via-white/90 to-white/95" />
+      <section className="relative overflow-hidden pt-12 pb-16">
         <ViteCyanCanvas className="absolute inset-0 h-full w-full" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <div className="animate-hero-up-1 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-cyan-700 ring-1 ring-cyan-500/20 shadow-2xs">
