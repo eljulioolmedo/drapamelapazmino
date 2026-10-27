@@ -11,8 +11,10 @@ import {
   Radio,
   ExternalLink,
   Tv,
+  Camera,
+  MapPin,
 } from 'lucide-react';
-import { SITE_CONFIG, SONORAMA_YOUTUBE_VIDEOS } from '../data/siteContent';
+import { SITE_CONFIG, SONORAMA_YOUTUBE_VIDEOS, CLINIC_REAL_PHOTOS } from '../data/siteContent';
 
 export const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'h-4 w-4' }) => (
   <svg
@@ -31,6 +33,10 @@ export const InstagramIcon: React.FC<{ className?: string }> = ({ className = 'h
   </svg>
 );
 
+/**
+ * Real photos from https://maps.app.goo.gl/o5sB1327LsLovAet7 (excluding old location photo 09)
+ * + Real YouTube & Facebook videos of Dra. Pamela Pazmiño on Sonorama Vital.
+ */
 export const MEDIA_ASSETS = {
   facebookReelUrl: 'https://www.facebook.com/reel/1418801960469263',
   facebookReelEmbedUrl:
@@ -39,23 +45,23 @@ export const MEDIA_ASSETS = {
   sonoramaYoutubeChannel: 'https://www.youtube.com/@SonoramaDigital',
   sonoramaTvChannel: 'https://www.youtube.com/@SonoramaTvOficial',
   sonoramaYoutubeSearch: 'https://www.youtube.com/results?search_query=sonorama+vital',
-  doctorHeroPhoto: 'https://i.ytimg.com/vi/YEiBtw4KfyM/hqdefault.jpg',
-  doctorConsultationPhoto:
-    'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=85',
-  clinicHighTechPhoto:
-    'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=85',
-  digitalDentistryPhoto:
-    'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=85',
-  naturalSmileAfter:
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
-  jawHarmonyPhoto:
-    'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85',
-  biomimeticCeramicsPhoto:
-    'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=1200&q=85',
+  googleMapsUrl:
+    'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
+
+  // Real downloaded photos from DentalCheck Google Maps listing
+  draPameCyanScrubs: '/images/clinic/dentalcheck-03.jpg',
+  draPameDiplomas: '/images/clinic/dentalcheck-08.jpg',
+  draPameClinicalUnit: '/images/clinic/dentalcheck-02.jpg',
+  draPameHappyPatient: '/images/clinic/dentalcheck-10.jpg',
+  realBeforeAfterSmile: '/images/clinic/dentalcheck-05.jpg',
+  realCadCamSplint3D: '/images/clinic/dentalcheck-06.jpg',
+  realBiomimeticVeneers: '/images/clinic/dentalcheck-07.jpg',
+  realOralRehabProsthesis: '/images/clinic/dentalcheck-04.jpg',
+  fortunePlazaBuilding: '/images/clinic/dentalcheck-01.jpg',
+
+  // Looping HD video accents
   clinicVideoLoop:
     'https://assets.mixkit.co/videos/preview/mixkit-dentist-examining-a-patient-with-tools-44551-large.mp4',
-  smileVideoLoop:
-    'https://assets.mixkit.co/videos/preview/mixkit-woman-smiling-at-the-camera-41695-large.mp4',
   digitalScanVideoLoop:
     'https://assets.mixkit.co/videos/preview/mixkit-female-doctor-looking-at-a-medical-scan-41655-large.mp4',
 };
@@ -202,7 +208,7 @@ const BIOMECHANICAL_ZONES = [
     label: 'Bruxismo',
     title: 'Relajación Neuromuscular (Sueño y Vigilia)',
     detail:
-      'Controlamos la sobrecarga de los músculos maseteros y temporales mediante férulas rígidas calibradas y biofeedback diurno.',
+      'Controlamos la sobrecarga de los músculos maseteros y temporales mediante férulas rígidas digitales 3D calibradas y biofeedback diurno.',
     cx: 96,
     cy: 162,
     mirrorCx: 224,
@@ -231,43 +237,106 @@ const BIOMECHANICAL_ZONES = [
   },
 ];
 
+const HERO_DOCTOR_PHOTOS = [
+  {
+    id: 'pame-cyan',
+    src: MEDIA_ASSETS.draPameCyanScrubs,
+    badge: 'Directora Clínica · Dental Check UIO',
+    title: 'Dra. Pamela Pazmiño',
+    subtitle: 'Especialista en Rehabilitación Oral, ATM Integral y Bruxismo',
+  },
+  {
+    id: 'pame-diplomas',
+    src: MEDIA_ASSETS.draPameDiplomas,
+    badge: 'Docente e Investigadora UDLA',
+    title: 'Excelencia Académica y Científica',
+    subtitle: 'Publicaciones internacionales en PubMed / NIH sobre dolor orofacial',
+  },
+  {
+    id: 'pame-patient',
+    src: MEDIA_ASSETS.draPameHappyPatient,
+    badge: '5.0 ★ en Google Maps (36+ reseñas)',
+    title: '"Nuestro mejor proyecto, Tu sonrisa"',
+    subtitle: 'Atención empática, minuciosa y libre de dolor en Quito',
+  },
+  {
+    id: 'pame-chair',
+    src: MEDIA_ASSETS.draPameClinicalUnit,
+    badge: 'Tecnología & Precisión',
+    title: 'Consultorio Dental Check UIO',
+    subtitle: 'Edificio Fortune Plaza · Torre Alemania (La Pradera / Iñaquito)',
+  },
+];
+
 /**
  * High-Tech Hero Showcase combining:
- * 1. Real YouTube Episodes of Dra. Pamela Pazmiño on Sonorama Vital (YEiBtw4KfyM + quick switcher)
- * 2. Real Facebook Reel (1418801960469263)
- * 3. Interactive 3D Cyan ATM Scanner
+ * 1. Real Photos of Dra. Pamela Pazmiño in Cyan Scrubs at Dental Check UIO
+ * 2. Real YouTube Episodes of Dra. Pamela Pazmiño on Sonorama Vital (YEiBtw4KfyM + switcher)
+ * 3. Real Facebook Reel (1418801960469263)
+ * 4. Interactive 3D Cyan ATM Scanner + Real 3D CAD/CAM Splint
  */
 export const InteractiveAtmHarmonyShowcase: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'youtube' | 'reel' | 'scanner'>('youtube');
+  const [activeTab, setActiveTab] = useState<'doctora' | 'youtube' | 'reel' | 'scanner'>('doctora');
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [heroVideoId, setHeroVideoId] = useState<string>(SONORAMA_YOUTUBE_VIDEOS[0].id);
   const [activeZoneId, setActiveZoneId] = useState<string>('atm');
+
+  // Auto-advance Dra. Pame's real clinic photos when on the 'doctora' tab
+  useEffect(() => {
+    if (activeTab !== 'doctora' || isPaused) return;
+    const timer = setInterval(() => {
+      setActivePhotoIdx((prev) => (prev + 1) % HERO_DOCTOR_PHOTOS.length);
+    }, 4800);
+    return () => clearInterval(timer);
+  }, [activeTab, isPaused]);
 
   const activeZone = BIOMECHANICAL_ZONES.find((z) => z.id === activeZoneId) || BIOMECHANICAL_ZONES[0];
   const currentHeroVideo =
     SONORAMA_YOUTUBE_VIDEOS.find((v) => v.id === heroVideoId) || SONORAMA_YOUTUBE_VIDEOS[0];
+  const currentPhoto = HERO_DOCTOR_PHOTOS[activePhotoIdx] || HERO_DOCTOR_PHOTOS[0];
 
   return (
-    <div className="relative mx-auto w-full max-w-xl">
+    <div
+      className="relative mx-auto w-full max-w-xl"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       {/* Vite-style Cyan Neon Halo */}
       <div className="pointer-events-none absolute -top-10 -right-10 h-80 w-80 rounded-full bg-cyan-400/35 blur-[100px] animate-pulse-glow" />
       <div className="pointer-events-none absolute -bottom-10 -left-10 h-72 w-72 rounded-full bg-sky-400/25 blur-[90px]" />
 
-      {/* Outer High-Tech Glass Frame */}
+      {/* Outer High-Tech Glass Frame with Signature Dental Check Wooden Slat Architectural Trim */}
       <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-950 p-3.5 sm:p-4 text-white shadow-[0_32px_90px_-15px_rgba(6,182,212,0.45)] ring-1 ring-cyan-400/40">
+        {/* Top Architectural Wooden Slat Ribbon */}
+        <div className="h-2 w-full rounded-full bg-wood-slats mb-3 opacity-95" title="Detalle arquitectónico Dental Check UIO" />
         {/* Top Mode Switcher Bar */}
         <div className="relative z-20 flex flex-wrap items-center justify-between gap-2 px-1 pb-3">
-          <div className="inline-flex flex-wrap rounded-full bg-slate-900/95 p-1 ring-1 ring-white/10 gap-1">
+          <div className="inline-flex flex-wrap rounded-full bg-slate-900 p-1 ring-1 ring-white/15 gap-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab('doctora')}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
+                activeTab === 'doctora'
+                  ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
+                  : 'text-slate-200 hover:text-white'
+              }`}
+            >
+              <Camera className="h-3 w-3" />
+              <span>Dra. Pame</span>
+            </button>
+
             <button
               type="button"
               onClick={() => setActiveTab('youtube')}
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 activeTab === 'youtube'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white'
+                  : 'text-slate-200 hover:text-white'
               }`}
             >
               <Tv className="h-3 w-3" />
-              <span>YouTube · Sonorama Vital</span>
+              <span>Sonorama Vital TV</span>
             </button>
 
             <button
@@ -276,11 +345,11 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 activeTab === 'reel'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white'
+                  : 'text-slate-200 hover:text-white'
               }`}
             >
               <Radio className="h-3 w-3" />
-              <span>Reel Esmalte</span>
+              <span>Reel</span>
             </button>
 
             <button
@@ -289,24 +358,84 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition cursor-pointer ${
                 activeTab === 'scanner'
                   ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white'
+                  : 'text-slate-200 hover:text-white'
               }`}
             >
               <Activity className="h-3 w-3" />
               <span>ATM 3D</span>
             </button>
           </div>
-
-          <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 px-3 py-1 text-[10px] font-extrabold text-cyan-300 ring-1 ring-cyan-400/30">
-            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-            <span>EN VIVO</span>
-          </span>
         </div>
 
-        {/* TAB 1: YOUTUBE EPISODES OF DRA. PAMELA PAZMIÑO ON SONORAMA VITAL */}
+        {/* TAB 1: REAL PHOTOS OF DRA. PAMELA PAZMIÑO AT DENTAL CHECK UIO */}
+        {activeTab === 'doctora' && (
+          <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 bg-vite-grid-dark p-3.5 sm:p-4 space-y-3.5">
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-slate-950 ring-1 ring-cyan-400/40 shadow-2xl">
+              <img
+                src={currentPhoto.src}
+                alt={currentPhoto.title}
+                className="h-full w-full object-cover object-top transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+
+              {/* Top Cyan Badge */}
+              <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-slate-950/85 backdrop-blur-md px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 ring-1 ring-cyan-400/40">
+                <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+                <span>{currentPhoto.badge}</span>
+              </div>
+
+              {/* Bottom Caption + Quick Video Trigger */}
+              <div className="absolute bottom-3 inset-x-3 flex items-end justify-between gap-3">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight drop-shadow">
+                    {currentPhoto.title}
+                  </h3>
+                  <p className="text-xs text-cyan-200 font-medium">
+                    {currentPhoto.subtitle}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('youtube')}
+                  className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-cyan-400 px-3.5 py-2 text-[11px] font-extrabold text-slate-950 shadow-lg hover:bg-cyan-300 transition cursor-pointer"
+                >
+                  <Play className="h-3.5 w-3.5 fill-current" />
+                  <span>Ver en TV</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 4 Real Photo Thumbnail Switchers */}
+            <div className="grid grid-cols-4 gap-2">
+              {HERO_DOCTOR_PHOTOS.map((photo, idx) => {
+                const isSelected = idx === activePhotoIdx;
+                return (
+                  <button
+                    key={photo.id}
+                    type="button"
+                    onClick={() => setActivePhotoIdx(idx)}
+                    className={`group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer transition-all ${
+                      isSelected
+                        ? 'ring-2 ring-cyan-400 shadow-lg shadow-cyan-500/30 scale-[1.02]'
+                        : 'opacity-65 hover:opacity-100 ring-1 ring-white/15'
+                    }`}
+                  >
+                    <img
+                      src={photo.src}
+                      alt={photo.title}
+                      className="h-full w-full object-cover object-top"
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: YOUTUBE EPISODES OF DRA. PAMELA PAZMIÑO ON SONORAMA VITAL */}
         {activeTab === 'youtube' && (
           <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 p-4 sm:p-5 bg-vite-grid-dark space-y-4">
-            {/* Main 16:9 YouTube Player */}
             <div className="relative w-full overflow-hidden rounded-2xl bg-black aspect-video shadow-[0_0_40px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/40">
               <iframe
                 key={currentHeroVideo.id}
@@ -318,7 +447,6 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
               />
             </div>
 
-            {/* Episode Info & Quick Episode Selector Strip */}
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -333,14 +461,13 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
                   href={currentHeroVideo.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 inline-flex items-center gap-1 rounded-full bg-cyan-400/15 px-3 py-1.5 text-[11px] font-bold text-cyan-300 hover:bg-cyan-400 hover:text-slate-950 transition"
+                  className="shrink-0 inline-flex items-center gap-1 rounded-full bg-cyan-400/20 px-3 py-1.5 text-[11px] font-bold text-cyan-300 hover:bg-cyan-400 hover:text-slate-950 transition"
                 >
                   <span>YouTube</span>
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
 
-              {/* 4 Thumbnail Switchers */}
               <div className="grid grid-cols-4 gap-2 pt-1">
                 {SONORAMA_YOUTUBE_VIDEOS.slice(0, 4).map((vid) => {
                   const isCurrent = vid.id === heroVideoId;
@@ -372,7 +499,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 2: REAL FACEBOOK REEL (Sonorama Vital - Dra. Pamela Pazmiño) */}
+        {/* TAB 3: REAL FACEBOOK REEL (Sonorama Vital - Dra. Pamela Pazmiño) */}
         {activeTab === 'reel' && (
           <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 p-4 sm:p-5 bg-vite-grid-dark space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
@@ -387,7 +514,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
               </div>
 
               <div className="sm:col-span-5 space-y-3.5 text-left">
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/15 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 ring-1 ring-cyan-400/30">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/20 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-cyan-300 ring-1 ring-cyan-400/30">
                   <Radio className="h-3 w-3" />
                   <span>Reel Oficial · Facebook</span>
                 </div>
@@ -396,7 +523,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
                   Cuidado del Esmalte y Fracturas Dentales
                 </h3>
 
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-200 leading-relaxed">
                   Cápsula educativa de la <strong>Dra. Pamela Pazmiño</strong> en <strong>Sonorama Vital</strong> sobre cómo proteger tus dientes frente al desgaste y bruxismo.
                 </p>
 
@@ -414,7 +541,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setActiveTab('youtube')}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white/8 px-4 py-2 text-[11px] font-bold text-cyan-300 hover:bg-white/15 transition cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-[11px] font-bold text-cyan-300 hover:bg-white/20 transition cursor-pointer"
                   >
                     <Tv className="h-3.5 w-3.5" />
                     <span>Ver Programas YouTube →</span>
@@ -425,115 +552,135 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 3: INTERACTIVE 3D ATM SCANNER */}
+        {/* TAB 4: INTERACTIVE 3D ATM SCANNER + REAL 3D CAD/CAM SPLINT */}
         {activeTab === 'scanner' && (
-          <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 p-5 sm:p-6 bg-vite-grid-dark">
-            <div className="relative z-10 flex flex-col items-center justify-center">
-              <svg
-                viewBox="0 0 320 270"
-                className="h-60 sm:h-64 w-full max-w-[330px] select-none"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="cyanLine" x1="0" y1="0" x2="320" y2="270" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#67E8F9" />
-                    <stop offset="50%" stopColor="#06B6D4" />
-                    <stop offset="100%" stopColor="#0284C7" />
-                  </linearGradient>
-                  <radialGradient id="cyanNodeGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.95" />
-                    <stop offset="100%" stopColor="#06B6D4" stopOpacity="0" />
-                  </radialGradient>
-                </defs>
+          <div className="relative overflow-hidden rounded-[2rem] bg-slate-900 p-4 sm:p-5 bg-vite-grid-dark space-y-3">
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+              <div className="sm:col-span-7 flex flex-col items-center justify-center">
+                <svg
+                  viewBox="0 0 320 270"
+                  className="h-48 sm:h-52 w-full max-w-[280px] select-none"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id="cyanLine" x1="0" y1="0" x2="320" y2="270" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#67E8F9" />
+                      <stop offset="50%" stopColor="#06B6D4" />
+                      <stop offset="100%" stopColor="#0284C7" />
+                    </linearGradient>
+                    <radialGradient id="cyanNodeGlow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.95" />
+                      <stop offset="100%" stopColor="#06B6D4" stopOpacity="0" />
+                    </radialGradient>
+                  </defs>
 
-                <circle cx="160" cy="135" r="112" stroke="url(#cyanLine)" strokeOpacity="0.2" strokeWidth="1" />
-                <circle
-                  cx="160"
-                  cy="135"
-                  r="88"
-                  stroke="url(#cyanLine)"
-                  strokeOpacity="0.32"
-                  strokeWidth="1"
-                  strokeDasharray="4 6"
+                  <circle cx="160" cy="135" r="112" stroke="url(#cyanLine)" strokeOpacity="0.2" strokeWidth="1" />
+                  <circle
+                    cx="160"
+                    cy="135"
+                    r="88"
+                    stroke="url(#cyanLine)"
+                    strokeOpacity="0.32"
+                    strokeWidth="1"
+                    strokeDasharray="4 6"
+                  />
+
+                  <line
+                    x1="160"
+                    y1="18"
+                    x2="160"
+                    y2="260"
+                    stroke="#22D3EE"
+                    strokeOpacity={activeZoneId === 'cervical' ? '0.95' : '0.28'}
+                    strokeWidth={activeZoneId === 'cervical' ? '2.2' : '1'}
+                    strokeDasharray="3 4"
+                  />
+
+                  <line
+                    x1="50"
+                    y1="112"
+                    x2="270"
+                    y2="112"
+                    stroke="#22D3EE"
+                    strokeOpacity={activeZoneId === 'atm' ? '0.95' : '0.32'}
+                    strokeWidth={activeZoneId === 'atm' ? '2.2' : '1'}
+                  />
+
+                  <path
+                    d="M78 112C78 158 96 196 124 218C142 232 151 236 160 236C169 236 178 232 196 218C224 196 242 158 242 112"
+                    stroke="url(#cyanLine)"
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M82 116L102 182M238 116L218 182"
+                    stroke="#67E8F9"
+                    strokeOpacity={activeZoneId === 'bruxismo' ? '0.95' : '0.35'}
+                    strokeWidth={activeZoneId === 'bruxismo' ? '3.2' : '1.5'}
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M112 184C128 202 143 208 160 208C177 208 192 202 208 184"
+                    stroke={activeZoneId === 'biomimetica' ? '#67E8F9' : '#22D3EE'}
+                    strokeWidth={activeZoneId === 'biomimetica' ? '4' : '2.5'}
+                    strokeLinecap="round"
+                  />
+
+                  {BIOMECHANICAL_ZONES.map((zone) => {
+                    const isSelected = zone.id === activeZoneId;
+                    return (
+                      <g key={zone.id} onClick={() => setActiveZoneId(zone.id)} className="cursor-pointer">
+                        <circle cx={zone.cx} cy={zone.cy} r={isSelected ? 19 : 12} fill="url(#cyanNodeGlow)" />
+                        <circle
+                          cx={zone.cx}
+                          cy={zone.cy}
+                          r={isSelected ? 7 : 5}
+                          fill={isSelected ? '#67E8F9' : '#06B6D4'}
+                          stroke="#ffffff"
+                          strokeWidth="1.5"
+                        />
+                        {zone.mirrorCx !== zone.cx && (
+                          <>
+                            <circle cx={zone.mirrorCx} cy={zone.cy} r={isSelected ? 19 : 12} fill="url(#cyanNodeGlow)" />
+                            <circle
+                              cx={zone.mirrorCx}
+                              cy={zone.cy}
+                              r={isSelected ? 7 : 5}
+                              fill={isSelected ? '#67E8F9' : '#06B6D4'}
+                              stroke="#ffffff"
+                              strokeWidth="1.5"
+                            />
+                          </>
+                        )}
+                      </g>
+                    );
+                  })}
+                </svg>
+              </div>
+
+              {/* Real 3D CAD/CAM Occlusal Splint Photo from DentalCheck */}
+              <div className="sm:col-span-5 relative overflow-hidden rounded-2xl aspect-[3/4] ring-1 ring-cyan-400/40">
+                <img
+                  src={MEDIA_ASSETS.realCadCamSplint3D}
+                  alt="Diseño 3D de Férula Oclusal CAD/CAM en Dental Check"
+                  className="h-full w-full object-cover"
                 />
-
-                <line
-                  x1="160"
-                  y1="18"
-                  x2="160"
-                  y2="260"
-                  stroke="#22D3EE"
-                  strokeOpacity={activeZoneId === 'cervical' ? '0.95' : '0.28'}
-                  strokeWidth={activeZoneId === 'cervical' ? '2.2' : '1'}
-                  strokeDasharray="3 4"
-                />
-
-                <line
-                  x1="50"
-                  y1="112"
-                  x2="270"
-                  y2="112"
-                  stroke="#22D3EE"
-                  strokeOpacity={activeZoneId === 'atm' ? '0.95' : '0.32'}
-                  strokeWidth={activeZoneId === 'atm' ? '2.2' : '1'}
-                />
-
-                <path
-                  d="M78 112C78 158 96 196 124 218C142 232 151 236 160 236C169 236 178 232 196 218C224 196 242 158 242 112"
-                  stroke="url(#cyanLine)"
-                  strokeWidth="2.8"
-                  strokeLinecap="round"
-                />
-
-                <path
-                  d="M82 116L102 182M238 116L218 182"
-                  stroke="#67E8F9"
-                  strokeOpacity={activeZoneId === 'bruxismo' ? '0.95' : '0.35'}
-                  strokeWidth={activeZoneId === 'bruxismo' ? '3.2' : '1.5'}
-                  strokeLinecap="round"
-                />
-
-                <path
-                  d="M112 184C128 202 143 208 160 208C177 208 192 202 208 184"
-                  stroke={activeZoneId === 'biomimetica' ? '#67E8F9' : '#22D3EE'}
-                  strokeWidth={activeZoneId === 'biomimetica' ? '4' : '2.5'}
-                  strokeLinecap="round"
-                />
-
-                {BIOMECHANICAL_ZONES.map((zone) => {
-                  const isSelected = zone.id === activeZoneId;
-                  return (
-                    <g key={zone.id} onClick={() => setActiveZoneId(zone.id)} className="cursor-pointer">
-                      <circle cx={zone.cx} cy={zone.cy} r={isSelected ? 19 : 12} fill="url(#cyanNodeGlow)" />
-                      <circle
-                        cx={zone.cx}
-                        cy={zone.cy}
-                        r={isSelected ? 7 : 5}
-                        fill={isSelected ? '#67E8F9' : '#06B6D4'}
-                        stroke="#ffffff"
-                        strokeWidth="1.5"
-                      />
-                      {zone.mirrorCx !== zone.cx && (
-                        <>
-                          <circle cx={zone.mirrorCx} cy={zone.cy} r={isSelected ? 19 : 12} fill="url(#cyanNodeGlow)" />
-                          <circle
-                            cx={zone.mirrorCx}
-                            cy={zone.cy}
-                            r={isSelected ? 7 : 5}
-                            fill={isSelected ? '#67E8F9' : '#06B6D4'}
-                            stroke="#ffffff"
-                            strokeWidth="1.5"
-                          />
-                        </>
-                      )}
-                    </g>
-                  );
-                })}
-              </svg>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
+                <div className="absolute bottom-2.5 inset-x-2.5">
+                  <span className="inline-block rounded-full bg-cyan-400 px-2.5 py-0.5 text-[9px] font-extrabold uppercase text-slate-950">
+                    CAD/CAM 3D Real
+                  </span>
+                  <p className="text-[11px] font-bold text-white mt-1 leading-tight">
+                    Férula Oclusal Digital para ATM y Bruxismo
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+            <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-2">
               {BIOMECHANICAL_ZONES.map((zone) => {
                 const isSelected = zone.id === activeZoneId;
                 return (
@@ -544,7 +691,7 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
                     className={`rounded-2xl px-3 py-2 text-left transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/25'
-                        : 'bg-white/6 text-cyan-100/80 hover:bg-white/12 ring-1 ring-white/10'
+                        : 'bg-slate-950/80 text-cyan-100 hover:bg-slate-800 ring-1 ring-white/15'
                     }`}
                   >
                     <span className={`block text-[10px] tracking-widest uppercase ${isSelected ? 'text-slate-900' : 'text-cyan-400'}`}>
@@ -556,21 +703,21 @@ export const InteractiveAtmHarmonyShowcase: React.FC = () => {
               })}
             </div>
 
-            <div className="relative z-10 rounded-2xl bg-slate-950/90 p-4 ring-1 ring-cyan-400/30">
+            <div className="relative z-10 rounded-2xl bg-slate-950/95 p-4 ring-1 ring-cyan-400/30">
               <div className="flex items-center justify-between gap-2 mb-1">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-400">
                   {activeZone.code} · {activeZone.label}
                 </span>
                 <button
                   type="button"
-                  onClick={() => setActiveTab('youtube')}
+                  onClick={() => setActiveTab('doctora')}
                   className="text-[11px] text-cyan-300 hover:underline cursor-pointer"
                 >
-                  ← Volver a Videos
+                  ← Ver Fotos Dra. Pame
                 </button>
               </div>
               <h3 className="text-base font-bold text-white">{activeZone.title}</h3>
-              <p className="text-xs text-cyan-100/85 mt-1 leading-relaxed">{activeZone.detail}</p>
+              <p className="text-xs text-slate-200 mt-1 leading-relaxed">{activeZone.detail}</p>
             </div>
           </div>
         )}
@@ -591,7 +738,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
     : SONORAMA_YOUTUBE_VIDEOS.slice(0, 6);
 
   return (
-    <div className="rounded-[2.75rem] bg-slate-950 p-6 sm:p-10 lg:p-14 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.38)] ring-1 ring-cyan-400/30 relative overflow-hidden bg-vite-grid-dark space-y-10">
+    <div className="rounded-[2.75rem] bg-slate-950 bg-vite-grid-dark p-6 sm:p-10 lg:p-14 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.38)] ring-1 ring-cyan-400/30 relative overflow-hidden space-y-10">
       <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]" />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-sky-500/15 blur-[120px]" />
 
@@ -608,7 +755,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
               Reels de Salud
             </span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
             Explora las emisiones de <strong>Sonorama Vital con Pamela Pazmiño</strong> en YouTube y Facebook (<em>@SonoramaDigital</em> / <em>@SonoramaTvOficial</em>). Haz clic en cualquier episodio para reproducirlo directamente aquí.
           </p>
         </div>
@@ -628,7 +775,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
             href={MEDIA_ASSETS.facebookReelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-xs font-bold text-white hover:bg-white/20 transition ring-1 ring-white/15"
+            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition ring-1 ring-white/20"
           >
             <Radio className="h-4 w-4 text-cyan-400" />
             <span>Reel Facebook</span>
@@ -640,7 +787,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
       {/* Main Cinema Row: Active YouTube Episode (8 cols) + Featured Facebook Reel (4 cols) */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
         {/* Main YouTube Theater (8 cols) */}
-        <div className="lg:col-span-8 rounded-[2rem] bg-slate-900/90 p-4 sm:p-6 ring-1 ring-cyan-400/30 flex flex-col justify-between space-y-4">
+        <div className="lg:col-span-8 rounded-[2rem] bg-slate-900/95 p-4 sm:p-6 ring-1 ring-cyan-400/30 flex flex-col justify-between space-y-4">
           <div className="relative w-full overflow-hidden rounded-2xl bg-black aspect-video shadow-2xl ring-1 ring-white/10">
             <iframe
               key={selectedVideo.id}
@@ -668,7 +815,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
               href={selectedVideo.youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-cyan-300 hover:bg-cyan-400 hover:text-slate-950 transition self-start"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-400/15 px-4 py-2 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/30 hover:bg-cyan-400 hover:text-slate-950 transition self-start"
             >
               <span>Abrir en YouTube</span>
               <ExternalLink className="h-3.5 w-3.5" />
@@ -677,7 +824,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
         </div>
 
         {/* Right: Embedded Facebook Reel 1418801960469263 (4 cols) */}
-        <div className="lg:col-span-4 rounded-[2rem] bg-slate-900/90 p-4 sm:p-5 ring-1 ring-cyan-400/30 flex flex-col items-center justify-between space-y-3">
+        <div className="lg:col-span-4 rounded-[2rem] bg-slate-900/95 p-4 sm:p-5 ring-1 ring-cyan-400/30 flex flex-col items-center justify-between space-y-3">
           <div className="w-full flex items-center justify-between text-xs">
             <span className="font-extrabold uppercase tracking-wider text-cyan-400">
               Facebook Reel · Salud Oral
@@ -703,7 +850,7 @@ export const SonoramaVitalMediaHub: React.FC = () => {
             />
           </div>
 
-          <p className="text-[11px] text-center text-slate-400">
+          <p className="text-[11px] text-center text-slate-300">
             Sonorama Digital · Radio Sonorama Ecuador
           </p>
         </div>
@@ -734,8 +881,8 @@ export const SonoramaVitalMediaHub: React.FC = () => {
                 onClick={() => setSelectedVideo(vid)}
                 className={`group text-left rounded-2xl p-3 transition-all flex items-center gap-3.5 cursor-pointer ${
                   isSelected
-                    ? 'bg-gradient-to-r from-cyan-500/25 to-cyan-400/10 ring-2 ring-cyan-400 shadow-lg shadow-cyan-500/20'
-                    : 'bg-white/5 hover:bg-white/10 ring-1 ring-white/10'
+                    ? 'bg-gradient-to-r from-cyan-950 to-slate-900 ring-2 ring-cyan-400 shadow-lg shadow-cyan-500/20'
+                    : 'bg-slate-900/90 hover:bg-slate-900 ring-1 ring-white/15'
                 }`}
               >
                 <div className="relative h-16 w-28 shrink-0 overflow-hidden rounded-xl bg-black">
@@ -773,130 +920,214 @@ export const SonoramaVitalMediaHub: React.FC = () => {
 };
 
 /**
- * Interactive Before/After & Video Bento Showcase for Biomimetic Rehabilitation & ATM Harmony.
+ * Real Dental Check Clinical Cases & Clinic Gallery Bento (using real photos from Google Maps).
  */
 export const InteractiveSmileAndVideoBento: React.FC<{
   onOpenBooking: (specId?: string) => void;
 }> = ({ onOpenBooking }) => {
-  const [sliderPos, setSliderPos] = useState(55);
-  const [muted, setMuted] = useState(true);
+  const [activeCaseIdx, setActiveCaseIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const realCases = [
+    {
+      badge: 'Caso Clínico Real · Antes y Después',
+      title: 'Diseño de Sonrisa Natural y Biomimética',
+      desc: 'Restauración armónica de bordes incisales, proporción dental y luminosidad sin desgastar tejido dental sano.',
+      image: MEDIA_ASSETS.realBeforeAfterSmile,
+      specId: 'estetica-natural',
+    },
+    {
+      badge: 'Planificación Digital 3D · ATM & Bruxismo',
+      title: 'Férula Oclusal Digital CAD/CAM',
+      desc: 'Escaneo intraoral y diseño tridimensional de dispositivos oclusales rígidos para proteger tus dientes y descomprimir la ATM.',
+      image: MEDIA_ASSETS.realCadCamSplint3D,
+      specId: 'atm-integral',
+    },
+    {
+      badge: 'Laboratorio Biomimético · Alta Precisión',
+      title: 'Laminados Cerámicos con Translucidez Natural',
+      desc: 'Cerámica libre de metal con microtextura y degradado de color idéntico al esmalte humano.',
+      image: MEDIA_ASSETS.realBiomimeticVeneers,
+      specId: 'rehabilitacion-oral',
+    },
+    {
+      badge: 'Rehabilitación Oral Integral',
+      title: 'Recuperación Funcional y Estética',
+      desc: 'Prótesis y rehabilitaciones adhesivas personalizadas que devuelven soporte labial y dimensión vertical.',
+      image: MEDIA_ASSETS.realOralRehabProsthesis,
+      specId: 'rehabilitacion-oral',
+    },
+  ];
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      setActiveCaseIdx((prev) => (prev + 1) % realCases.length);
+    }, 5200);
+    return () => clearInterval(timer);
+  }, [paused, realCases.length]);
+
+  const currentCase = realCases[activeCaseIdx] || realCases[0];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-      <div className="lg:col-span-7 rounded-[2.25rem] bg-slate-950 p-6 sm:p-8 text-white shadow-[0_24px_70px_-15px_rgba(6,182,212,0.25)] ring-1 ring-cyan-500/25 flex flex-col justify-between space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-cyan-400">
-              <SlidersHorizontal className="h-3.5 w-3.5" />
-              <span>Simulador Visual Interactivo</span>
+    <div
+      className="space-y-8"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        {/* Left: Real Clinical Cases Interactive Showcase (7 cols) */}
+        <div className="lg:col-span-7 relative overflow-hidden rounded-[2.25rem] bg-slate-950 p-6 sm:p-8 text-white shadow-[0_24px_70px_-15px_rgba(6,182,212,0.28)] ring-1 ring-cyan-500/30 flex flex-col justify-between space-y-5">
+          <div className="absolute top-0 inset-x-0 h-2 bg-wood-slats opacity-95" />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-cyan-400">
+                <SlidersHorizontal className="h-3.5 w-3.5" />
+                <span>Casos Reales · Dental Check UIO</span>
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
+                {currentCase.title}
+              </h3>
+            </div>
+            <span className="rounded-full bg-cyan-400/20 px-3.5 py-1 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/30">
+              {currentCase.badge}
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
-              Armonía Facial, ATM y Sonrisa Natural
-            </h3>
           </div>
-          <span className="rounded-full bg-cyan-500/15 px-3.5 py-1 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/30">
-            Desliza para comparar ↔
-          </span>
-        </div>
 
-        <div className="relative h-72 sm:h-80 w-full overflow-hidden rounded-3xl select-none ring-1 ring-white/15">
-          <img
-            src={MEDIA_ASSETS.naturalSmileAfter}
-            alt="Sonrisa rehabilitada y armónica"
-            className="h-full w-full object-cover"
-          />
-          <span className="absolute bottom-3 right-3 z-20 rounded-full bg-cyan-400 px-3 py-1 text-[11px] font-extrabold text-slate-950 shadow">
-            DESPUÉS · Armonía Biomimética & ATM
-          </span>
-
-          <div
-            className="absolute inset-y-0 left-0 overflow-hidden"
-            style={{ width: `${sliderPos}%` }}
-          >
+          <div className="relative h-72 sm:h-80 w-full overflow-hidden rounded-3xl bg-slate-900 ring-1 ring-cyan-400/30">
             <img
-              src={MEDIA_ASSETS.naturalSmileAfter}
-              alt="Estado previo con sobrecarga muscular"
-              className="h-full w-full max-w-none object-cover grayscale contrast-125 brightness-75"
-              style={{ width: '100vw', maxWidth: '720px' }}
+              src={currentCase.image}
+              alt={currentCase.title}
+              className="h-full w-full object-cover transition-all duration-500"
             />
-            <div className="absolute inset-0 bg-cyan-950/35" />
-            <span className="absolute bottom-3 left-3 z-20 rounded-full bg-slate-950/90 px-3 py-1 text-[11px] font-bold text-cyan-300 ring-1 ring-cyan-400/30">
-              ANTES · Tensión / Sobrecarga
-            </span>
-          </div>
-
-          <div
-            className="pointer-events-none absolute inset-y-0 z-20 w-0.5 bg-cyan-400 shadow-[0_0_16px_rgba(34,211,238,1)]"
-            style={{ left: `${sliderPos}%` }}
-          >
-            <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400 text-slate-950 shadow-lg font-extrabold text-xs">
-              ↔
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+            <div className="absolute bottom-4 inset-x-4 flex flex-wrap items-center justify-between gap-2">
+              <p className="text-xs sm:text-sm text-white font-medium max-w-md drop-shadow">
+                {currentCase.desc}
+              </p>
+              <button
+                type="button"
+                onClick={() => onOpenBooking(currentCase.specId)}
+                className="rounded-full bg-cyan-400 px-4 py-2 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition cursor-pointer shrink-0"
+              >
+                Consultar este tratamiento
+              </button>
             </div>
           </div>
 
-          <input
-            type="range"
-            min={10}
-            max={90}
-            value={sliderPos}
-            onChange={(e) => setSliderPos(Number(e.target.value))}
-            aria-label="Comparar antes y después"
-            className="absolute inset-0 z-30 h-full w-full opacity-0 cursor-ew-resize"
-          />
+          {/* 4 Real Case Selector Pills */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            {realCases.map((c, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setActiveCaseIdx(idx)}
+                className={`group relative overflow-hidden rounded-2xl p-2 text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                  idx === activeCaseIdx
+                    ? 'bg-cyan-400 text-slate-950 font-extrabold shadow-lg shadow-cyan-500/25'
+                    : 'bg-slate-900 text-slate-200 hover:bg-slate-800 ring-1 ring-white/15'
+                }`}
+              >
+                <img
+                  src={c.image}
+                  alt={c.title}
+                  className="h-10 w-10 rounded-xl object-cover shrink-0"
+                />
+                <span className="text-[11px] leading-tight line-clamp-2">{c.title}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          Al desprogramar la sobrecarga muscular del bruxismo y restituir la dimensión vertical perdida, relajamos el tercio inferior del rostro y devolvemos una sonrisa translúcida y natural.
-        </p>
+        {/* Right: Real Dra. Pamela Pazmiño & Patient Experience Card (5 cols) */}
+        <div className="lg:col-span-5 relative overflow-hidden rounded-[2.25rem] bg-slate-950 text-white shadow-[0_24px_70px_-15px_rgba(6,182,212,0.28)] ring-1 ring-cyan-500/30 min-h-[440px] flex flex-col justify-between p-6 sm:p-8">
+          <img
+            src={MEDIA_ASSETS.draPameHappyPatient}
+            alt="Dra. Pamela Pazmiño con paciente en Dental Check UIO"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/55 to-slate-950/15" />
+
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="inline-flex items-center gap-2 rounded-full bg-slate-950/85 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/40">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              <span>DENTAL CHECK UIO · 5.0 ★ GOOGLE</span>
+            </span>
+
+            <a
+              href={MEDIA_ASSETS.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-slate-950/85 backdrop-blur-md px-3 py-1.5 text-[11px] font-bold text-white hover:bg-cyan-400 hover:text-slate-950 transition ring-1 ring-white/20 inline-flex items-center gap-1"
+            >
+              <MapPin className="h-3 w-3 text-cyan-400" />
+              <span>Maps</span>
+            </a>
+          </div>
+
+          <div className="relative z-10 space-y-3 pt-40">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-cyan-400 block">
+              "{SITE_CONFIG.clinicTagline}"
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              Odontología sin dolor, empática y con resultados reales.
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              En nuestro centro de <strong>Fortune Plaza · Torre Alemania</strong> cuidamos cada detalle para que te sientas en calma desde el primer minuto.
+            </p>
+            <button
+              type="button"
+              onClick={() => onOpenBooking('dental-check-integral')}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-slate-950 hover:from-cyan-300 hover:to-cyan-400 transition shadow-lg shadow-cyan-500/25 cursor-pointer"
+            >
+              <span>Agendar Dental Check Integral</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Right: High-Tech Looping Clinical Video Reel Card (5 cols) */}
-      <div className="lg:col-span-5 relative overflow-hidden rounded-[2.25rem] bg-slate-900 text-white shadow-[0_24px_70px_-15px_rgba(6,182,212,0.25)] ring-1 ring-cyan-500/25 min-h-[420px] flex flex-col justify-between p-6 sm:p-8">
-        <video
-          src={MEDIA_ASSETS.digitalScanVideoLoop}
-          poster={MEDIA_ASSETS.doctorConsultationPhoto}
-          autoPlay
-          loop
-          muted={muted}
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-55"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/55 to-slate-950/30" />
-
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="inline-flex items-center gap-2 rounded-full bg-cyan-400/20 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/35">
-            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-            <span>VIDEO · DIAGNÓSTICO DIGITAL</span>
-          </span>
-
-          <button
-            type="button"
-            onClick={() => setMuted(!muted)}
-            className="rounded-full bg-slate-950/70 backdrop-blur-md p-2.5 text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition cursor-pointer ring-1 ring-white/15"
-            aria-label="Alternar audio"
+      {/* Real Clinic Photo Strip from Google Maps (Fortune Plaza, Consultorio, Diplomas, Dra. Pame) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          {
+            src: MEDIA_ASSETS.draPameCyanScrubs,
+            tag: 'Recepción Dental Check',
+            label: 'Dra. Pamela Pazmiño',
+          },
+          {
+            src: MEDIA_ASSETS.draPameClinicalUnit,
+            tag: 'Equipamiento Moderno',
+            label: 'Unidad Clínica Dental Check',
+          },
+          {
+            src: MEDIA_ASSETS.draPameDiplomas,
+            tag: 'Especialista & Docente UDLA',
+            label: 'Respaldo Académico',
+          },
+          {
+            src: MEDIA_ASSETS.fortunePlazaBuilding,
+            tag: 'Av. Eloy Alfaro y Alemania',
+            label: 'Edificio Fortune Plaza · Torre Alemania',
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="group relative overflow-hidden rounded-3xl bg-slate-950 aspect-[4/3] ring-1 ring-slate-200/80 shadow-md"
           >
-            {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-        </div>
-
-        <div className="relative z-10 space-y-4 pt-24">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-cyan-400 block">
-            Tecnología & Evidencia · Dental Check UIO
-          </span>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-            Diagnóstico visual claro antes de cualquier tratamiento.
-          </h3>
-          <p className="text-xs sm:text-sm text-cyan-50/90 leading-relaxed">
-            Evaluamos tu articulación (ATM), encías y oclusión con fotografía clínica y análisis funcional en Quito.
-          </p>
-          <button
-            type="button"
-            onClick={() => onOpenBooking('dental-check-integral')}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-slate-950 hover:from-cyan-300 hover:to-cyan-400 transition shadow-lg shadow-cyan-500/25 cursor-pointer"
-          >
-            <span>Agendar Dental Check Integral</span>
-          </button>
-        </div>
+            <img
+              src={item.src}
+              alt={item.label}
+              className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+            <div className="absolute bottom-3 inset-x-3 text-white">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-cyan-400 block">
+                {item.tag}
+              </span>
+              <p className="text-xs sm:text-sm font-bold leading-snug">{item.label}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -908,57 +1139,44 @@ export const MinimalistAuthorityShowcase: React.FC = () => {
       <div className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-gradient-to-tr from-cyan-400/25 via-sky-300/15 to-transparent blur-2xl" />
 
       <div className="relative grid grid-cols-1 sm:grid-cols-12 gap-4">
-        {/* Main Real Broadcast Thumbnail / Portrait Card (7 cols) */}
-        <div className="sm:col-span-7 relative overflow-hidden rounded-[2rem] bg-slate-900 min-h-[380px] shadow-xl ring-1 ring-cyan-500/25 group">
+        {/* Main Portrait: Dra. Pamela Pazmiño with her University & Specialty Diplomas (7 cols) */}
+        <div className="sm:col-span-7 relative overflow-hidden rounded-[2rem] bg-slate-950 min-h-[400px] shadow-xl ring-1 ring-cyan-500/25 group">
           <img
-            src={SONORAMA_YOUTUBE_VIDEOS[0].thumbnailUrl}
-            alt="Dra. Pamela Pazmiño en Sonorama Vital"
-            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+            src={MEDIA_ASSETS.draPameDiplomas}
+            alt="Dra. Pamela Pazmiño junto a sus títulos de especialidad en Dental Check UIO"
+            className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent" />
-          <a
-            href={SONORAMA_YOUTUBE_VIDEOS[0].youtubeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 flex items-center justify-center"
-            aria-label="Ver Sonorama Vital con Pamela Pazmiño en YouTube"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cyan-400/90 text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.8)] group-hover:scale-110 transition-transform">
-              <Play className="h-6 w-6 fill-current ml-0.5" />
-            </div>
-          </a>
-          <div className="absolute bottom-4 inset-x-4 rounded-2xl bg-slate-950/85 backdrop-blur-xl p-4 ring-1 ring-cyan-400/30 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent" />
+          <div className="absolute bottom-4 inset-x-4 rounded-2xl bg-slate-950/90 backdrop-blur-xl p-4 ring-1 ring-cyan-400/35 text-white">
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400">
-              Sonorama Vital · Radio Sonorama & Dental Check
+              Especialista en Rehabilitación Oral · ATM Integral
             </span>
             <p className="text-sm font-bold mt-0.5">
-              Dra. Pamela Pazmiño: Ciencia clínica y divulgación en salud
+              Dra. Eliana Pamela Pazmiño Troncoso · Directora Dental Check UIO
             </p>
           </div>
         </div>
 
-        {/* Right Stack: Looping Video + UDLA Science Metric Card (5 cols) */}
+        {/* Right Stack: Real Clinical Suite Photo + UDLA Science Card (5 cols) */}
         <div className="sm:col-span-5 flex flex-col gap-4">
-          <div className="relative flex-1 overflow-hidden rounded-[2rem] bg-slate-950 min-h-[190px] ring-1 ring-cyan-500/25">
-            <video
-              src={MEDIA_ASSETS.clinicVideoLoop}
-              poster={MEDIA_ASSETS.doctorConsultationPhoto}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="h-full w-full object-cover opacity-80"
+          <div className="relative flex-1 overflow-hidden rounded-[2rem] bg-slate-950 min-h-[210px] ring-1 ring-cyan-500/25 group">
+            <img
+              src={MEDIA_ASSETS.draPameClinicalUnit}
+              alt="Dra. Pamela Pazmiño en el consultorio Dental Check UIO"
+              className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
             <div className="absolute bottom-3 left-3 right-3 text-white">
-              <span className="inline-block rounded-full bg-cyan-500/30 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-cyan-200">
+              <span className="inline-block rounded-full bg-cyan-400 px-2.5 py-0.5 text-[10px] font-extrabold text-slate-950">
                 Dental Check UIO
               </span>
-              <p className="text-xs font-bold mt-1">Tecnología y precisión clínica</p>
+              <p className="text-xs font-bold mt-1">Tecnología y precisión clínica sin dolor</p>
             </div>
           </div>
 
-          <div className="rounded-[2rem] bg-gradient-to-br from-cyan-500 to-sky-600 p-5 text-white shadow-lg shadow-cyan-500/20 space-y-2">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-cyan-500 to-sky-600 p-5 pl-7 text-white shadow-lg shadow-cyan-500/20 space-y-2">
+            {/* Architectural Vertical Wooden Slat Side Strip */}
+            <div className="absolute inset-y-0 left-0 w-3 bg-wood-slats" />
             <div className="flex items-center justify-between">
               <GraduationCap className="h-6 w-6 text-cyan-100" />
               <span className="text-[10px] font-extrabold uppercase tracking-widest bg-white/20 px-2.5 py-0.5 rounded-full">
@@ -982,36 +1200,36 @@ export const SpecialtyVisualIllustration: React.FC<{
   type: 'atm' | 'bruxism' | 'rehab' | 'esthetic' | 'dentalcheck';
 }> = ({ type }) => {
   const imageByType = {
-    atm: MEDIA_ASSETS.digitalDentistryPhoto,
-    bruxism: MEDIA_ASSETS.jawHarmonyPhoto,
-    rehab: MEDIA_ASSETS.biomimeticCeramicsPhoto,
-    esthetic: MEDIA_ASSETS.naturalSmileAfter,
-    dentalcheck: MEDIA_ASSETS.clinicHighTechPhoto,
+    atm: MEDIA_ASSETS.realCadCamSplint3D,
+    bruxism: MEDIA_ASSETS.draPameClinicalUnit,
+    rehab: MEDIA_ASSETS.realBiomimeticVeneers,
+    esthetic: MEDIA_ASSETS.realBeforeAfterSmile,
+    dentalcheck: MEDIA_ASSETS.draPameCyanScrubs,
   };
 
   return (
     <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-50 via-sky-50/70 to-white p-5 sm:p-6 ring-1 ring-cyan-500/20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-        <div className="lg:col-span-4 relative h-44 sm:h-48 overflow-hidden rounded-2xl ring-1 ring-cyan-500/20">
+        <div className="lg:col-span-4 relative h-48 sm:h-52 overflow-hidden rounded-2xl ring-1 ring-cyan-500/20 bg-slate-950">
           <img
             src={imageByType[type]}
             alt={type}
-            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+            className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent" />
           <span className="absolute bottom-3 left-3 rounded-full bg-cyan-400 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-950">
-            {type === 'atm' && 'ATM Integral · 3D'}
-            {type === 'bruxism' && 'Protección Neuromuscular'}
-            {type === 'rehab' && 'Cerámica Biomimética'}
-            {type === 'esthetic' && 'Sonrisa Natural'}
-            {type === 'dentalcheck' && 'Dental Check UIO'}
+            {type === 'atm' && 'Férula Digital 3D Real'}
+            {type === 'bruxism' && 'Consultorio Dental Check'}
+            {type === 'rehab' && 'Cerámica Biomimética Real'}
+            {type === 'esthetic' && 'Caso Real Antes y Después'}
+            {type === 'dentalcheck' && 'Dra. Pamela Pazmiño'}
           </span>
         </div>
 
         <div className="lg:col-span-8 space-y-3">
           <div className="flex items-center justify-between border-b border-cyan-500/15 pb-2.5">
             <span className="text-xs uppercase tracking-widest text-cyan-700 font-extrabold">
-              {type === 'atm' && 'Eje Biomecánico · ATM Integral'}
+              {type === 'atm' && 'Eje Biomecánico · ATM Integral & CAD/CAM 3D'}
               {type === 'bruxism' && 'Neurofisiología y Protección Oclusal'}
               {type === 'rehab' && 'Adhesión Biomimética Conservadora'}
               {type === 'esthetic' && 'Armonía Natural y Translucidez'}
@@ -1035,9 +1253,9 @@ export const SpecialtyVisualIllustration: React.FC<{
                 </p>
               </div>
               <div className="rounded-2xl bg-white p-3.5 shadow-2xs ring-1 ring-cyan-500/10">
-                <p className="font-bold text-cyan-700 mb-1">03 · Férula Calibrada</p>
+                <p className="font-bold text-cyan-700 mb-1">03 · Férula Digital 3D</p>
                 <p className="text-slate-600 leading-relaxed">
-                  Desprogramación neuromuscular y férulas estabilizadoras rígidas en céntrica.
+                  Desprogramación neuromuscular y férulas estabilizadoras rígidas diseñadas en 3D.
                 </p>
               </div>
             </div>
@@ -1107,7 +1325,7 @@ export const SpecialtyVisualIllustration: React.FC<{
                 <span>Centro Odontológico Dental Check UIO (@dentalcheck.uio)</span>
               </div>
               <p className="text-slate-600 leading-relaxed">
-                Valoración preventiva integral antes de ortodoncia, profilaxis ultrasónica, periodoncia, endodoncia y cirugía oral en Av. La Coruña y Francisco de Orellana.
+                Valoración preventiva integral antes de ortodoncia, profilaxis ultrasónica, periodoncia, endodoncia y cirugía oral en Edificio Fortune Plaza · Torre Alemania (Av. Eloy Alfaro y Alemania).
               </p>
             </div>
           )}

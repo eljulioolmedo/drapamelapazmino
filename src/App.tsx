@@ -20,10 +20,36 @@ const ScrollToTopAndHash: React.FC = () => {
       const el = document.getElementById(id);
       if (el) {
         setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 80);
-        return;
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Attach smooth scroll-reveal animations to sections & articles on route change
+    const targets = Array.from(document.querySelectorAll('main section, main article'));
+    targets.forEach((el, index) => {
+      if (index === 0) {
+        el.classList.remove('scroll-reveal');
+        el.classList.add('is-visible');
+      } else {
+        el.classList.add('scroll-reveal');
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, [pathname, hash]);
 
   return null;

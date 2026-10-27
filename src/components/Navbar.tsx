@@ -25,10 +25,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking, onOpenQuiz }) => 
       <div className="mx-auto max-w-7xl">
         {/* Floating Minimalist Glass Pill Header */}
         <div className="rounded-full bg-white/85 backdrop-blur-2xl px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-4 shadow-[0_8px_32px_-8px_rgba(6,182,212,0.14)] ring-1 ring-cyan-500/15">
-          {/* Minimalist Cyan Brand Identity */}
+          {/* Minimalist Cyan + Architectural Wood-Slat Brand Identity */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-extrabold text-sm tracking-tight shadow-md shadow-cyan-500/25 group-hover:scale-105 transition-transform">
-              PP
+            <div className="relative flex items-center">
+              <span
+                className="h-9 w-2 rounded-l-xl bg-wood-slats mr-0.5 hidden sm:block"
+                aria-hidden="true"
+                title="Arquitectura Dental Check UIO"
+              />
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-extrabold text-sm tracking-tight shadow-md shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+                PP
+              </div>
             </div>
             <div>
               <span className="block text-base sm:text-lg font-extrabold text-slate-900 leading-none tracking-tight">

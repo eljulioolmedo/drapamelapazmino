@@ -19,7 +19,7 @@
   }
 }
 
-/* Vite-inspired High-Tech Animations */
+/* Vite-inspired High-Tech & Subtle Modern Animations */
 @keyframes pulseGlow {
   0%, 100% {
     opacity: 0.45;
@@ -36,7 +36,7 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
 }
 
@@ -61,12 +61,12 @@
   }
 }
 
-@keyframes scanline {
+@keyframes progressFill {
   0% {
-    transform: translateY(-100%);
+    width: 0%;
   }
   100% {
-    transform: translateY(400%);
+    width: 100%;
   }
 }
 
@@ -75,7 +75,7 @@
 }
 
 .animate-float-smooth {
-  animation: floatSmooth 6s ease-in-out infinite;
+  animation: floatSmooth 5.5s ease-in-out infinite;
 }
 
 .animate-marquee {
@@ -93,12 +93,28 @@
   animation: cyanBeam 6s ease infinite;
 }
 
-.animate-scanline {
-  animation: scanline 4.5s linear infinite;
+.animate-progress-bar {
+  animation: progressFill 4.8s linear infinite;
+}
+
+/* Scroll-Reveal Animation Classes (smooth modern entrance on scroll) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.988);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* Subtle Vite grid pattern */
 .bg-vite-grid {
+  background-color: #f8fafc;
   background-size: 40px 40px;
   background-image: 
     linear-gradient(to right, rgba(6, 182, 212, 0.07) 1px, transparent 1px),
@@ -106,10 +122,44 @@
 }
 
 .bg-vite-grid-dark {
-  background-size: 36px 36px;
+  background-color: #020617;
+  background-size: 36px 36px, 36px 36px, 100% 100%;
   background-image: 
     linear-gradient(to right, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(34, 211, 238, 0.08) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, #083344 0%, #0f172a 45%, #020617 100%);
+}
+
+/*
+ * Signature Dental Check UIO Architectural Vertical Wooden Slats (Listones de Madera)
+ * Inspired by the warm vertical wood-slat walls in Dra. Pamela Pazmiño's clinic.
+ */
+.bg-wood-slats {
+  background-color: #b8743b;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      #d4955a 0px,
+      #c68246 4px,
+      #b26d33 9px,
+      #784318 10px,
+      #593010 12px,
+      #c9874d 13px
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.18) 100%);
+  box-shadow: inset 0 0 12px rgba(45, 22, 6, 0.35);
+}
+
+.bg-wood-slats-soft {
+  background-color: #f5ebe1;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(198, 130, 70, 0.18) 0px,
+    rgba(198, 130, 70, 0.26) 6px,
+    rgba(120, 67, 24, 0.34) 8px,
+    rgba(255, 255, 255, 0.6) 9px,
+    rgba(212, 149, 90, 0.14) 14px
+  );
 }
 
 /* Minimalist custom scrollbar */

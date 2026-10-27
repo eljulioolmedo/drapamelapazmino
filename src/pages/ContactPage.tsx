@@ -99,7 +99,7 @@ export const ContactPage: React.FC = () => {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Ej. 099 189 7077"
+                    placeholder="Ej. 096 042 4887"
                     className="w-full rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-900 ring-1 ring-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
                   />
                 </div>
@@ -197,20 +197,15 @@ export const ContactPage: React.FC = () => {
                 <div className="flex items-start gap-3">
                   <Phone className="h-5 w-5 text-cyan-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-bold text-white">Teléfonos:</p>
+                    <p className="font-bold text-white">WhatsApp Directo:</p>
                     <p>
-                      WhatsApp:{' '}
                       <a
                         href={`https://wa.me/${SITE_CONFIG.whatsappNumberClean}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-cyan-400 font-bold hover:underline"
                       >
-                        {SITE_CONFIG.whatsappDisplay}
-                      </a>
-                    </p>
-                    <p>
-                      Fijo:{' '}
-                      <a href={`tel:${SITE_CONFIG.landlineClean}`} className="text-cyan-400 font-bold hover:underline">
-                        {SITE_CONFIG.landlineDisplay}
+                        {SITE_CONFIG.whatsappDisplay} ({SITE_CONFIG.whatsappInternational})
                       </a>
                     </p>
                   </div>
@@ -265,7 +260,7 @@ export const ContactPage: React.FC = () => {
               <div className="p-4 border-b border-slate-100 flex items-center justify-between text-xs">
                 <span className="font-bold text-slate-900 flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-cyan-500" />
-                  Av. La Coruña y Fco. de Orellana, Quito
+                  Av. Eloy Alfaro esq. y Alemania · Fortune Plaza (Torre Alemania)
                 </span>
                 <a
                   href={SITE_CONFIG.address.googleMapsShareUrl}

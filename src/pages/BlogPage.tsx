@@ -144,7 +144,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({ onOpenBooking, onOpenGuide, 
                 ¿Te identificas con este artículo?
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Agenda una valoración de <strong>{relatedSpec.title}</strong> con la Dra. Pamela Pazmiño en Av. La Coruña y Francisco de Orellana.
+                Agenda una valoración de <strong>{relatedSpec.title}</strong> con la Dra. Pamela Pazmiño en Dental Check UIO ({SITE_CONFIG.address.street}).
               </p>
             </div>
 

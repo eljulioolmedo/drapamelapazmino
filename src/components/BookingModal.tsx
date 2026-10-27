@@ -45,7 +45,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       `• *Horario preferido:* ${preferredSchedule}`,
       symptomsNote.trim() ? `• *Consulta:* ${symptomsNote.trim()}` : null,
       ``,
-      `Quedo atento/a a la disponibilidad en Av. La Coruña y Francisco de Orellana. ¡Muchas gracias!`,
+      `Quedo atento/a a la disponibilidad en Dental Check UIO (Av. Eloy Alfaro esq. y Alemania · Edificio Fortune Plaza, Torre Alemania). ¡Muchas gracias!`,
     ].filter(Boolean);
 
     return lines.join('\n');
@@ -208,9 +208,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="flex items-center gap-1.5">
               <Phone className="h-3.5 w-3.5 text-cyan-600" />
               <span>
-                Fijo:{' '}
-                <a href={`tel:${SITE_CONFIG.landlineClean}`} className="font-bold text-slate-800 hover:text-cyan-600">
-                  {SITE_CONFIG.landlineDisplay}
+                WhatsApp:{' '}
+                <a
+                  href={`https://wa.me/${SITE_CONFIG.whatsappNumberClean}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-slate-800 hover:text-cyan-600"
+                >
+                  {SITE_CONFIG.whatsappDisplay}
                 </a>
               </span>
             </div>
@@ -221,7 +226,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               className="inline-flex items-center gap-1 font-bold text-cyan-600 hover:underline"
             >
               <MapPin className="h-3.5 w-3.5" />
-              <span>Av. La Coruña y Fco. de Orellana, Quito</span>
+              <span>Av. Eloy Alfaro y Alemania (Fortune Plaza)</span>
             </a>
           </div>
         </form>

@@ -12,8 +12,9 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenGuide }) => {
   return (
     <footer className="relative overflow-hidden bg-slate-950 text-slate-300 pt-20 pb-14">
-      {/* Subtle Top Cyan Glow Line */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+      {/* Signature Architectural Wooden Slats + Cyan Glow Top Bar */}
+      <div className="absolute top-0 inset-x-0 h-2.5 bg-wood-slats opacity-90" />
+      <div className="absolute top-2.5 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent" />
       <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-64 w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -151,12 +152,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenGuide }) =>
               <div className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-cyan-400 shrink-0" />
                 <div>
-                  <a href={`https://wa.me/${SITE_CONFIG.whatsappNumberClean}`} className="text-white hover:text-cyan-300 font-semibold">
-                    {SITE_CONFIG.whatsappDisplay}
-                  </a>
-                  {' · '}
-                  <a href={`tel:${SITE_CONFIG.landlineClean}`} className="hover:text-cyan-300">
-                    {SITE_CONFIG.landlineDisplay}
+                  <a
+                    href={`https://wa.me/${SITE_CONFIG.whatsappNumberClean}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-cyan-300 font-semibold"
+                  >
+                    WhatsApp: {SITE_CONFIG.whatsappDisplay}
                   </a>
                 </div>
               </div>

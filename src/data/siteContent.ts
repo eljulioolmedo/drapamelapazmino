@@ -187,30 +187,95 @@ export const SONORAMA_YOUTUBE_VIDEOS: SonoramaVideoItem[] = [
   },
 ];
 
+export const CLINIC_REAL_PHOTOS = [
+  {
+    id: 'dra-pame-cyan',
+    src: '/images/clinic/dentalcheck-03.jpg',
+    badge: 'Directora Clínica · Dental Check',
+    title: 'Dra. Pamela Pazmiño en Dental Check UIO',
+    caption: 'Especialista en Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial.',
+  },
+  {
+    id: 'dra-pame-diplomas',
+    src: '/images/clinic/dentalcheck-08.jpg',
+    badge: 'Excelencia Académica · UDLA',
+    title: 'Formación de Posgrado, Docencia e Investigación',
+    caption: 'Trayectoria académica respaldada por publicaciones científicas internacionales y docencia universitaria.',
+  },
+  {
+    id: 'dra-pame-patient',
+    src: '/images/clinic/dentalcheck-10.jpg',
+    badge: 'Nuestro mejor proyecto, Tu sonrisa',
+    title: 'Atención Empática y Sin Dolor',
+    caption: 'Acompañamiento personalizado y resultados que devuelven la confianza al sonreír.',
+  },
+  {
+    id: 'dra-pame-chair',
+    src: '/images/clinic/dentalcheck-02.jpg',
+    badge: 'Tecnología & Bioseguridad',
+    title: 'Consultorio Clínico Dental Check',
+    caption: 'Equipamiento moderno para diagnóstico de ATM, rehabilitación oral y estética dental.',
+  },
+  {
+    id: 'cadcam-splint-3d',
+    src: '/images/clinic/dentalcheck-06.jpg',
+    badge: 'ATM Integral · CAD/CAM 3D',
+    title: 'Diseño Digital 3D de Férula Oclusal',
+    caption: 'Planificación tridimensional de dispositivos oclusales rígidos para bruxismo y descompresión articular.',
+  },
+  {
+    id: 'smile-before-after',
+    src: '/images/clinic/dentalcheck-05.jpg',
+    badge: 'Caso Clínico Real · Antes y Después',
+    title: 'Diseño de Sonrisa Natural y Biomimética',
+    caption: 'Armonía estética respetando la anatomía, translucidez y biología de tus dientes.',
+  },
+  {
+    id: 'biomimetic-veneers',
+    src: '/images/clinic/dentalcheck-07.jpg',
+    badge: 'Laboratorio de Alta Precisión',
+    title: 'Laminados e Incrustaciones Cerámicas',
+    caption: 'Microtextura y translucidez incisal que imitan a la perfección el esmalte dental natural.',
+  },
+  {
+    id: 'rehab-prosthesis',
+    src: '/images/clinic/dentalcheck-04.jpg',
+    badge: 'Rehabilitación Oral Integral',
+    title: 'Caracterización Gingival y Dental Biomimética',
+    caption: 'Recuperación funcional y estética de alta complejidad.',
+  },
+  {
+    id: 'fortune-plaza-building',
+    src: '/images/clinic/dentalcheck-01.jpg',
+    badge: 'Ubicación en Quito · Fortune Plaza',
+    title: 'Edificio Fortune Plaza · Torre Alemania',
+    caption: 'Av. Eloy Alfaro y Alemania (Sector La Pradera / Iñaquito), Quito.',
+  },
+];
+
 export const SITE_CONFIG = {
   doctorName: 'Dra. Pamela Pazmiño',
   doctorFullName: 'Dra. Eliana Pamela Pazmiño Troncoso',
   doctorTitle: 'Especialista en Rehabilitación Oral · ATM Integral, Bruxismo y Dolor Orofacial',
   academicRole: 'Docente Universitaria e Investigadora Científica (UDLA)',
   clinicName: 'Dental Check UIO',
+  clinicTagline: 'Nuestro mejor proyecto, Tu sonrisa',
   domain: 'drapamelapazmino.com',
-  whatsappNumberClean: '593991897077',
-  whatsappDisplay: '099 189 7077',
-  whatsappInternational: '+593 99 189 7077',
-  landlineDisplay: '(02) 515 1868',
-  landlineClean: '+59325151868',
+  whatsappNumberClean: '593960424887',
+  whatsappDisplay: '096 042 4887',
+  whatsappInternational: '+593 96 042 4887',
   email: 'consultas@drapamelapazmino.com',
   address: {
-    street: 'Av. La Coruña y Francisco de Orellana',
-    sector: 'Sector Iñaquito / La Floresta',
+    street: 'Av. Eloy Alfaro esq. y Alemania · Edificio Fortune Plaza (Torre Alemania)',
+    sector: 'Sector La Pradera · 170519 Quito',
     city: 'Quito, Ecuador',
-    reference: 'Zona médica y financiera del centro-norte de Quito, fácil acceso y parqueo cercano',
-    googleMapsShareUrl: 'https://share.google/CnvzdeUfDjMqICTIm',
-    googleMapsEmbedQuery: 'https://www.google.com/maps?q=Av.+La+Coru%C3%B1a+y+Francisco+de+Orellana,+Quito,+Ecuador&output=embed',
+    reference: 'Edificio Fortune Plaza · Torre Alemania (Av. Eloy Alfaro y Alemania), con parqueadero y accesibilidad universal',
+    googleMapsShareUrl: 'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
+    googleMapsEmbedQuery: 'https://www.google.com/maps?q=-0.1935118,-78.4915978&hl=es&z=17&output=embed',
   },
   hours: {
-    weekdays: 'Lunes a Viernes: 09h00 a 19h00',
-    saturdays: 'Sábados: 09h00 a 14h00 (Previa cita)',
+    weekdays: 'Lunes a Viernes: 08h30 a 19h00',
+    saturdays: 'Sábados: 08h30 a 17h00 (Previa cita)',
     note: 'Atención personalizada bajo agenda previa para garantizar el tiempo clínico que cada paciente merece.',
   },
   social: {
@@ -222,17 +287,16 @@ export const SITE_CONFIG = {
     instagramClinic: {
       handle: '@dentalcheck.uio',
       url: 'https://www.instagram.com/dentalcheck.uio/',
-      description: 'Centro Odontológico Integral Dental Check en Quito: prevención, diagnóstico seguro y especialidades.',
+      description: 'Centro Odontológico Integral Dental Check en Quito: "Nuestro mejor proyecto, Tu sonrisa".',
     },
     googleProfile: {
-      label: 'Ubicación y Reseñas en Google',
-      url: 'https://share.google/CnvzdeUfDjMqICTIm',
+      label: 'Ubicación y 36+ Reseñas 5★ en Google Maps',
+      url: 'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
     },
   },
-  // Easy-to-replace image paths: drop real photos into public/images/ and update paths here if desired
   images: {
-    doctorPortraitLocal: '/images/dra-pamela-pazmino.jpg',
-    clinicPhotoLocal: '/images/dental-check-uio.jpg',
+    doctorPortraitLocal: '/images/clinic/dentalcheck-03.jpg',
+    clinicPhotoLocal: '/images/clinic/dentalcheck-02.jpg',
   },
 };
 
@@ -458,9 +522,9 @@ export const SPECIALTIES: SpecialtyItem[] = [
     title: 'Odontología Integral y Preventiva — Dental Check UIO',
     subtitle: 'Tu centro de salud oral en Quito: diagnóstico completo y especialidades coordinadas',
     shortDescription:
-      'En Dental Check UIO (Av. La Coruña y Francisco de Orellana) realizamos valoraciones diagnósticas integrales, prevención periodontal y tratamientos interdisciplinarios seguros.',
+      'En Dental Check UIO (Av. Eloy Alfaro esq. y Alemania · Edificio Fortune Plaza, Torre Alemania) realizamos valoraciones diagnósticas integrales, prevención periodontal y tratamientos interdisciplinarios seguros.',
     fullDescription:
-      'Bajo la dirección clínica de la Dra. Pamela Pazmiño, Dental Check UIO nace con una misión clara: transformar la visita al odontólogo en una experiencia tranquila, transparente y preventiva. Sabemos que ningún tratamiento complejo (como ortodoncia, implantes o estética) debe iniciarse sin antes garantizar encías sanas, ausencia de infecciones y una articulación temporomandibular estable. En nuestro centro en el sector Iñaquito reunimos tecnología diagnóstica y especialistas coordinados en cada área.',
+      'Bajo la dirección clínica de la Dra. Pamela Pazmiño, Dental Check UIO nace con una misión clara: transformar la visita al odontólogo en una experiencia tranquila, transparente y preventiva. Sabemos que ningún tratamiento complejo (como ortodoncia, implantes o estética) debe iniciarse sin antes garantizar encías sanas, ausencia de infecciones y una articulación temporomandibular estable. En nuestro centro en el sector La Pradera (Edificio Fortune Plaza · Torre Alemania) reunimos tecnología diagnóstica y especialistas coordinados en cada área.',
     iconName: 'Stethoscope',
     brandTag: 'Dental Check UIO · Especialidades',
     symptomsToWatch: [
@@ -488,7 +552,7 @@ export const SPECIALTIES: SpecialtyItem[] = [
       },
     ],
     clinicalBenefit: 'Diagnósticos honestos y tratamientos interdisciplinarios coordinados en un solo lugar en el norte de Quito.',
-    durationOrFormat: 'Citas puntuales en Av. La Coruña y Francisco de Orellana, Quito',
+    durationOrFormat: 'Citas puntuales en Av. Eloy Alfaro esq. y Alemania (Fortune Plaza · Torre Alemania), Quito',
     imageSvgType: 'dentalcheck',
   },
 ];
@@ -518,7 +582,7 @@ export const CREDENTIALS_LIST = [
   {
     category: 'Dirección Clínica',
     title: 'Directora Clínica en Dental Check UIO',
-    institution: '@dentalcheck.uio · Av. La Coruña y Francisco de Orellana, Quito',
+    institution: '@dentalcheck.uio · Av. Eloy Alfaro esq. y Alemania (Fortune Plaza · Torre Alemania), Quito',
     description:
       'Lidera un modelo de atención odontológica preventiva, ética y multidisciplinaria donde cada paciente comprende su diagnóstico antes de cualquier procedimiento.',
   },
@@ -846,43 +910,47 @@ export const INSTAGRAM_SHOWCASE = [
     id: 'ig-1',
     account: '@drapamelapazmino',
     accountUrl: 'https://www.instagram.com/drapamelapazmino/',
-    badge: 'ATM Integral & Bruxismo',
+    imageUrl: '/images/clinic/dentalcheck-06.jpg',
+    badge: 'ATM Integral & Bruxismo 3D',
     title: '¿Dolor de cabeza al despertar o chasquidos al abrir la boca?',
     caption:
-      'Tu articulación temporomandibular (ATM) y tu postura cervical están conectadas. Descubre por qué una valoración integral a tiempo evita el desgaste severo.',
-    format: 'Reel Educativo',
+      'Tu articulación temporomandibular (ATM) y tu postura cervical están conectadas. Planificamos férulas oclusales digitales 3D calibradas para tu caso.',
+    format: 'Diagnóstico Digital 3D',
     likesLabel: 'Comunidad Salud Oral Quito',
   },
   {
     id: 'ig-2',
     account: '@drapamelapazmino',
     accountUrl: 'https://www.instagram.com/drapamelapazmino/',
-    badge: 'Rehabilitación y Estética Natural',
+    imageUrl: '/images/clinic/dentalcheck-05.jpg',
+    badge: 'Caso Real · Antes y Después',
     title: 'Diseño de Sonrisa Natural: Armonía que respeta tu biología',
     caption:
       'Resultados luminosos, translúcidos y conservadores. Devolvemos la anatomía perdida sin desgastar tejido dental sano.',
-    format: 'Caso Clínico & Filosofía',
+    format: 'Caso Clínico Real',
     likesLabel: 'Odontología Biomimética',
   },
   {
     id: 'ig-3',
     account: '@dentalcheck.uio',
     accountUrl: 'https://www.instagram.com/dentalcheck.uio/',
-    badge: 'Dental Check UIO · Prevención',
-    title: '¿Vas a iniciar Ortodoncia? Haz tu Dental Check primero',
+    imageUrl: '/images/clinic/dentalcheck-03.jpg',
+    badge: 'Dental Check UIO · Quito',
+    title: 'Dra. Pamela Pazmiño · "Nuestro mejor proyecto, Tu sonrisa"',
     caption:
-      'Antes de colocar brackets o alineadores, evaluamos encías, raíces y tu ATM en nuestro centro de la Av. La Coruña y Francisco de Orellana.',
-    format: 'Carrusel Clínico',
+      'Antes de colocar brackets, alineadores o carillas, evaluamos encías, raíces y tu ATM en nuestro centro de Fortune Plaza (Torre Alemania).',
+    format: 'Directora Clínica',
     likesLabel: 'Prevención Segura en Quito',
   },
   {
     id: 'ig-4',
     account: '@dentalcheck.uio',
     accountUrl: 'https://www.instagram.com/dentalcheck.uio/',
-    badge: 'Especialidades Coordinadas',
-    title: 'Bioseguridad, tecnología y calidez humana en cada consulta',
+    imageUrl: '/images/clinic/dentalcheck-10.jpg',
+    badge: 'Pacientes Felices · 5.0 ★',
+    title: 'Bioseguridad, tecnología y mano suave sin dolor en cada consulta',
     caption:
-      'Un equipo de especialistas liderado por la Dra. Pamela Pazmiño para cuidar la sonrisa de toda tu familia en el sector Iñaquito.',
+      'Un equipo de especialistas liderado por la Dra. Pamela Pazmiño para cuidar tu sonrisa con empatía y precisión clínica.',
     format: 'Experiencia en Clínica',
     likesLabel: 'Dental Check Quito',
   },
@@ -891,29 +959,47 @@ export const INSTAGRAM_SHOWCASE = [
 export const TESTIMONIALS = [
   {
     id: 't1',
-    name: 'María Fernanda V.',
-    role: 'Paciente de ATM Integral y Bruxismo · Quito',
+    name: 'Julio Olmedo',
+    role: 'Reseña Verificada en Google Maps · 5.0 ★',
     quote:
-      'Llegué con dolores de cabeza diarios, dolor de cuello y un chasquido en la mandíbula que no me dejaba comer tranquila. La Dra. Pamela Pazmiño me explicó con una claridad increíble lo que ocurría en mi ATM. Con mi férula calibrada y su protocolo integral, volví a dormir y despertar sin dolor.',
-    specialty: 'ATM Integral y Bruxismo',
+      'La Dra. Pame es muy profesional y minuciosa, tenía años sin ir al dentista por malas experiencias respecto al manejo del dolor, pero ella en verdad que tiene muy buena mano.',
+    specialty: 'Atención Sin Dolor · Dra. Pamela Pazmiño',
     rating: 5,
   },
   {
     id: 't2',
-    name: 'Carlos Andrés M.',
-    role: 'Paciente de Rehabilitación Oral · Quito',
+    name: 'Estefanía Bravo',
+    role: 'Reseña Verificada en Google Maps · 5.0 ★',
     quote:
-      'Tenía mucho desgaste en mis dientes por años de apretarlos en el trabajo y me daba miedo que me limaran los dientes sanos. La Dra. Pamela realizó una rehabilitación adhesiva súper conservadora; mis dientes recuperaron su forma natural y mi mordida se siente firme y cómoda.',
-    specialty: 'Rehabilitación Oral Biomimética',
+      'Muy buena atención, muy suave la mano de la doctora, sin dolor. Muy buena atención y muy chévere cómo te cuentan qué es lo que está pasando y te dan muchas opciones.',
+    specialty: 'Diagnóstico Claro y Empático',
     rating: 5,
   },
   {
     id: 't3',
-    name: 'Gabriela S.',
-    role: 'Paciente en Dental Check UIO · Sector La Coruña',
+    name: 'Selene López',
+    role: 'Reseña Verificada en Google Maps · 5.0 ★',
     quote:
-      'En Dental Check sientes paz desde que entras. Te dedican el tiempo necesario, te muestran con fotografías el estado real de tus dientes y coordinaron mi chequeo de ATM y profilaxis antes de empezar mi tratamiento estético. 100% recomendados en Quito.',
-    specialty: 'Valoración Dental Check & Estética Natural',
+      'La verdad es que me ha ido muy bien, la Dra. Pame siempre se asegura que no me sienta incómoda o me duela en cada uno de mis tratamientos, me gusta ir y sentirme sana con mis dientes. 🦷 Buena experiencia.',
+    specialty: 'Rehabilitación y Salud Oral Integral',
+    rating: 5,
+  },
+  {
+    id: 't4',
+    name: 'Santiago Zavala',
+    role: 'Reseña Verificada en Google Maps · 5.0 ★',
+    quote:
+      'Dental Check me devolvió la confianza y quitó la fobia que había desarrollado a visitar al dentista. Su personal es excelente, empático y muy profesional; sus equipos son modernos. Dental Check es referente en el área odontológica.',
+    specialty: 'Dental Check UIO · Quito',
+    rating: 5,
+  },
+  {
+    id: 't5',
+    name: 'Jairo Daniel',
+    role: 'Reseña Verificada en Google Maps · 5.0 ★',
+    quote:
+      'Excelente servicio, les recomiendo a la Doc. Pame y a su equipo de trabajo en Dental Check.',
+    specialty: 'Especialidades Odontológicas',
     rating: 5,
   },
 ];
@@ -932,7 +1018,7 @@ export const FAQS = [
   {
     question: '¿Dónde está ubicado el consultorio y cómo puedo llegar?',
     answer:
-      'Atendemos en nuestro centro odontológico Dental Check UIO, ubicado estratégicamente en el centro-norte de Quito: Av. La Coruña y Francisco de Orellana (Sector Iñaquito / La Floresta). Contamos con fácil acceso vehicular, transporte público y zonas de parqueo cercanas.',
+      'Atendemos en nuestro centro odontológico Dental Check UIO, ubicado en Av. Eloy Alfaro esq. y Alemania, Edificio Fortune Plaza (Torre Alemania), Sector La Pradera (170519 Quito). Contamos con fácil acceso vehicular, parqueadero y accesibilidad universal.',
   },
   {
     question: '¿En el Diseño de Sonrisa Natural es necesario desgastar mis dientes sanos?',

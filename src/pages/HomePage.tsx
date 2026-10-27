@@ -172,14 +172,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               'Bruxismo del Sueño y Vigilia',
               'Rehabilitación Oral Biomimética',
               'Diseño de Sonrisa Natural sin Desgaste',
-              'Dental Check UIO · Av. La Coruña',
+              'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
               'Sonorama Vital · Radio Sonorama Ecuador',
               'Investigación Científica UDLA · PubMed',
               'ATM Integral & Eje Cráneo-Cervical',
               'Bruxismo del Sueño y Vigilia',
               'Rehabilitación Oral Biomimética',
               'Diseño de Sonrisa Natural sin Desgaste',
-              'Dental Check UIO · Av. La Coruña',
+              'Dental Check UIO · Av. Eloy Alfaro y Alemania (Fortune Plaza)',
               'Sonorama Vital · Radio Sonorama Ecuador',
               'Investigación Científica UDLA · PubMed',
             ].map((item, idx) => (
@@ -222,8 +222,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
           {EMPATHY_SYMPTOMS.map((item, idx) => (
             <div
               key={item.id}
-              className="group relative overflow-hidden rounded-[2rem] bg-white hover:bg-gradient-to-br hover:from-cyan-50/90 hover:to-white p-7 transition-all duration-300 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] flex flex-col justify-between"
+              className="group relative overflow-hidden rounded-[2rem] bg-white hover:bg-gradient-to-br hover:from-cyan-50/90 hover:to-white p-7 pl-9 transition-all duration-300 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] flex flex-col justify-between"
             >
+              {/* Subtle Architectural Wood-Slat Vertical Accent */}
+              <div className="absolute inset-y-0 left-0 w-2.5 bg-wood-slats opacity-80 group-hover:opacity-100 transition-opacity" />
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-cyan-500/10 px-3.5 py-1 text-[11px] font-bold text-cyan-700">
@@ -260,8 +262,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
       {/* 5. BENTO GRID OF 5 CLINICAL SPECIALTIES */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.75rem] bg-gradient-to-b from-cyan-950 via-slate-900 to-slate-950 p-7 sm:p-12 lg:p-16 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.28)] relative overflow-hidden bg-vite-grid-dark">
+        <div className="rounded-[2.75rem] bg-slate-950 bg-vite-grid-dark p-7 sm:p-12 lg:p-16 text-white shadow-[0_32px_90px_-20px_rgba(6,182,212,0.35)] ring-1 ring-cyan-400/30 relative overflow-hidden">
+          {/* Signature Architectural Wooden Slats Top Trim */}
+          <div className="absolute top-0 inset-x-0 h-2.5 bg-wood-slats opacity-95" />
           <div className="pointer-events-none absolute -top-24 right-10 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 left-10 h-96 w-96 rounded-full bg-sky-500/15 blur-3xl" />
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl space-y-3">
@@ -275,7 +280,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
 
             <Link
               to="/especialidades"
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-xs font-bold text-white hover:bg-cyan-400 hover:text-slate-950 transition self-start"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-400/15 px-6 py-3 text-xs font-bold text-cyan-300 ring-1 ring-cyan-400/35 hover:bg-cyan-400 hover:text-slate-950 transition self-start"
             >
               <span>Ver protocolos detallados</span>
               <ArrowRight className="h-4 w-4" />
@@ -291,35 +296,35 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   key={spec.id}
                   className={`rounded-[2rem] p-7 flex flex-col justify-between transition-all ${
                     isFeatured
-                      ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-cyan-500/20 via-cyan-900/30 to-white/5 ring-1 ring-cyan-400/40'
-                      : 'bg-white/6 hover:bg-white/10 ring-1 ring-white/10 hover:ring-cyan-400/30'
+                      ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-cyan-950/95 via-slate-900/95 to-slate-900/90 ring-2 ring-cyan-400/50 shadow-[0_20px_50px_-15px_rgba(6,182,212,0.3)]'
+                      : 'bg-slate-900/90 hover:bg-slate-900 ring-1 ring-cyan-400/25 hover:ring-cyan-400/60 shadow-lg'
                   }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-[11px] font-bold text-cyan-300">
+                      <span className="rounded-full bg-cyan-400/20 px-3 py-1 text-[11px] font-bold text-cyan-300 ring-1 ring-cyan-400/30">
                         {spec.badge}
                       </span>
-                      <span className="text-[11px] text-cyan-100/60 font-medium">{spec.brandTag}</span>
+                      <span className="text-[11px] text-cyan-200/80 font-semibold">{spec.brandTag}</span>
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-500 text-slate-950 shadow-md shadow-cyan-500/25">
                         <IconComponent className="h-6 w-6" />
                       </div>
                       <div>
                         <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                           {spec.title}
                         </h3>
-                        <p className="text-xs text-cyan-300 font-medium mt-0.5">{spec.subtitle}</p>
+                        <p className="text-xs text-cyan-300 font-semibold mt-0.5">{spec.subtitle}</p>
                       </div>
                     </div>
 
-                    <p className="text-sm text-slate-300 leading-relaxed">{spec.shortDescription}</p>
+                    <p className="text-sm text-slate-200 leading-relaxed">{spec.shortDescription}</p>
 
-                    <div className="pt-2 space-y-1.5">
+                    <div className="pt-2 space-y-2">
                       {spec.procedures.slice(0, isFeatured ? 3 : 2).map((proc, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-cyan-100/90">
+                        <div key={i} className="flex items-center gap-2 text-xs text-cyan-100 font-medium">
                           <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                           <span>{proc.name}</span>
                         </div>
@@ -327,11 +332,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                     </div>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <div className="pt-6 mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => onOpenBooking(spec.id)}
-                      className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-xs font-extrabold text-slate-950 hover:bg-cyan-300 transition cursor-pointer shadow-md shadow-cyan-500/20"
                     >
                       <Calendar className="h-3.5 w-3.5" />
                       <span>Agendar cita</span>
@@ -485,7 +490,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               href={post.accountUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-[2rem] bg-white p-6 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.18)] transition-all flex flex-col justify-between"
+              className="group rounded-[2rem] bg-white p-5 ring-1 ring-slate-200/80 hover:ring-cyan-400 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.22)] transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs">
@@ -498,13 +503,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   </span>
                 </div>
 
-                <div className="rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-600 p-4 text-white">
-                  <span className="text-[10px] uppercase tracking-wider text-cyan-100 font-bold block">
-                    {post.badge}
-                  </span>
-                  <h3 className="text-base font-bold mt-1 leading-snug">
-                    {post.title}
-                  </h3>
+                <div className="relative h-48 w-full overflow-hidden rounded-2xl bg-slate-950 ring-1 ring-slate-100">
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
+                  <div className="absolute bottom-3 inset-x-3 text-white">
+                    <span className="text-[10px] uppercase tracking-wider text-cyan-300 font-extrabold block">
+                      {post.badge}
+                    </span>
+                    <h3 className="text-sm font-bold mt-0.5 leading-snug">
+                      {post.title}
+                    </h3>
+                  </div>
                 </div>
 
                 <p className="text-xs text-slate-600 leading-relaxed">{post.caption}</p>
@@ -519,29 +532,46 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
         </div>
       </section>
 
-      {/* 9. PATIENT TESTIMONIALS & BLOG PREVIEW */}
+      {/* 9. PATIENT TESTIMONIALS (REAL GOOGLE MAPS REVIEWS) & BLOG PREVIEW */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-20">
         <div>
-          <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
-              Experiencias Reales
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Historias de alivio articular y armonía dental
-            </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div className="space-y-2">
+              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-600">
+                36+ Reseñas Verificadas en Google Maps · 5.0 ★
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Lo que dicen nuestros pacientes sobre la Dra. Pame
+              </h2>
+            </div>
+            <a
+              href={SITE_CONFIG.address.googleMapsShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-5 py-2.5 text-xs font-bold text-cyan-700 hover:bg-cyan-100 transition self-start"
+            >
+              <Star className="h-3.5 w-3.5 fill-cyan-500 text-cyan-500" />
+              <span>Ver todas las reseñas en Google Maps</span>
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TESTIMONIALS.slice(0, 3).map((t) => (
               <div
                 key={t.id}
-                className="rounded-[2rem] bg-white p-7 shadow-xs ring-1 ring-cyan-500/15 flex flex-col justify-between space-y-5"
+                className="rounded-[2rem] bg-white p-7 shadow-xs ring-1 ring-cyan-500/15 hover:ring-cyan-400 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-15px_rgba(6,182,212,0.2)] transition-all duration-300 flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-3">
-                  <div className="flex items-center gap-1 text-cyan-500">
-                    {Array.from({ length: t.rating }).map((_, idx) => (
-                      <Star key={idx} className="h-4 w-4 fill-cyan-400" />
-                    ))}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-cyan-500">
+                      {Array.from({ length: t.rating }).map((_, idx) => (
+                        <Star key={idx} className="h-4 w-4 fill-cyan-400" />
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-cyan-600 bg-cyan-50 px-2.5 py-0.5 rounded-full">
+                      Google Maps
+                    </span>
                   </div>
                   <p className="text-sm text-slate-700 leading-relaxed">"{t.quote}"</p>
                 </div>
@@ -617,8 +647,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
               Agenda tu valoración con la Dra. Pamela Pazmiño
             </h2>
             <p className="text-sm sm:text-base text-cyan-50 leading-relaxed max-w-2xl">
-              Atención personalizada en el sector Iñaquito / La Coruña. WhatsApp directo{' '}
-              <strong>{SITE_CONFIG.whatsappDisplay}</strong> o teléfono fijo <strong>{SITE_CONFIG.landlineDisplay}</strong>.
+              Atención personalizada en <strong>Edificio Fortune Plaza · Torre Alemania</strong> (Av. Eloy Alfaro esq. y Alemania, Sector La Pradera). WhatsApp directo{' '}
+              <strong>{SITE_CONFIG.whatsappDisplay}</strong>.
             </p>
           </div>
 

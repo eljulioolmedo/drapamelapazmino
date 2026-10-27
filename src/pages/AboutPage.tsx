@@ -251,9 +251,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
               Ubicación y Contacto Directo
             </h3>
             <div className="space-y-2.5 text-xs sm:text-sm text-slate-300">
-              <p><strong className="text-white">Dirección:</strong> {SITE_CONFIG.address.street}, {SITE_CONFIG.address.sector}</p>
+              <p><strong className="text-white">Dirección:</strong> {SITE_CONFIG.address.street} ({SITE_CONFIG.address.sector})</p>
               <p><strong className="text-white">WhatsApp:</strong> {SITE_CONFIG.whatsappDisplay}</p>
-              <p><strong className="text-white">Teléfono Fijo:</strong> {SITE_CONFIG.landlineDisplay}</p>
               <p><strong className="text-white">Horario:</strong> {SITE_CONFIG.hours.weekdays}</p>
             </div>
             <button
