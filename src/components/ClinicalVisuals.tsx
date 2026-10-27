@@ -49,7 +49,7 @@ export const MEDIA_ASSETS = {
     'https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjg3fqLk9uXAxUAAAAAHQAAAAAQIA..i&fvr=1&pvq=Cg0vZy8xMW5uMGN3OXFf&cs=1&um=1&ie=UTF-8&fb=1&gl=ec&sa=X&ftid=0x91d5912ce4b1be17:0x46de3827080205ae',
 
   // Real downloaded photos & video from DentalCheck
-  heroAnimationLoopMp4: '/videos/hero-dental-check-loop.mp4',
+  heroAnimationLoopMp4: '/videos/Fix_video_logo_framing_8c50867c_1080p.mp4',
   dentalCheckLogo: '/images/clinic/dentalcheck-logo.png',
   dentalCheckIcon: '/images/clinic/dentalcheck-icon.png',
   heroDraPamela: '/images/clinic/hero-dra-pamela.jpg',
