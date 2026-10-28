@@ -167,7 +167,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
             <div className="lg:col-span-5 flex items-center justify-center order-first lg:order-last">
               <div className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_32px_90px_-15px_rgba(6,182,212,0.45)] ring-2 ring-cyan-400/70 animate-hero-right">
                 <video
-                  src="/videos/Fix_video_logo_framing_8c50867c_1080p.mp4"
+                  src="/videos/Odontologist_using_original_picture_f9bb1cb3.mp4"
                   poster="/images/clinic/hero-dra-pamela.jpg"
                   autoPlay
                   loop
