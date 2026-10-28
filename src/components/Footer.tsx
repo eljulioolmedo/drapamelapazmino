@@ -182,9 +182,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenGuide }) =>
           <p>
             © {new Date().getFullYear()} {SITE_CONFIG.doctorFullName} · {SITE_CONFIG.domain}
           </p>
-          <p>
-            Centro Clínico: <strong className="text-slate-300">{SITE_CONFIG.clinicName}</strong> ({SITE_CONFIG.social.instagramClinic.handle}) · Quito, Ecuador
-          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p>
+              Centro Clínico: <strong className="text-slate-300">{SITE_CONFIG.clinicName}</strong> ({SITE_CONFIG.social.instagramClinic.handle}) · Quito, Ecuador
+            </p>
+            <span className="text-slate-700">·</span>
+            <Link
+              to="/admin"
+              className="text-slate-600 hover:text-cyan-400 transition font-semibold"
+            >
+              Panel Admin
+            </Link>
+          </div>
         </div>
       </div>
 

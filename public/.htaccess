@@ -8,7 +8,10 @@ DirectoryIndex index.html
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Serve existing files or directories directly
+  # Block direct web access to private CMS auth/history storage
+  RewriteRule ^cms-data/ - [F,L]
+
+  # Serve existing files or directories directly (including /api/cms.php and /uploads/*)
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

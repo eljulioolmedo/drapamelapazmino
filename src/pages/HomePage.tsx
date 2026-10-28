@@ -35,6 +35,7 @@ import {
   InstagramIcon as Instagram,
 } from '../components/ClinicalVisuals';
 import { AtmQuizContent } from '../components/AtmQuizModal';
+import { useCms } from '../context/CmsContext';
 
 interface HomePageProps {
   onOpenBooking: (specialtyId?: string, note?: string) => void;
@@ -50,9 +51,11 @@ const iconMap = {
 };
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }) => {
+  const { cmsData } = useCms();
+  const { hero } = cmsData;
+
   return (
     <div className="space-y-28 pb-24">
-      {/* 1. FULL-BLEED CINEMATIC VIDEO HERO (UNBOXED REAL HERO STAGE) */}
       {/* 1. ENDLESS WOOD + CYAN GLASS HERO WITH 9:16 FULL-FRAME HERO VIDEO */}
       <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16">
         {/* Interactive 60fps Cyan Energy Beam & Bio-Node Canvas */}
@@ -71,21 +74,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                 />
                 <div className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-4 py-1.5 text-xs font-extrabold text-cyan-800 ring-1 ring-cyan-500/30">
                   <span className="h-2.5 w-2.5 rounded-full bg-cyan-500 animate-ping" />
-                  <span>ATM Integral · Rehabilitación · Bruxismo</span>
+                  <span>{hero.badge}</span>
                 </div>
               </div>
 
               <h1 className="animate-hero-up-2 text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-slate-900 leading-[1.06] tracking-tight">
-                Ciencia y tecnología para{' '}
+                {hero.titlePrefix}{' '}
                 <span className="bg-gradient-to-r from-cyan-500 via-cyan-400 to-sky-600 bg-clip-text text-transparent animate-cyan-beam">
-                  liberar tu ATM
+                  {hero.titleHighlight}
                 </span>{' '}
-                y rehabilitar tu sonrisa.
+                {hero.titleSuffix}
               </h1>
 
               <p className="animate-hero-up-3 text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl">
-                Soy la <strong className="text-slate-900 font-bold">{SITE_CONFIG.doctorFullName}</strong>, especialista en{' '}
-                <strong className="text-slate-900 font-bold">Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial</strong>, docente e investigadora universitaria (UDLA), directora clínica de <strong className="text-cyan-700 font-bold">Dental Check UIO</strong> y conductora de <strong className="text-cyan-700 font-bold">Sonorama Vital</strong>.
+                {hero.description}
               </p>
 
               {/* Floating Minimalist Capability Pills */}
@@ -117,7 +119,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   className="btn-shimmer inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 px-8 py-4 text-sm font-extrabold text-white shadow-[0_16px_40px_-8px_rgba(6,182,212,0.55)] hover:from-cyan-400 hover:to-cyan-500 hover:scale-[1.03] transition-all cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
-                  <span>Agendar Valoración en Quito</span>
+                  <span>{hero.primaryCtaText}</span>
                 </button>
 
                 <a
@@ -125,7 +127,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-4 text-sm font-bold text-white shadow-md hover:bg-cyan-600 hover:scale-[1.02] transition-all"
                 >
                   <Radio className="h-4 w-4 text-cyan-400" />
-                  <span>Videos Sonorama Vital</span>
+                  <span>{hero.secondaryCtaText}</span>
                 </a>
               </div>
 
@@ -167,8 +169,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking, onOpenGuide }
             <div className="lg:col-span-5 flex items-center justify-center order-first lg:order-last">
               <div className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_32px_90px_-15px_rgba(6,182,212,0.45)] ring-2 ring-cyan-400/70 animate-hero-right">
                 <video
-                  src="/videos/Odontologist_using_original_picture_f9bb1cb3.mp4"
-                  poster="/images/clinic/hero-dra-pamela.jpg"
+                  key={hero.videoUrl}
+                  src={hero.videoUrl}
+                  poster={hero.posterUrl}
                   autoPlay
                   loop
                   muted

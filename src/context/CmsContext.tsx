@@ -1,0 +1,621 @@
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import {
+  SITE_CONFIG,
+  SONORAMA_YOUTUBE_VIDEOS,
+  SCIENTIFIC_PUBLICATIONS,
+  RESEARCHER_PROFILES,
+  RESEARCH_COLLABORATORS,
+  ADDITIONAL_COAUTHORS,
+  SCIENTIFIC_HIGHLIGHTS,
+  BLOG_POSTS,
+  SPECIALTIES,
+  TESTIMONIALS,
+  FAQS,
+  INSTAGRAM_SHOWCASE,
+   SonoramaVideoItem,
+  BlogPost,
+  SpecialtyItem,
+} from '../data/siteContent';
+import { MEDIA_ASSETS } from '../components/ClinicalVisuals';
+
+export interface HeroContentConfig {
+  badge: string;
+  titlePrefix: string;
+  titleHighlight: string;
+  titleSuffix: string;
+  description: string;
+  videoUrl: string;
+  posterUrl: string;
+  primaryCtaText: string;
+  secondaryCtaText: string;
+}
+
+export interface CmsMediaConfig {
+  facebookReelUrl: string;
+  heroDraPamela: string;
+  draPameDiplomas: string;
+  draPameClinicalUnit: string;
+  draPameHappyPatient: string;
+  realBeforeAfterSmile: string;
+  realCadCamSplint3D: string;
+  realBiomimeticVeneers: string;
+  realOralRehabProsthesis: string;
+  fortunePlazaBuilding: string;
+}
+
+export interface CmsData {
+  hero: HeroContentConfig;
+  mediaAssets: CmsMediaConfig;
+  siteConfig: typeof SITE_CONFIG;
+  sonoramaVideos: SonoramaVideoItem[];
+  scientificPublications: typeof SCIENTIFIC_PUBLICATIONS;
+  researcherProfiles: typeof RESEARCHER_PROFILES;
+  researchCollaborators: typeof RESEARCH_COLLABORATORS;
+  additionalCoauthors: string[];
+  blogPosts: BlogPost[];
+  specialties: SpecialtyItem[];
+  testimonials: typeof TESTIMONIALS;
+  faqs: typeof FAQS;
+  instagramShowcase: typeof INSTAGRAM_SHOWCASE;
+}
+
+export interface CmsSnapshotMeta {
+  id: string;
+  timestamp: string;
+  label: string;
+}
+
+const DEFAULT_HERO_CONFIG: HeroContentConfig = {
+  badge: 'ATM Integral · Rehabilitación · Bruxismo',
+  titlePrefix: 'Ciencia y tecnología para',
+  titleHighlight: 'liberar tu ATM',
+  titleSuffix: 'y rehabilitar tu sonrisa.',
+  description:
+    'Soy la Dra. Eliana Pamela Pazmiño Troncoso, especialista en Rehabilitación Oral, ATM Integral, Bruxismo y Dolor Orofacial, docente e investigadora universitaria (UDLA), directora clínica de Dental Check UIO y conductora de Sonorama Vital.',
+  videoUrl: '/videos/Odontologist_using_original_picture_f9bb1cb3.mp4',
+  posterUrl: '/images/clinic/hero-dra-pamela.jpg',
+  primaryCtaText: 'Agendar Valoración en Quito',
+  secondaryCtaText: 'Videos Sonorama Vital',
+};
+
+function deepClone<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+const FACTORY_CMS_DATA: CmsData = deepClone({
+  hero: DEFAULT_HERO_CONFIG,
+  mediaAssets: {
+    facebookReelUrl: MEDIA_ASSETS.facebookReelUrl,
+    heroDraPamela: MEDIA_ASSETS.heroDraPamela,
+    draPameDiplomas: MEDIA_ASSETS.draPameDiplomas,
+    draPameClinicalUnit: MEDIA_ASSETS.draPameClinicalUnit,
+    draPameHappyPatient: MEDIA_ASSETS.draPameHappyPatient,
+    realBeforeAfterSmile: MEDIA_ASSETS.realBeforeAfterSmile,
+    realCadCamSplint3D: MEDIA_ASSETS.realCadCamSplint3D,
+    realBiomimeticVeneers: MEDIA_ASSETS.realBiomimeticVeneers,
+    realOralRehabProsthesis: MEDIA_ASSETS.realOralRehabProsthesis,
+    fortunePlazaBuilding: MEDIA_ASSETS.fortunePlazaBuilding,
+  },
+  siteConfig: SITE_CONFIG,
+  sonoramaVideos: SONORAMA_YOUTUBE_VIDEOS,
+  scientificPublications: SCIENTIFIC_PUBLICATIONS,
+  researcherProfiles: RESEARCHER_PROFILES,
+  researchCollaborators: RESEARCH_COLLABORATORS,
+  additionalCoauthors: ADDITIONAL_COAUTHORS,
+  blogPosts: BLOG_POSTS,
+  specialties: SPECIALTIES,
+  testimonials: TESTIMONIALS,
+  faqs: FAQS,
+  instagramShowcase: INSTAGRAM_SHOWCASE,
+});
+
+function replaceArrayInPlace<T>(target: T[], source: T[]) {
+  if (!Array.isArray(source)) return;
+  target.splice(0, target.length, ...deepClone(source));
+}
+
+function applyCmsToRuntime(data: CmsData) {
+  if (!data) return;
+
+  if (data.siteConfig) {
+    Object.assign(SITE_CONFIG, deepClone(data.siteConfig));
+  }
+
+  if (data.mediaAssets) {
+    Object.assign(MEDIA_ASSETS, deepClone(data.mediaAssets));
+    if (data.mediaAssets.facebookReelUrl) {
+      MEDIA_ASSETS.facebookReelEmbedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+        data.mediaAssets.facebookReelUrl
+      )}&show_text=false&t=0`;
+    }
+  }
+
+  if (data.hero?.videoUrl) {
+    MEDIA_ASSETS.heroAnimationLoopMp4 = data.hero.videoUrl;
+  }
+  if (data.hero?.posterUrl) {
+    MEDIA_ASSETS.heroDraPamela = data.hero.posterUrl;
+    SITE_CONFIG.images.doctorPortraitLocal = data.hero.posterUrl;
+  }
+
+  if (Array.isArray(data.sonoramaVideos)) {
+    replaceArrayInPlace(SONORAMA_YOUTUBE_VIDEOS, data.sonoramaVideos);
+  }
+  if (Array.isArray(data.scientificPublications)) {
+    replaceArrayInPlace(SCIENTIFIC_PUBLICATIONS, data.scientificPublications);
+    const updatedHighlights = data.scientificPublications.map((p) => ({
+      journal: `${p.journal} (${p.year}) · Publicado como ${p.publishedAs}`,
+      topic: p.title,
+      summary: p.focus,
+      links: p.links,
+      coAuthors: p.coAuthors,
+    }));
+    replaceArrayInPlace(SCIENTIFIC_HIGHLIGHTS, updatedHighlights);
+  }
+  if (data.researcherProfiles) {
+    Object.assign(RESEARCHER_PROFILES, deepClone(data.researcherProfiles));
+  }
+  if (Array.isArray(data.researchCollaborators)) {
+    replaceArrayInPlace(RESEARCH_COLLABORATORS, data.researchCollaborators);
+  }
+  if (Array.isArray(data.additionalCoauthors)) {
+    replaceArrayInPlace(ADDITIONAL_COAUTHORS, data.additionalCoauthors);
+  }
+  if (Array.isArray(data.blogPosts)) {
+    replaceArrayInPlace(BLOG_POSTS, data.blogPosts);
+  }
+  if (Array.isArray(data.specialties)) {
+    replaceArrayInPlace(SPECIALTIES, data.specialties);
+  }
+  if (Array.isArray(data.testimonials)) {
+    replaceArrayInPlace(TESTIMONIALS, data.testimonials);
+  }
+  if (Array.isArray(data.faqs)) {
+    replaceArrayInPlace(FAQS, data.faqs);
+  }
+  if (Array.isArray(data.instagramShowcase)) {
+    replaceArrayInPlace(INSTAGRAM_SHOWCASE, data.instagramShowcase);
+  }
+}
+
+function mergeWithDefaults(partial: Partial<CmsData> | null | undefined): CmsData {
+  const base = deepClone(FACTORY_CMS_DATA);
+  if (!partial || typeof partial !== 'object') return base;
+
+  return {
+    hero: { ...base.hero, ...(partial.hero || {}) },
+    mediaAssets: { ...base.mediaAssets, ...(partial.mediaAssets || {}) },
+    siteConfig: {
+      ...base.siteConfig,
+      ...(partial.siteConfig || {}),
+      address: { ...base.siteConfig.address, ...(partial.siteConfig?.address || {}) },
+      hours: { ...base.siteConfig.hours, ...(partial.siteConfig?.hours || {}) },
+      social: {
+        ...base.siteConfig.social,
+        ...(partial.siteConfig?.social || {}),
+        instagramPersonal: {
+          ...base.siteConfig.social.instagramPersonal,
+          ...(partial.siteConfig?.social?.instagramPersonal || {}),
+        },
+        instagramClinic: {
+          ...base.siteConfig.social.instagramClinic,
+          ...(partial.siteConfig?.social?.instagramClinic || {}),
+        },
+        googleProfile: {
+          ...base.siteConfig.social.googleProfile,
+          ...(partial.siteConfig?.social?.googleProfile || {}),
+        },
+      },
+      images: { ...base.siteConfig.images, ...(partial.siteConfig?.images || {}) },
+    },
+    sonoramaVideos: Array.isArray(partial.sonoramaVideos) ? partial.sonoramaVideos : base.sonoramaVideos,
+    scientificPublications: Array.isArray(partial.scientificPublications)
+      ? partial.scientificPublications
+      : base.scientificPublications,
+    researcherProfiles: {
+      ...base.researcherProfiles,
+      ...(partial.researcherProfiles || {}),
+    },
+    researchCollaborators: Array.isArray(partial.researchCollaborators)
+      ? partial.researchCollaborators
+      : base.researchCollaborators,
+    additionalCoauthors: Array.isArray(partial.additionalCoauthors)
+      ? partial.additionalCoauthors
+      : base.additionalCoauthors,
+    blogPosts: Array.isArray(partial.blogPosts) ? partial.blogPosts : base.blogPosts,
+    specialties: Array.isArray(partial.specialties) ? partial.specialties : base.specialties,
+    testimonials: Array.isArray(partial.testimonials) ? partial.testimonials : base.testimonials,
+    faqs: Array.isArray(partial.faqs) ? partial.faqs : base.faqs,
+    instagramShowcase: Array.isArray(partial.instagramShowcase)
+      ? partial.instagramShowcase
+      : base.instagramShowcase,
+  };
+}
+
+interface CmsContextValue {
+  cmsData: CmsData;
+  cmsVersion: number;
+  updatedAt: string | null;
+  isAuthenticated: boolean;
+  authToken: string | null;
+  login: (password: string) => Promise<{ ok: boolean; error?: string }>;
+  logout: () => void;
+  saveCmsData: (newData: CmsData, label?: string) => Promise<{ ok: boolean; error?: string }>;
+  uploadMediaFile: (file: File) => Promise<{ ok: boolean; url?: string; error?: string }>;
+  fetchYoutubeMeta: (url: string) => Promise<{
+    ok: boolean;
+    videoId?: string;
+    title?: string;
+    thumbnailUrl?: string;
+    watchUrl?: string;
+    error?: string;
+  }>;
+  fetchHistory: () => Promise<CmsSnapshotMeta[]>;
+  restoreSnapshot: (id: string) => Promise<{ ok: boolean; error?: string }>;
+  resetToFactoryDefaults: () => Promise<{ ok: boolean; error?: string }>;
+  changeAdminPassword: (newPassword: string) => Promise<{ ok: boolean; error?: string }>;
+}
+
+const CmsContext = createContext<CmsContextValue | null>(null);
+
+const LOCAL_STORAGE_CONTENT_KEY = 'drapamela_cms_content_v1';
+const LOCAL_STORAGE_TOKEN_KEY = 'drapamela_cms_token_v1';
+
+export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [cmsData, setCmsData] = useState<CmsData>(() => deepClone(FACTORY_CMS_DATA));
+  const [cmsVersion, setCmsVersion] = useState<number>(0);
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+    } catch {
+      return null;
+    }
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  const syncDataEverywhere = useCallback((nextData: CmsData, timestamp?: string) => {
+    const merged = mergeWithDefaults(nextData);
+    applyCmsToRuntime(merged);
+    setCmsData(merged);
+    setCmsVersion((v) => v + 1);
+    if (timestamp) {
+      setUpdatedAt(timestamp);
+    }
+    try {
+      localStorage.setItem(LOCAL_STORAGE_CONTENT_KEY, JSON.stringify(merged));
+    } catch {
+      // ignore storage quota errors
+    }
+  }, []);
+
+  // Load live content from Hostinger PHP API on startup
+  useEffect(() => {
+    let cancelled = false;
+    async function loadInitial() {
+      try {
+        const res = await fetch(`/api/cms.php?action=get&_t=${Date.now()}`, {
+          cache: 'no-store',
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (!cancelled && json?.ok && json?.hasCustomContent && json?.content) {
+            syncDataEverywhere(json.content, json.updatedAt);
+            return;
+          }
+        }
+      } catch {
+        // Fallback to localStorage if running in local dev without PHP
+        try {
+          const cached = localStorage.getItem(LOCAL_STORAGE_CONTENT_KEY);
+          if (cached && !cancelled) {
+            syncDataEverywhere(JSON.parse(cached));
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
+    loadInitial();
+    return () => {
+      cancelled = true;
+    };
+  }, [syncDataEverywhere]);
+
+  // Verify stored token on startup
+  useEffect(() => {
+    if (!authToken) {
+      setIsAuthenticated(false);
+      return;
+    }
+    let cancelled = false;
+    async function checkToken() {
+      try {
+        const res = await fetch('/api/cms.php?action=verify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CMS-Token': authToken || '',
+          },
+          body: JSON.stringify({ token: authToken }),
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (!cancelled) {
+            setIsAuthenticated(Boolean(json?.ok));
+            if (!json?.ok) {
+              setAuthToken(null);
+              localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+            }
+          }
+          return;
+        }
+      } catch {
+        if (!cancelled && authToken === 'local-dev-token') {
+          setIsAuthenticated(true);
+        }
+      }
+    }
+    checkToken();
+    return () => {
+      cancelled = true;
+    };
+  }, [authToken]);
+
+  const login = async (password: string): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/cms.php?action=login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok && json?.token) {
+        setAuthToken(json.token);
+        setIsAuthenticated(true);
+        try {
+          localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, json.token);
+        } catch {
+          // ignore
+        }
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'Contraseña incorrecta.' };
+    } catch {
+      // Local dev fallback if PHP server isn't running locally
+      if (password === 'DentalCheck2026!') {
+        setAuthToken('local-dev-token');
+        setIsAuthenticated(true);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, 'local-dev-token');
+        return { ok: true };
+      }
+      return { ok: false, error: 'Contraseña incorrecta.' };
+    }
+  };
+
+  const logout = () => {
+    setAuthToken(null);
+    setIsAuthenticated(false);
+    try {
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+    } catch {
+      // ignore
+    }
+  };
+
+  const saveCmsData = async (
+    newData: CmsData,
+    label = 'Actualización desde panel /admin'
+  ): Promise<{ ok: boolean; error?: string }> => {
+    syncDataEverywhere(newData, new Date().toISOString());
+    try {
+      const res = await fetch('/api/cms.php?action=save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({
+          token: authToken,
+          label,
+          content: newData,
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok) {
+        setUpdatedAt(json.updatedAt || new Date().toISOString());
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'Error al guardar en el servidor.' };
+    } catch {
+      if (authToken === 'local-dev-token') {
+        return { ok: true };
+      }
+      return { ok: false, error: 'No se pudo conectar con el servidor para guardar.' };
+    }
+  };
+
+  const uploadMediaFile = async (
+    file: File
+  ): Promise<{ ok: boolean; url?: string; error?: string }> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (authToken) {
+      formData.append('token', authToken);
+    }
+    try {
+      const res = await fetch('/api/cms.php?action=upload', {
+        method: 'POST',
+        headers: {
+          'X-CMS-Token': authToken || '',
+        },
+        body: formData,
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok && json?.url) {
+        return { ok: true, url: json.url };
+      }
+      return { ok: false, error: json?.error || 'No se pudo subir el archivo.' };
+    } catch {
+      // Local preview fallback using object URL
+      const localUrl = URL.createObjectURL(file);
+      return { ok: true, url: localUrl };
+    }
+  };
+
+  const fetchYoutubeMeta = async (url: string) => {
+    // Extract 11-char YouTube ID client-side first
+    const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([a-zA-Z0-9_-]{11})/);
+    const videoId = match ? match[1] : /^[a-zA-Z0-9_-]{11}$/.test(url.trim()) ? url.trim() : '';
+    if (!videoId) {
+      return { ok: false, error: 'Pega un enlace válido de YouTube (ej. https://www.youtube.com/watch?v=...).' };
+    }
+    try {
+      const res = await fetch(`/api/cms.php?action=youtube_meta&url=${encodeURIComponent(url)}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json?.ok) {
+          return json;
+        }
+      }
+    } catch {
+      // fallback to client-side noembed/oembed
+    }
+    try {
+      const oembed = await fetch(
+        `https://noembed.com/embed?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`)}`
+      );
+      if (oembed.ok) {
+        const meta = await oembed.json();
+        return {
+          ok: true,
+          videoId,
+          title: meta?.title || `Sonorama Vital con Pamela Pazmiño · ${videoId}`,
+          thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+          watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        };
+      }
+    } catch {
+      // ignore
+    }
+    return {
+      ok: true,
+      videoId,
+      title: `Sonorama Vital con Pamela Pazmiño`,
+      thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    };
+  };
+
+  const fetchHistory = async (): Promise<CmsSnapshotMeta[]> => {
+    try {
+      const res = await fetch(`/api/cms.php?action=history&token=${encodeURIComponent(authToken || '')}`, {
+        headers: { 'X-CMS-Token': authToken || '' },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json?.ok && Array.isArray(json.snapshots)) {
+          return json.snapshots;
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return [];
+  };
+
+  const restoreSnapshot = async (id: string): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/cms.php?action=restore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken, id }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok && json?.content) {
+        syncDataEverywhere(json.content, json.updatedAt);
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'No se pudo restaurar la versión.' };
+    } catch {
+      return { ok: false, error: 'Error de red al restaurar la versión.' };
+    }
+  };
+
+  const resetToFactoryDefaults = async (): Promise<{ ok: boolean; error?: string }> => {
+    const defaults = deepClone(FACTORY_CMS_DATA);
+    syncDataEverywhere(defaults, new Date().toISOString());
+    try {
+      localStorage.removeItem(LOCAL_STORAGE_CONTENT_KEY);
+      await fetch('/api/cms.php?action=reset_defaults', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken }),
+      });
+    } catch {
+      // ignore
+    }
+    return { ok: true };
+  };
+
+  const changeAdminPassword = async (
+    newPassword: string
+  ): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/cms.php?action=change_password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken, newPassword }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok && json?.token) {
+        setAuthToken(json.token);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, json.token);
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'No se pudo actualizar la contraseña.' };
+    } catch {
+      return { ok: false, error: 'Error de conexión con el servidor.' };
+    }
+  };
+
+  return (
+    <CmsContext.Provider
+      value={{
+        cmsData,
+        cmsVersion,
+        updatedAt,
+        isAuthenticated,
+        authToken,
+        login,
+        logout,
+        saveCmsData,
+        uploadMediaFile,
+        fetchYoutubeMeta,
+        fetchHistory,
+        restoreSnapshot,
+        resetToFactoryDefaults,
+        changeAdminPassword,
+      }}
+    >
+      {children}
+    </CmsContext.Provider>
+  );
+};
+
+export const useCms = (): CmsContextValue => {
+  const ctx = useContext(CmsContext);
+  if (!ctx) {
+    throw new Error('useCms must be used within a CmsProvider');
+  }
+  return ctx;
+};

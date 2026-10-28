@@ -10,6 +10,8 @@ import { AboutPage } from './pages/AboutPage';
 import { SpecialtiesPage } from './pages/SpecialtiesPage';
 import { BlogPage } from './pages/BlogPage';
 import { ContactPage } from './pages/ContactPage';
+import { AdminPage } from './pages/AdminPage';
+import { CmsProvider, useCms } from './context/CmsContext';
 
 const ScrollToTopAndHash: React.FC = () => {
   const { pathname, hash } = useLocation();
@@ -71,7 +73,8 @@ const ScrollToTopAndHash: React.FC = () => {
   return null;
 };
 
-export const App: React.FC = () => {
+const AppShell: React.FC = () => {
+  const { cmsVersion } = useCms();
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingSpecialtyId, setBookingSpecialtyId] = useState<string>('atm-integral');
   const [bookingInitialNote, setBookingInitialNote] = useState<string>('');
@@ -87,7 +90,10 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTopAndHash />
-      <div className="relative min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      <div
+        data-cms-version={cmsVersion}
+        className="relative min-h-screen flex flex-col bg-slate-50 text-slate-900"
+      >
         {/* Endless Seamless Architectural Wood Slats + Cyan Glass Background Across All Pages */}
         <div
           className="pointer-events-none fixed inset-y-0 left-0 w-full lg:w-[58%] bg-repeat-y bg-[length:100%_auto] bg-left opacity-35 lg:opacity-50 z-0"
@@ -145,6 +151,7 @@ export const App: React.FC = () => {
               }
             />
             <Route path="/contacto" element={<ContactPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route
               path="*"
               element={
@@ -184,5 +191,11 @@ export const App: React.FC = () => {
     </BrowserRouter>
   );
 };
+
+export const App: React.FC = () => (
+  <CmsProvider>
+    <AppShell />
+  </CmsProvider>
+);
 
 export default App;
