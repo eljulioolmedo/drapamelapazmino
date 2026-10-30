@@ -217,6 +217,61 @@ if ($action === 'youtube_meta') {
     exit;
 }
 
+if ($action === 'media_list') {
+    $items = [];
+    $scanFolders = [
+        ['dir' => $uploadsDir, 'prefix' => '/uploads/', 'folder' => 'uploads', 'deletable' => true],
+        ['dir' => $rootDir . '/videos', 'prefix' => '/videos/', 'folder' => 'videos', 'deletable' => false],
+        ['dir' => $rootDir . '/images/clinic', 'prefix' => '/images/clinic/', 'folder' => 'clinic', 'deletable' => false],
+    ];
+    foreach ($scanFolders as $sf) {
+        if (!is_dir($sf['dir'])) {
+            continue;
+        }
+        $files = @scandir($sf['dir']);
+        if (!is_array($files)) {
+            continue;
+        }
+        foreach ($files as $f) {
+            if ($f === '.' || $f === '..' || strpos($f, '.') === 0) {
+                continue;
+            }
+            $full = $sf['dir'] . '/' . $f;
+            if (!is_file($full)) {
+                continue;
+            }
+            $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
+            $type = 'other';
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'], true)) {
+                $type = 'image';
+            } elseif (in_array($ext, ['mp4', 'webm', 'mov'], true)) {
+                $type = 'video';
+            } elseif ($ext === 'pdf') {
+                $type = 'pdf';
+            } else {
+                continue;
+            }
+            $items[] = [
+                'url' => $sf['prefix'] . $f,
+                'filename' => $f,
+                'type' => $type,
+                'folder' => $sf['folder'],
+                'deletable' => $sf['deletable'],
+                'size' => @filesize($full) ?: 0,
+                'modifiedAt' => @date('c', filemtime($full)),
+            ];
+        }
+    }
+    usort($items, function ($a, $b) {
+        return strcmp($b['modifiedAt'], $a['modifiedAt']);
+    });
+    echo json_encode([
+        'ok' => true,
+        'items' => $items,
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // All actions below require authentication
 $body = get_request_body();
 $token = extract_token($body);
@@ -366,6 +421,19 @@ if ($action === 'upload') {
         'url' => '/uploads/' . $finalName,
         'filename' => $finalName,
     ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if ($action === 'media_delete') {
+    $filename = basename((string)($body['filename'] ?? ''));
+    $targetPath = $uploadsDir . '/' . $filename;
+    if (!$filename || !file_exists($targetPath)) {
+        http_response_code(404);
+        echo json_encode(['ok' => false, 'error' => 'Archivo no encontrado en /uploads/.'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    @unlink($targetPath);
+    echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

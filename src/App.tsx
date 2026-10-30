@@ -12,6 +12,7 @@ import { BlogPage } from './pages/BlogPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 import { CmsProvider, useCms } from './context/CmsContext';
+import { LivePageEditorOverlay } from './components/LivePageEditorOverlay';
 
 const ScrollToTopAndHash: React.FC = () => {
   const { pathname, hash } = useLocation();
@@ -187,6 +188,8 @@ const AppShell: React.FC = () => {
           onClose={() => setGuideModalOpen(false)}
           onOpenBooking={(specId) => handleOpenBooking(specId)}
         />
+
+        <LivePageEditorOverlay />
       </div>
     </BrowserRouter>
   );

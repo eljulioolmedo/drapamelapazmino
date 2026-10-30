@@ -12,9 +12,13 @@ import {
   TESTIMONIALS,
   FAQS,
   INSTAGRAM_SHOWCASE,
-   SonoramaVideoItem,
+  EMPATHY_SYMPTOMS,
+  ATM_QUIZ_QUESTIONS,
+  FREE_GUIDE_CONTENT,
+  SonoramaVideoItem,
   BlogPost,
   SpecialtyItem,
+  QuizQuestion,
 } from '../data/siteContent';
 import { MEDIA_ASSETS } from '../components/ClinicalVisuals';
 
@@ -57,6 +61,9 @@ export interface CmsData {
   testimonials: typeof TESTIMONIALS;
   faqs: typeof FAQS;
   instagramShowcase: typeof INSTAGRAM_SHOWCASE;
+  empathySymptoms: typeof EMPATHY_SYMPTOMS;
+  atmQuizQuestions: QuizQuestion[];
+  freeGuideContent: typeof FREE_GUIDE_CONTENT;
 }
 
 export interface CmsSnapshotMeta {
@@ -64,6 +71,30 @@ export interface CmsSnapshotMeta {
   timestamp: string;
   label: string;
 }
+
+export interface CmsMediaItem {
+  url: string;
+  filename: string;
+  type: 'image' | 'video' | 'pdf';
+  folder: 'uploads' | 'clinic' | 'videos';
+  deletable: boolean;
+  size: number;
+  modifiedAt: string;
+}
+
+export type InspectorSectionType =
+  | 'hero'
+  | 'sonorama'
+  | 'symptoms'
+  | 'cases'
+  | 'specialties'
+  | 'publications'
+  | 'guide'
+  | 'blog'
+  | 'instagram'
+  | 'testimonials'
+  | 'faq'
+  | 'contact';
 
 const DEFAULT_HERO_CONFIG: HeroContentConfig = {
   badge: 'ATM Integral · Rehabilitación · Bruxismo',
@@ -107,6 +138,9 @@ const FACTORY_CMS_DATA: CmsData = deepClone({
   testimonials: TESTIMONIALS,
   faqs: FAQS,
   instagramShowcase: INSTAGRAM_SHOWCASE,
+  empathySymptoms: EMPATHY_SYMPTOMS,
+  atmQuizQuestions: ATM_QUIZ_QUESTIONS,
+  freeGuideContent: FREE_GUIDE_CONTENT,
 });
 
 function replaceArrayInPlace<T>(target: T[], source: T[]) {
@@ -176,6 +210,15 @@ function applyCmsToRuntime(data: CmsData) {
   if (Array.isArray(data.instagramShowcase)) {
     replaceArrayInPlace(INSTAGRAM_SHOWCASE, data.instagramShowcase);
   }
+  if (Array.isArray(data.empathySymptoms)) {
+    replaceArrayInPlace(EMPATHY_SYMPTOMS, data.empathySymptoms);
+  }
+  if (Array.isArray(data.atmQuizQuestions)) {
+    replaceArrayInPlace(ATM_QUIZ_QUESTIONS, data.atmQuizQuestions);
+  }
+  if (data.freeGuideContent) {
+    Object.assign(FREE_GUIDE_CONTENT, deepClone(data.freeGuideContent));
+  }
 }
 
 function mergeWithDefaults(partial: Partial<CmsData> | null | undefined): CmsData {
@@ -229,8 +272,123 @@ function mergeWithDefaults(partial: Partial<CmsData> | null | undefined): CmsDat
     instagramShowcase: Array.isArray(partial.instagramShowcase)
       ? partial.instagramShowcase
       : base.instagramShowcase,
+    empathySymptoms: Array.isArray(partial.empathySymptoms)
+      ? partial.empathySymptoms
+      : base.empathySymptoms,
+    atmQuizQuestions: Array.isArray(partial.atmQuizQuestions)
+      ? partial.atmQuizQuestions
+      : base.atmQuizQuestions,
+    freeGuideContent: {
+      ...base.freeGuideContent,
+      ...(partial.freeGuideContent || {}),
+      chapters: Array.isArray(partial.freeGuideContent?.chapters)
+        ? partial.freeGuideContent!.chapters
+        : base.freeGuideContent.chapters,
+    },
   };
 }
+
+const FALLBACK_MEDIA_ITEMS: CmsMediaItem[] = [
+  {
+    url: '/videos/Odontologist_using_original_picture_f9bb1cb3.mp4',
+    filename: 'Odontologist_using_original_picture_f9bb1cb3.mp4',
+    type: 'video',
+    folder: 'videos',
+    deletable: false,
+    size: 3670016,
+    modifiedAt: '2026-10-28T07:00:00Z',
+  },
+  {
+    url: '/images/clinic/hero-dra-pamela.jpg',
+    filename: 'hero-dra-pamela.jpg',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 245000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-logo.png',
+    filename: 'dentalcheck-logo.png',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 85000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-01.jpg',
+    filename: 'dentalcheck-01.jpg (Edificio Fortune Plaza)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 180000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-02.jpg',
+    filename: 'dentalcheck-02.jpg (Unidad Clínica Dental Check)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 195000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-04.jpg',
+    filename: 'dentalcheck-04.jpg (Rehabilitación Oral)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 210000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-05.jpg',
+    filename: 'dentalcheck-05.jpg (Antes y Después Sonrisa)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 220000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-06.jpg',
+    filename: 'dentalcheck-06.jpg (Férula Digital 3D Real)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 175000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-07.jpg',
+    filename: 'dentalcheck-07.jpg (Carillas Biomiméticas)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 205000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-08.jpg',
+    filename: 'dentalcheck-08.jpg (Diplomas y Docencia UDLA)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 230000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+  {
+    url: '/images/clinic/dentalcheck-10.jpg',
+    filename: 'dentalcheck-10.jpg (Pacientes Felices 5.0★)',
+    type: 'image',
+    folder: 'clinic',
+    deletable: false,
+    size: 215000,
+    modifiedAt: '2026-10-27T20:00:00Z',
+  },
+];
 
 interface CmsContextValue {
   cmsData: CmsData;
@@ -238,10 +396,18 @@ interface CmsContextValue {
   updatedAt: string | null;
   isAuthenticated: boolean;
   authToken: string | null;
+  editOnPageEnabled: boolean;
+  setEditOnPageEnabled: (enabled: boolean) => void;
+  inspectorSection: InspectorSectionType | null;
+  openInspector: (section: InspectorSectionType) => void;
+  closeInspector: () => void;
   login: (password: string) => Promise<{ ok: boolean; error?: string }>;
   logout: () => void;
+  updateLiveDraft: (updater: (prev: CmsData) => CmsData) => void;
   saveCmsData: (newData: CmsData, label?: string) => Promise<{ ok: boolean; error?: string }>;
   uploadMediaFile: (file: File) => Promise<{ ok: boolean; url?: string; error?: string }>;
+  fetchMediaLibrary: () => Promise<CmsMediaItem[]>;
+  deleteMediaFile: (filename: string) => Promise<{ ok: boolean; error?: string }>;
   fetchYoutubeMeta: (url: string) => Promise<{
     ok: boolean;
     videoId?: string;
@@ -273,6 +439,16 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   });
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [editOnPageEnabled, setEditOnPageEnabled] = useState<boolean>(false);
+  const [inspectorSection, setInspectorSection] = useState<InspectorSectionType | null>(null);
+
+  const openInspector = useCallback((section: InspectorSectionType) => {
+    setInspectorSection(section);
+  }, []);
+
+  const closeInspector = useCallback(() => {
+    setInspectorSection(null);
+  }, []);
 
   const syncDataEverywhere = useCallback((nextData: CmsData, timestamp?: string) => {
     const merged = mergeWithDefaults(nextData);
@@ -288,6 +464,18 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // ignore storage quota errors
     }
   }, []);
+
+  const updateLiveDraft = useCallback(
+    (updater: (prev: CmsData) => CmsData) => {
+      setCmsData((prev) => {
+        const next = mergeWithDefaults(updater(deepClone(prev)));
+        applyCmsToRuntime(next);
+        setCmsVersion((v) => v + 1);
+        return next;
+      });
+    },
+    []
+  );
 
   // Load live content from Hostinger PHP API on startup
   useEffect(() => {
@@ -305,7 +493,6 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           }
         }
       } catch {
-        // Fallback to localStorage if running in local dev without PHP
         try {
           const cached = localStorage.getItem(LOCAL_STORAGE_CONTENT_KEY);
           if (cached && !cancelled) {
@@ -382,7 +569,6 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
       return { ok: false, error: json?.error || 'Contraseña incorrecta.' };
     } catch {
-      // Local dev fallback if PHP server isn't running locally
       if (password === 'DentalCheck2026!') {
         setAuthToken('local-dev-token');
         setIsAuthenticated(true);
@@ -396,6 +582,8 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const logout = () => {
     setAuthToken(null);
     setIsAuthenticated(false);
+    setEditOnPageEnabled(false);
+    setInspectorSection(null);
     try {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
     } catch {
@@ -457,14 +645,51 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
       return { ok: false, error: json?.error || 'No se pudo subir el archivo.' };
     } catch {
-      // Local preview fallback using object URL
       const localUrl = URL.createObjectURL(file);
       return { ok: true, url: localUrl };
     }
   };
 
+  const fetchMediaLibrary = useCallback(async (): Promise<CmsMediaItem[]> => {
+    try {
+      const res = await fetch(`/api/cms.php?action=media_list&_t=${Date.now()}`, {
+        cache: 'no-store',
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json?.ok && Array.isArray(json.items)) {
+          return json.items;
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return FALLBACK_MEDIA_ITEMS;
+  }, []);
+
+  const deleteMediaFile = async (
+    filename: string
+  ): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/cms.php?action=media_delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken, filename }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok) {
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'No se pudo eliminar el archivo.' };
+    } catch {
+      return { ok: false, error: 'Error de red al eliminar el archivo.' };
+    }
+  };
+
   const fetchYoutubeMeta = async (url: string) => {
-    // Extract 11-char YouTube ID client-side first
     const match = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([a-zA-Z0-9_-]{11})/);
     const videoId = match ? match[1] : /^[a-zA-Z0-9_-]{11}$/.test(url.trim()) ? url.trim() : '';
     if (!videoId) {
@@ -479,7 +704,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
       }
     } catch {
-      // fallback to client-side noembed/oembed
+      // fallback
     }
     try {
       const oembed = await fetch(
@@ -507,7 +732,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   };
 
-  const fetchHistory = async (): Promise<CmsSnapshotMeta[]> => {
+  const fetchHistory = useCallback(async (): Promise<CmsSnapshotMeta[]> => {
     try {
       const res = await fetch(`/api/cms.php?action=history&token=${encodeURIComponent(authToken || '')}`, {
         headers: { 'X-CMS-Token': authToken || '' },
@@ -522,7 +747,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // ignore
     }
     return [];
-  };
+  }, [authToken]);
 
   const restoreSnapshot = async (id: string): Promise<{ ok: boolean; error?: string }> => {
     try {
@@ -596,10 +821,18 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updatedAt,
         isAuthenticated,
         authToken,
+        editOnPageEnabled,
+        setEditOnPageEnabled,
+        inspectorSection,
+        openInspector,
+        closeInspector,
         login,
         logout,
+        updateLiveDraft,
         saveCmsData,
         uploadMediaFile,
+        fetchMediaLibrary,
+        deleteMediaFile,
         fetchYoutubeMeta,
         fetchHistory,
         restoreSnapshot,
