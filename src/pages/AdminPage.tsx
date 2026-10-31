@@ -30,9 +30,11 @@ import {
   Monitor,
   Edit3,
   BookOpen,
+  MessageSquare,
 } from 'lucide-react';
 import { useCms, CmsData, CmsSnapshotMeta } from '../context/CmsContext';
 import { MediaLibraryModal } from '../components/MediaLibraryModal';
+import { InternalChatPanel } from '../components/InternalChatPanel';
 import { HomePage } from './HomePage';
 
 type AdminTab =
@@ -42,7 +44,8 @@ type AdminTab =
   | 'blog-faq'
   | 'specialties'
   | 'contact-reviews'
-  | 'history-security';
+  | 'history-security'
+  | 'internal-chat';
 
 export const AdminPage: React.FC = () => {
   const navigate = useNavigate();
@@ -62,6 +65,8 @@ export const AdminPage: React.FC = () => {
     restoreSnapshot,
     resetToFactoryDefaults,
     changeAdminPassword,
+    chatUnreadCount,
+    activeRole,
   } = useCms();
 
   const [passwordInput, setPasswordInput] = useState('');
@@ -69,7 +74,9 @@ export const AdminPage: React.FC = () => {
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<AdminTab>('hero-media');
+  const [activeTab, setActiveTab] = useState<AdminTab>(() => {
+    return window.location.hash === '#chat' ? 'internal-chat' : 'hero-media';
+  });
   const [draft, setDraft] = useState<CmsData>(() => JSON.parse(JSON.stringify(cmsData)));
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -78,6 +85,16 @@ export const AdminPage: React.FC = () => {
 
   // Split-Screen Live Preview state
   const [splitPreviewMode, setSplitPreviewMode] = useState<'off' | 'desktop' | 'mobile'>('off');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#chat') {
+        setActiveTab('internal-chat');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Visual Media Library Modal state
   const [mediaModal, setMediaModal] = useState<{
@@ -496,6 +513,24 @@ export const AdminPage: React.FC = () => {
 
           <button
             type="button"
+            onClick={() => setActiveTab('internal-chat')}
+            className={`relative inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-extrabold transition cursor-pointer ${
+              activeTab === 'internal-chat'
+                ? 'bg-cyan-400 text-slate-950 shadow-md ring-2 ring-cyan-300'
+                : 'bg-white/10 text-cyan-200 hover:bg-white/20'
+            }`}
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+            <span>Chat Inge ↔ Doc</span>
+            {(activeRole === 'doc' ? chatUnreadCount.forDoc : chatUnreadCount.forInge) > 0 && (
+              <span className="rounded-full bg-red-500 px-1.5 py-0.2 text-[10px] text-white font-black animate-pulse">
+                {activeRole === 'doc' ? chatUnreadCount.forDoc : chatUnreadCount.forInge}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
             onClick={() =>
               setMediaModal({
                 open: true,
@@ -584,6 +619,12 @@ export const AdminPage: React.FC = () => {
           { id: 'specialties', label: '5. Especialidades & Síntomas', icon: Stethoscope },
           { id: 'contact-reviews', label: '6. Contacto, Horarios & Reseñas', icon: MapPin },
           { id: 'history-security', label: '7. Historial (10 Versiones) & Clave', icon: History },
+          {
+            id: 'internal-chat',
+            label: '8. Chat Interno (Inge ↔ Doc)',
+            icon: MessageSquare,
+            badgeCount: activeRole === 'doc' ? chatUnreadCount.forDoc : chatUnreadCount.forInge,
+          },
         ].map((t) => {
           const Icon = t.icon;
           const active = activeTab === t.id;
@@ -592,7 +633,7 @@ export const AdminPage: React.FC = () => {
               key={t.id}
               type="button"
               onClick={() => setActiveTab(t.id as AdminTab)}
-              className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-extrabold transition cursor-pointer ${
+              className={`relative inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-extrabold transition cursor-pointer ${
                 active
                   ? 'bg-slate-900 text-cyan-300 shadow-sm ring-1 ring-cyan-400/40'
                   : 'text-slate-700 hover:bg-cyan-50/80 hover:text-slate-900'
@@ -600,6 +641,11 @@ export const AdminPage: React.FC = () => {
             >
               <Icon className="h-4 w-4" />
               <span>{t.label}</span>
+              {'badgeCount' in t && Boolean(t.badgeCount && t.badgeCount > 0) && (
+                <span className="rounded-full bg-red-500 px-2 py-0.5 text-[10px] text-white font-black animate-pulse">
+                  {t.badgeCount}
+                </span>
+              )}
             </button>
           );
         })}
@@ -2660,6 +2706,11 @@ export const AdminPage: React.FC = () => {
                 </div>
               </div>
             </div>
+          )}
+
+          {/* TAB 8: INTERNAL CHAT (INGE ↔ DOC) */}
+          {activeTab === 'internal-chat' && (
+            <InternalChatPanel embeddedInTab={true} />
           )}
         </div>
 

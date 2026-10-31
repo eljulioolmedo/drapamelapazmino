@@ -15,9 +15,11 @@ import {
   GraduationCap,
   MapPin,
   Stethoscope,
+  MessageSquare,
 } from 'lucide-react';
 import { useCms, InspectorSectionType } from '../context/CmsContext';
 import { MediaLibraryModal } from './MediaLibraryModal';
+import { InternalChatPanel } from './InternalChatPanel';
 
 export const LivePageEditorOverlay: React.FC = () => {
   const location = useLocation();
@@ -32,10 +34,14 @@ export const LivePageEditorOverlay: React.FC = () => {
     updateLiveDraft,
     saveCmsData,
     fetchYoutubeMeta,
+    chatUnreadCount,
+    activeRole,
   } = useCms();
 
   const [saving, setSaving] = useState(false);
   const [savedNotice, setSavedNotice] = useState('');
+  const [chatOpen, setChatOpen] = useState(false);
+  const unreadCount = activeRole === 'doc' ? chatUnreadCount.forDoc : chatUnreadCount.forInge;
   const [mediaModal, setMediaModal] = useState<{
     open: boolean;
     accept: 'all' | 'image' | 'video';
@@ -177,6 +183,25 @@ export const LivePageEditorOverlay: React.FC = () => {
         >
           <Save className="h-3.5 w-3.5" />
           <span>{saving ? 'Guardando...' : savedNotice || 'Guardar Todo'}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setChatOpen((prev) => !prev)}
+          className={`relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-extrabold transition cursor-pointer ${
+            chatOpen
+              ? 'bg-cyan-400 text-slate-950 shadow-sm'
+              : 'bg-white/10 text-cyan-200 hover:bg-white/20'
+          }`}
+          title="Abrir chat interno Inge ↔ Doc"
+        >
+          <MessageSquare className="h-3.5 w-3.5" />
+          <span>Chat Interno</span>
+          {unreadCount > 0 && (
+            <span className="inline-flex items-center justify-center rounded-full bg-rose-500 text-white text-[10px] font-black h-4 px-1.5 min-w-[16px] animate-pulse">
+              {unreadCount}
+            </span>
+          )}
         </button>
 
         <Link
@@ -725,6 +750,13 @@ export const LivePageEditorOverlay: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Floating Internal Chat Drawer */}
+      {chatOpen && (
+        <div className="fixed inset-y-0 right-0 z-[95] w-full max-w-lg bg-white shadow-[-25px_0_60px_rgba(15,23,42,0.35)] flex flex-col border-l border-slate-200">
+          <InternalChatPanel onClose={() => setChatOpen(false)} />
         </div>
       )}
 

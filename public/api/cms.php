@@ -31,6 +31,7 @@ if (!file_exists($htaccessPath)) {
 
 $authFile = $dataDir . '/auth.json';
 $contentFile = $dataDir . '/content.json';
+$chatFile = $dataDir . '/chat.json';
 
 function get_auth_config($authFile) {
     if (file_exists($authFile)) {
@@ -135,6 +136,128 @@ function backup_current_content($contentFile, $historyDir, $label = 'Guardado au
             @unlink($oldFile);
         }
     }
+}
+
+function get_chat_data($chatFile) {
+    if (file_exists($chatFile)) {
+        $raw = @file_get_contents($chatFile);
+        $parsed = @json_decode($raw, true);
+        if (is_array($parsed) && isset($parsed['messages'])) {
+            return $parsed;
+        }
+    }
+    // Default initial welcome message
+    $initial = [
+        'updatedAt' => gmdate('c'),
+        'messages' => [
+            [
+                'id' => 'msg-welcome-1',
+                'sender' => 'inge',
+                'senderName' => 'Inge Julio (Soporte)',
+                'text' => '¡Hola Doc! Canal de soporte directo activado. Cualquier consulta, ajuste o material que necesites subir, déjamelo aquí y recibiré una alerta inmediata en mi correo.',
+                'attachmentUrl' => '',
+                'attachmentName' => '',
+                'timestamp' => gmdate('c'),
+                'readByDoc' => false,
+                'readByInge' => true,
+            ]
+        ]
+    ];
+    @file_put_contents($chatFile, json_encode($initial, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    return $initial;
+}
+
+function send_chat_email_alert($msgData, $supportEmail = 'julio.olmedo.p@gmail.com') {
+    $senderName = $msgData['senderName'] ?? 'Dra. Pamela Pazmiño (Doc)';
+    $text = htmlspecialchars($msgData['text'] ?? '', ENT_QUOTES, 'UTF-8');
+    $attachmentUrl = !empty($msgData['attachmentUrl']) ? $msgData['attachmentUrl'] : '';
+    $attachmentName = htmlspecialchars($msgData['attachmentName'] ?? 'Archivo adjunto', ENT_QUOTES, 'UTF-8');
+
+    // Ecuadorian Time (America/Guayaquil, UTC-5)
+    $dt = new DateTime('now', new DateTimeZone('America/Guayaquil'));
+    $timeStr = $dt->format('d/m/Y - h:i A');
+
+    $subject = "🔔 Mensaje de la Doc en Chat Interno [drapamelapazmino.com]";
+
+    $attachmentHtml = '';
+    if ($attachmentUrl) {
+        $fullAttachmentUrl = (strpos($attachmentUrl, 'http') === 0)
+            ? $attachmentUrl
+            : 'https://drapamelapazmino.com' . $attachmentUrl;
+        $attachmentHtml = '
+        <div style="margin-top: 15px; padding: 12px; background: #e0f2fe; border-left: 4px solid #0284c7; border-radius: 8px;">
+            <p style="margin: 0; font-size: 13px; color: #0369a1; font-weight: bold;">📎 Archivo / Imagen Adjunta:</p>
+            <p style="margin: 4px 0 0 0;"><a href="' . htmlspecialchars($fullAttachmentUrl, ENT_QUOTES, 'UTF-8') . '" target="_blank" style="color: #0284c7; font-weight: 600; text-decoration: underline;">' . $attachmentName . '</a></p>
+        </div>';
+    }
+
+    $messageHtml = '
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <title>' . htmlspecialchars($subject, ENT_QUOTES, 'UTF-8') . '</title>
+    </head>
+    <body style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f9; margin: 0; padding: 24px; color: #1e293b;">
+      <table align="center" width="100%" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+        <tr>
+          <td style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 24px; border-bottom: 3px solid #06b6d4;">
+            <table width="100%">
+              <tr>
+                <td>
+                  <h1 style="margin: 0; color: #ffffff; font-size: 18px; font-weight: 800; letter-spacing: -0.02em;">
+                    Dra. Pamela Pazmiño <span style="color: #22d3ee; font-weight: 400;">· Chat Interno Soporte</span>
+                  </h1>
+                  <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 12px;">Alerta de Consulta: Doc (Admin) → Inge (Soporte)</p>
+                </td>
+                <td align="right">
+                  <span style="background: rgba(6,182,212,0.2); color: #22d3ee; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(6,182,212,0.4);">
+                    drapamelapazmino.com
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 28px;">
+            <p style="margin: 0 0 16px 0; font-size: 14px; color: #475569;">
+              Hola <strong>Inge (Julio)</strong>, la <strong>Dra. Pamela (Doc)</strong> te ha dejado un nuevo mensaje en el canal interno de la web:
+            </p>
+            
+            <div style="background-color: #f8fafc; border-left: 4px solid #06b6d4; padding: 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="font-size: 12px; font-weight: 700; color: #0891b2; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">
+                👩‍⚕️ ' . htmlspecialchars($senderName, ENT_QUOTES, 'UTF-8') . ' · ' . $timeStr . '
+              </div>
+              <div style="font-size: 15px; line-height: 1.6; color: #0f172a; white-space: pre-wrap;">' . nl2br($text) . '</div>
+              ' . $attachmentHtml . '
+            </div>
+
+            <div style="text-align: center; margin-top: 28px; margin-bottom: 20px;">
+              <a href="https://drapamelapazmino.com/admin#chat" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color: #042f2e; text-decoration: none; font-weight: 800; font-size: 14px; padding: 14px 28px; border-radius: 9999px; box-shadow: 0 8px 20px rgba(6,182,212,0.35);">
+                💬 Abrir y Responder en el Chat Interno
+              </a>
+            </div>
+
+            <p style="margin: 24px 0 0 0; font-size: 11px; color: #94a3b8; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 16px;">
+              Esta notificación automática fue enviada a <strong>' . htmlspecialchars($supportEmail, ENT_QUOTES, 'UTF-8') . '</strong> porque la Doc envió un mensaje en el panel web.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+    ';
+
+    $headers = [
+        'MIME-Version: 1.0',
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Dra. Pamela Pazmiño <noreply@drapamelapazmino.com>',
+        'Reply-To: consultas@drapamelapazmino.com',
+        'X-Mailer: PHP/' . phpversion()
+    ];
+
+    @mail($supportEmail, $subject, $messageHtml, implode("\r\n", $headers));
 }
 
 $action = $_GET['action'] ?? 'get';
@@ -433,6 +556,130 @@ if ($action === 'media_delete') {
         exit;
     }
     @unlink($targetPath);
+    echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if ($action === 'chat_get') {
+    $chatData = get_chat_data($chatFile);
+    $messages = $chatData['messages'] ?? [];
+
+    $unreadForDoc = 0;
+    $unreadForInge = 0;
+    foreach ($messages as $m) {
+        if (($m['sender'] ?? '') === 'inge' && empty($m['readByDoc'])) {
+            $unreadForDoc++;
+        }
+        if (($m['sender'] ?? '') === 'doc' && empty($m['readByInge'])) {
+            $unreadForInge++;
+        }
+    }
+
+    echo json_encode([
+        'ok' => true,
+        'messages' => $messages,
+        'unreadForDoc' => $unreadForDoc,
+        'unreadForInge' => $unreadForInge,
+        'updatedAt' => $chatData['updatedAt'] ?? gmdate('c'),
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if ($action === 'chat_send') {
+    $sender = trim((string)($body['sender'] ?? 'doc'));
+    if (!in_array($sender, ['doc', 'inge'], true)) {
+        $sender = 'doc';
+    }
+    $senderName = trim((string)($body['senderName'] ?? ($sender === 'doc' ? 'Dra. Pamela (Doc)' : 'Inge Julio (Soporte)')));
+    $text = trim((string)($body['text'] ?? ''));
+    $attachmentUrl = trim((string)($body['attachmentUrl'] ?? ''));
+    $attachmentName = trim((string)($body['attachmentName'] ?? ''));
+
+    if ($text === '' && $attachmentUrl === '') {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'El mensaje no puede estar vacío.'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $chatData = get_chat_data($chatFile);
+    $messages = $chatData['messages'] ?? [];
+
+    $newMsg = [
+        'id' => 'msg-' . gmdate('YmdHis') . '-' . substr(bin2hex(random_bytes(3)), 0, 6),
+        'sender' => $sender,
+        'senderName' => $senderName,
+        'text' => $text,
+        'attachmentUrl' => $attachmentUrl,
+        'attachmentName' => $attachmentName,
+        'timestamp' => gmdate('c'),
+        'readByDoc' => ($sender === 'doc'),
+        'readByInge' => ($sender === 'inge'),
+    ];
+
+    $messages[] = $newMsg;
+
+    if (count($messages) > 200) {
+        $messages = array_slice($messages, -200);
+    }
+
+    $chatData['messages'] = $messages;
+    $chatData['updatedAt'] = gmdate('c');
+    @file_put_contents($chatFile, json_encode($chatData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+    // If message is from Doc, send email alert to Julio!
+    if ($sender === 'doc') {
+        send_chat_email_alert($newMsg, 'julio.olmedo.p@gmail.com');
+    }
+
+    echo json_encode([
+        'ok' => true,
+        'message' => $newMsg,
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if ($action === 'chat_mark_read') {
+    $role = trim((string)($body['role'] ?? 'doc'));
+    $chatData = get_chat_data($chatFile);
+    $messages = $chatData['messages'] ?? [];
+    $changed = false;
+
+    foreach ($messages as &$m) {
+        if ($role === 'doc' && empty($m['readByDoc'])) {
+            $m['readByDoc'] = true;
+            $changed = true;
+        } elseif ($role === 'inge' && empty($m['readByInge'])) {
+            $m['readByInge'] = true;
+            $changed = true;
+        }
+    }
+    unset($m);
+
+    if ($changed) {
+        $chatData['messages'] = $messages;
+        $chatData['updatedAt'] = gmdate('c');
+        @file_put_contents($chatFile, json_encode($chatData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if ($action === 'chat_delete_message') {
+    $msgId = trim((string)($body['id'] ?? ''));
+    if (!$msgId) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'ID de mensaje requerido.'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    $chatData = get_chat_data($chatFile);
+    $messages = $chatData['messages'] ?? [];
+    $filtered = array_values(array_filter($messages, function($m) use ($msgId) {
+        return ($m['id'] ?? '') !== $msgId;
+    }));
+    $chatData['messages'] = $filtered;
+    $chatData['updatedAt'] = gmdate('c');
+    @file_put_contents($chatFile, json_encode($chatData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     echo json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
     exit;
 }

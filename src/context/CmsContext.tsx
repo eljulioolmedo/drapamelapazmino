@@ -72,6 +72,18 @@ export interface CmsSnapshotMeta {
   label: string;
 }
 
+export interface ChatMessage {
+  id: string;
+  sender: 'doc' | 'inge';
+  senderName: string;
+  text: string;
+  attachmentUrl?: string;
+  attachmentName?: string;
+  timestamp: string;
+  readByDoc?: boolean;
+  readByInge?: boolean;
+}
+
 export interface CmsMediaItem {
   url: string;
   filename: string;
@@ -420,6 +432,20 @@ interface CmsContextValue {
   restoreSnapshot: (id: string) => Promise<{ ok: boolean; error?: string }>;
   resetToFactoryDefaults: () => Promise<{ ok: boolean; error?: string }>;
   changeAdminPassword: (newPassword: string) => Promise<{ ok: boolean; error?: string }>;
+  chatMessages: ChatMessage[];
+  chatUnreadCount: { forDoc: number; forInge: number };
+  activeRole: 'doc' | 'inge';
+  setActiveRole: (role: 'doc' | 'inge') => void;
+  fetchChatMessages: () => Promise<ChatMessage[]>;
+  sendChatMessage: (params: {
+    sender?: 'doc' | 'inge';
+    senderName?: string;
+    text: string;
+    attachmentUrl?: string;
+    attachmentName?: string;
+  }) => Promise<{ ok: boolean; message?: ChatMessage; error?: string }>;
+  markChatAsRead: (role?: 'doc' | 'inge') => Promise<void>;
+  deleteChatMessage: (id: string) => Promise<{ ok: boolean; error?: string }>;
 }
 
 const CmsContext = createContext<CmsContextValue | null>(null);
@@ -441,6 +467,30 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [editOnPageEnabled, setEditOnPageEnabled] = useState<boolean>(false);
   const [inspectorSection, setInspectorSection] = useState<InspectorSectionType | null>(null);
+
+  // Internal Chat State (Inge ↔ Doc)
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatUnreadCount, setChatUnreadCount] = useState<{ forDoc: number; forInge: number }>({
+    forDoc: 0,
+    forInge: 0,
+  });
+  const [activeRole, setActiveRoleState] = useState<'doc' | 'inge'>(() => {
+    try {
+      const stored = localStorage.getItem('drapamela_chat_role_v1');
+      return stored === 'inge' ? 'inge' : 'doc';
+    } catch {
+      return 'doc';
+    }
+  });
+
+  const setActiveRole = useCallback((role: 'doc' | 'inge') => {
+    setActiveRoleState(role);
+    try {
+      localStorage.setItem('drapamela_chat_role_v1', role);
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const openInspector = useCallback((section: InspectorSectionType) => {
     setInspectorSection(section);
@@ -813,6 +863,118 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
+  const fetchChatMessages = useCallback(async (): Promise<ChatMessage[]> => {
+    try {
+      const res = await fetch(
+        `/api/cms.php?action=chat_get&_t=${Date.now()}&token=${encodeURIComponent(authToken || '')}`,
+        {
+          headers: { 'X-CMS-Token': authToken || '' },
+        }
+      );
+      if (res.ok) {
+        const json = await res.json();
+        if (json?.ok && Array.isArray(json.messages)) {
+          setChatMessages(json.messages);
+          setChatUnreadCount({
+            forDoc: json.unreadForDoc || 0,
+            forInge: json.unreadForInge || 0,
+          });
+          return json.messages;
+        }
+      }
+    } catch {
+      // fallback
+    }
+    return [];
+  }, [authToken]);
+
+  // Periodic polling for chat messages every 8 seconds when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    fetchChatMessages();
+    const interval = setInterval(fetchChatMessages, 8000);
+    return () => clearInterval(interval);
+  }, [isAuthenticated, fetchChatMessages]);
+
+  const sendChatMessage = async (params: {
+    sender?: 'doc' | 'inge';
+    senderName?: string;
+    text: string;
+    attachmentUrl?: string;
+    attachmentName?: string;
+  }): Promise<{ ok: boolean; message?: ChatMessage; error?: string }> => {
+    const sender = params.sender || activeRole;
+    const senderName =
+      params.senderName ||
+      (sender === 'doc' ? 'Dra. Pamela (Doc)' : 'Inge Julio (Soporte)');
+    try {
+      const res = await fetch('/api/cms.php?action=chat_send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({
+          token: authToken,
+          sender,
+          senderName,
+          text: params.text,
+          attachmentUrl: params.attachmentUrl || '',
+          attachmentName: params.attachmentName || '',
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok && json?.message) {
+        setChatMessages((prev) => [...prev, json.message]);
+        return { ok: true, message: json.message };
+      }
+      return { ok: false, error: json?.error || 'Error al enviar mensaje.' };
+    } catch {
+      return { ok: false, error: 'Error de conexión con el servidor.' };
+    }
+  };
+
+  const markChatAsRead = async (role?: 'doc' | 'inge') => {
+    const targetRole = role || activeRole;
+    try {
+      await fetch('/api/cms.php?action=chat_mark_read', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken, role: targetRole }),
+      });
+      setChatUnreadCount((prev) => ({
+        ...prev,
+        [targetRole === 'doc' ? 'forDoc' : 'forInge']: 0,
+      }));
+    } catch {
+      // ignore
+    }
+  };
+
+  const deleteChatMessage = async (id: string): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/cms.php?action=chat_delete_message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CMS-Token': authToken || '',
+        },
+        body: JSON.stringify({ token: authToken, id }),
+      });
+      const json = await res.json();
+      if (res.ok && json?.ok) {
+        setChatMessages((prev) => prev.filter((m) => m.id !== id));
+        return { ok: true };
+      }
+      return { ok: false, error: json?.error || 'Error al borrar mensaje.' };
+    } catch {
+      return { ok: false, error: 'Error de red.' };
+    }
+  };
+
   return (
     <CmsContext.Provider
       value={{
@@ -838,6 +1000,14 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         restoreSnapshot,
         resetToFactoryDefaults,
         changeAdminPassword,
+        chatMessages,
+        chatUnreadCount,
+        activeRole,
+        setActiveRole,
+        fetchChatMessages,
+        sendChatMessage,
+        markChatAsRead,
+        deleteChatMessage,
       }}
     >
       {children}
